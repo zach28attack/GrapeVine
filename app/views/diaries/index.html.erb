@@ -1,8 +1,12 @@
+<%= link_to "Create new food", new_food_path %>
+<%= render partial: "foods/form_list", locals: {time_of_day: "Breakfast"} %>
 <%= render "summary", diaries: @breakfast_diaries%>
 <%= render "form", time_of_day: "Breakfast"%>
 <%#  %>
+<%= render partial: "foods/form_list", locals: {time_of_day: "Lunch"} %>
 <%= render "summary", diaries: @lunch_diaries%>
 <%= render "form", time_of_day: "Lunch"%>
 <%#  %>
+<%= render partial: "foods/form_list", locals: {time_of_day: "Dinner"} %>
 <%= render "summary", diaries: @dinner_diaries%>
 <%= render "form", time_of_day: "Dinner"%>
