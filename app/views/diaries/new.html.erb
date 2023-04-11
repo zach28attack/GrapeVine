@@ -1,3 +1,12 @@
 new
-<% form_with model: @diary do |f| %>
+<%= form_with model: @diary do |f| %>
+  <%= f.label :calories %>
+  <%= f.text_field :calories%>
+  <%= f.label :protein %>
+  <%= f.text_field :protein%>
+  <%= f.label :fats %>
+  <%= f.text_field :fats%>
+  <%= f.label :carbs %>
+  <%= f.text_field :carbs%>
+  <%= f.submit "Save Diary"%>
 <%end%>
