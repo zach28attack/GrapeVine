@@ -1,5 +1,5 @@
 class DiariesController < ApplicationController
-
+before_action :init_diary
   def new
     @diary = Diary.new
   end
@@ -40,5 +40,13 @@ class DiariesController < ApplicationController
 
   def diary_params
     params.require(:diary).permit(:calories, :protein, :fats, :carbs, :time_of_day)
+  end
+
+  def init_diary
+    ["Breakfast", "Lunch", "Dinner"].each do |time_of_day|
+    if Diary.find_by(time_of_day: time_of_day) == nil
+      Diary.create(user_id: 1, calories:0, protein: 0, fats: 0, carbs: 0, time_of_day: time_of_day)
+    end
+    end
   end
 end
