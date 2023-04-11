@@ -1,0 +1,15 @@
+<% @foods.each do |food| %>
+  <%= form_with model: @diary do |f| %>
+    <%= food.calories %>
+    <%= f.hidden_field :calories, value: food.calories %>
+    <%= food.protein %>
+    <%= f.hidden_field :protein, value: food.protein%>
+    <%= food.fats %>
+    <%= f.hidden_field :fats, value: food.fats%>
+    <%= food.carbs %>
+    <%= f.hidden_field :carbs, value: food.carbs%>
+    <%= f.hidden_field :time_of_day, value: time_of_day %>
+    <%= food.food_name %>
+    <%= f.submit "Save Diary"%>
+  <%end%>
+<%end%>
