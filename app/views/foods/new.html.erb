@@ -1,0 +1,13 @@
+<%= form_with model: @food do |f| %>
+  <%= f.label :food_name %>
+  <%= f.text_field :food_name %>
+  <%= f.label :calories %>
+  <%= f.number_field :calories %>
+  <%= f.label :protein %>
+  <%= f.number_field :protein %>
+  <%= f.label :fats %>
+  <%= f.number_field :fats %>
+  <%= f.label :carbs %>
+  <%= f.number_field :carbs %>
+  <%= f.submit "Save Food" %>
+<%end%>
