@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+/* 
+ color scheme: 
+ */
+
+:root {
+  --primary: #8139a7;
+  --secondary: #8561bb;
+  --accent: #e51cb3;
+}
+/* 
+### DIARY STYLING
+*/
