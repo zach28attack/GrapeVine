@@ -7,6 +7,10 @@ class FoodsController < ApplicationController
     @foods = Food.all
   end
 
+  def show
+    
+  end
+  
   def create
     @food = Food.new(food_params)
     @food.user_id = 1
