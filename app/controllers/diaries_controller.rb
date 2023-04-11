@@ -5,7 +5,7 @@ class DiariesController < ApplicationController
   end
 
   def index
-
+    @diary = Diary.new
   end
 
   def create
@@ -14,7 +14,7 @@ class DiariesController < ApplicationController
     if @diary.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 
