@@ -5,7 +5,13 @@ class DiariesController < ApplicationController
   end
 
   def index
+    diaries = Diary.all
+    @breakfast_diaries = diaries.select { |diary| diary.time_of_day == "Breakfast" }
+    @lunch_diaries = diaries.select { |diary| diary.time_of_day == "Lunch" }
+    @dinner_diaries = diaries.select { |diary| diary.time_of_day == "Dinner" }
     @diary = Diary.new
+
+    @foods = Food.all
   end
 
   def create
