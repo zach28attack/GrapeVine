@@ -14,6 +14,10 @@ before_action :init_diary
     @foods = Food.all
   end
 
+  def show
+    
+  end
+
   def create
     @diary = Diary.new(diary_params)
     @diary.user_id = 1
