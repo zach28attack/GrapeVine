@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_11_181525) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_12_164101) do
   create_table "diaries", force: :cascade do |t|
     t.integer "user_id"
     t.integer "calories"
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_181525) do
     t.string "time_of_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "meal_id"
+    t.integer "food_id"
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
