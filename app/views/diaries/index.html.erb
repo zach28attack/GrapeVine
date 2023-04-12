@@ -1,16 +1,30 @@
-<%= link_to "Create new Food", new_food_path %>
-<%= link_to "Create new Meal", new_meal_path %>
-<% @meals.each do |meal| %>
-  <%= link_to "#{meal.meal_name}", new_foods_meal_path(meal_id: meal.id) %>
-<% end %>
-<%= render partial: "foods/form_list", locals: {time_of_day: "Breakfast"} %>
-<%= render "summary", diaries: @breakfast_diaries%>
-<%= render "form", time_of_day: "Breakfast"%>
-<%#  %>
-<%= render partial: "foods/form_list", locals: {time_of_day: "Lunch"} %>
-<%= render "summary", diaries: @lunch_diaries%>
-<%= render "form", time_of_day: "Lunch"%>
-<%#  %>
-<%= render partial: "foods/form_list", locals: {time_of_day: "Dinner"} %>
-<%= render "summary", diaries: @dinner_diaries%>
-<%= render "form", time_of_day: "Dinner"%>
+<header>
+  <%= link_to "Create new Food", new_food_path %>
+  <%= link_to "Create new Meal", new_meal_path %>
+  <%= render "meals/form_list" %>
+  <hr/>
+</header>
+<main class="container">
+  <div class="card">
+    <div class="hidden">
+      <%= render partial: "foods/form_list", locals: {time_of_day: "Breakfast"} %>
+      <%= render "form", time_of_day: "Breakfast"%>
+    </div>
+    <%= render "summary", diaries: @breakfast_diaries%>
+  </div>
+  <div class="card">
+    <div class="hidden">
+      <%= render partial: "foods/form_list", locals: {time_of_day: "Lunch"} %>
+      <%= render "form", time_of_day: "Lunch"%>
+    </div>
+    <%= render "summary", diaries: @lunch_diaries%>
+  </div>
+  <div class="card">
+    <div class="hidden">
+      <%= render partial: "foods/form_list", locals: {time_of_day: "Dinner"} %>
+      <%= render "form", time_of_day: "Dinner"%>
+    </div>
+    <%= render "summary", diaries: @dinner_diaries%>
+  </div>
+  <hr/>
+</main>
