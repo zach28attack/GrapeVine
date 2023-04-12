@@ -12,6 +12,7 @@ before_action :init_diary
     @diary = Diary.new
 
     @foods = Food.all
+    @meals = Meal.all
   end
 
   def show
