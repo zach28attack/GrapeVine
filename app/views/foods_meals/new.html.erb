@@ -1,0 +1,9 @@
+<%= @meal %>
+<% @foods.each do |food|%>
+  <%= form_with model: @foods_meal do |f| %>
+    <%=food.food_name%>
+    <%=f.hidden_field :meal_id, value: @meal.id%>
+    <%=f.hidden_field :food_id, value: food.id%>
+    <%=f.submit "Add food"%>
+  <% end %>
+<% end %>
