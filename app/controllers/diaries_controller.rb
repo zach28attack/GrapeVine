@@ -46,7 +46,7 @@ before_action :init_diary
   private
 
   def diary_params
-    params.require(:diary).permit(:calories, :protein, :fats, :carbs, :time_of_day)
+    params.require(:diary).permit(:calories, :protein, :fats, :carbs, :time_of_day, :meal_id, :food_id)
   end
 
   def init_diary

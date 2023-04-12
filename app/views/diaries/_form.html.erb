@@ -1,13 +1,18 @@
-diary-form <%=time_of_day%>
-<%= form_with model: @diary do |f| %>
-  <%= f.label :calories %>
-  <%= f.text_field :calories%>
-  <%= f.label :protein %>
-  <%= f.text_field :protein%>
-  <%= f.label :fats %>
-  <%= f.text_field :fats%>
-  <%= f.label :carbs %>
-  <%= f.text_field :carbs%>
-  <%= f.hidden_field :time_of_day, value: time_of_day %>
-  <%= f.submit "Save Diary"%>
-<%end%>
+<template id="diary-form-template">
+  <div class="diary-form-modal">
+    <div id="diary-form" class="diary-form">
+      <%= form_with model: @diary do |f| %>
+        <%= f.label :calories %>
+        <%= f.text_field :calories%>
+        <%= f.label :protein %>
+        <%= f.text_field :protein%>
+        <%= f.label :fats %>
+        <%= f.text_field :fats%>
+        <%= f.label :carbs %>
+        <%= f.text_field :carbs%>
+        <%= f.hidden_field :time_of_day, value: "Breakfast" %>
+        <%= f.submit "Save Diary"%>
+      <%end%>
+    </div>
+  </div>
+</template>

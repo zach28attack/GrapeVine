@@ -6,25 +6,15 @@
 </header>
 <main class="container">
   <div class="card">
-    <div class="hidden">
-      <%= render partial: "foods/form_list", locals: {time_of_day: "Breakfast"} %>
-      <%= render "form", time_of_day: "Breakfast"%>
-    </div>
     <%= render "summary", diaries: @breakfast_diaries%>
   </div>
   <div class="card">
-    <div class="hidden">
-      <%= render partial: "foods/form_list", locals: {time_of_day: "Lunch"} %>
-      <%= render "form", time_of_day: "Lunch"%>
-    </div>
     <%= render "summary", diaries: @lunch_diaries%>
   </div>
   <div class="card">
-    <div class="hidden">
-      <%= render partial: "foods/form_list", locals: {time_of_day: "Dinner"} %>
-      <%= render "form", time_of_day: "Dinner"%>
-    </div>
     <%= render "summary", diaries: @dinner_diaries%>
   </div>
   <hr/>
 </main>
+<%= render "foods/form_list" %>
+<%= render "form" %>
