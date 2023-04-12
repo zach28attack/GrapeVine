@@ -20,8 +20,10 @@ before_action :init_diary
   end
 
   def create
+    
     @diary = Diary.new(diary_params)
     @diary.user_id = 1
+    @diary.remove_nil
     if @diary.save
       redirect_to root_path
     else
