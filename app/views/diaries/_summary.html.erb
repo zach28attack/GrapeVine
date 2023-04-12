@@ -1,7 +1,7 @@
 <table class= summary-table>
   <thead>
     <tr>
-      <th colspan="5" class="summary-header-title"><%= diaries.last.time_of_day %></th>
+      <th class="summary-header-title"><%= diaries.last.time_of_day %></th>
       <th>Calories</th>
       <th>Protein</th>
       <th>Fats</th>
@@ -10,11 +10,13 @@
   </thead>
   <tbody>
     <% diaries.each do |diary| %>
-      <tr>
+      <tr class="diary-item">
         <td>
           <div class="summary-body-title">
             <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : "Custom Food" %>
           </div>
+          <button>Add food</button>
+          <button>Add meal</button>
         </td>
         <td><%= diary.calories %></td>
         <td><%= diary.protein %></td>
@@ -22,7 +24,7 @@
         <td><%= diary.carbs %></td>
       </tr>
     <% end %>
-    <tr>
+    <tr class="totals-row">
       <td>totals</td>
       <td><%= diaries.sum(&:calories) %></td>
       <td><%= diaries.sum(&:protein) %></td>
