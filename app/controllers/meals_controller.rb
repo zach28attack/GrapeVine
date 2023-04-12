@@ -1,6 +1,6 @@
 class MealsController < ApplicationController
   def new
-    
+    @meal = Meal.new
   end
   
   def index
@@ -12,7 +12,13 @@ class MealsController < ApplicationController
   end
 
   def create
-    
+    @meal = Meal.new(meal_param)
+    @meal.user_id = 1
+    if @meal.save
+      redirect_to new_foods_meal_path(@meal)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -25,5 +31,11 @@ class MealsController < ApplicationController
 
   def destroy
     
+  end
+
+  private
+
+  def meal_param
+    params.require(:meal).permit(:meal_name)
   end
 end
