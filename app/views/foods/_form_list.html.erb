@@ -1,20 +1,21 @@
-<template>
-  <div id="food-list-form">
-    <% @foods.each do |food| %>
-      <%= form_with model: @diary do |f| %>
-        <%= food.calories %>
-        <%= f.hidden_field :calories, value: food.calories %>
-        <%= food.protein %>
-        <%= f.hidden_field :protein, value: food.protein%>
-        <%= food.fats %>
-        <%= f.hidden_field :fats, value: food.fats%>
-        <%= food.carbs %>
-        <%= f.hidden_field :carbs, value: food.carbs%>
-        <%= f.hidden_field :time_of_day, value: "Breakfast" %>
-        <%= f.hidden_field :food_id, value: food.id %>
-        <%= food.food_name %>
-        <%= f.submit "Save Diary"%>
+<template id="food-list-form-template">
+  <div class="diary-form-modal">
+    <div id="food-list-form">
+      <% @foods.each do |food| %>
+        <%= form_with model: @diary do |f| %>
+          <%= food.calories %>
+          <%= f.hidden_field :calories, value: food.calories %>
+          <%= food.protein %>
+          <%= f.hidden_field :protein, value: food.protein%>
+          <%= food.fats %>
+          <%= f.hidden_field :fats, value: food.fats%>
+          <%= food.carbs %>
+          <%= f.hidden_field :carbs, value: food.carbs%>
+          <%= f.hidden_field :time_of_day, value: "Breakfast" %>
+          <%= f.hidden_field :food_id, value: food.id %>
+          <%= food.food_name %>
+          <%= f.submit "Save Diary"%>
+        <%end%>
       <%end%>
-    <%end%>
-  </div>
-</template>
+    </div>
+  </template>
