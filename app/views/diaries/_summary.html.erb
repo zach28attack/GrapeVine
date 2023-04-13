@@ -1,4 +1,4 @@
-<table class= summary-table>
+<table class= summary-table id="time-of-day" data-tod=<%= diaries.last.time_of_day %>>
   <thead>
     <tr>
       <th class="summary-header-title"><%= diaries.last.time_of_day %></th>
@@ -15,8 +15,6 @@
           <div class="summary-body-title">
             <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : "Custom Food" %>
           </div>
-          <button id="add-summary-item-toggle">Add food/meal</button>
-          <button id="diary-form-toggle">Quick Add</button>
         </td>
         <td><%= diary.calories %></td>
         <td><%= diary.protein %></td>
@@ -25,7 +23,10 @@
       </tr>
     <% end %>
     <tr class="totals-row">
-      <td>totals</td>
+      <td>
+        <button id="add-summary-item-toggle">Add food/meal</button>
+        <button id="diary-form-toggle">Quick Add</button>
+      </td>
       <td><%= diaries.sum(&:calories) %></td>
       <td><%= diaries.sum(&:protein) %></td>
       <td><%= diaries.sum(&:fats) %></td>
