@@ -1,5 +1,5 @@
-<template id="food-list-form-template">
-  <div class="diary-form-modal">
+<template id=<%="#{id}"%>>
+  <div class="diary-form-modal" id="food-list-form-modal">
     <div id="food-list-form">
       <% @foods.each do |food| %>
         <%= form_with model: @diary do |f| %>
@@ -11,11 +11,11 @@
           <%= f.hidden_field :fats, value: food.fats%>
           <%= food.carbs %>
           <%= f.hidden_field :carbs, value: food.carbs%>
-          <%= f.hidden_field :time_of_day, value: "Breakfast" %>
+          <%= f.hidden_field :time_of_day, value: time_of_day %>
           <%= f.hidden_field :food_id, value: food.id %>
           <%= food.food_name %>
-          <%= f.submit "Save Diary"%>
+          <%= f.submit "Add item"%>
         <%end%>
       <%end%>
     </div>
-  </template>
+</template>
