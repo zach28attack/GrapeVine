@@ -4,7 +4,8 @@ class MealsController < ApplicationController
   end
   
   def index
-    
+    @meals = Meal.all
+    @diary = Diary.new
   end
 
   def show
