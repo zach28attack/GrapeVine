@@ -1,7 +1,7 @@
 class FoodsMealsController < ApplicationController
 
   def new
-    @meal = Meal.find(params[:meal_id])
+    @meal = params[:meal_id] ?  Meal.find(params[:meal_id]) : Meal.new
     @foods_meal = FoodsMeal.new
     @foods = Food.all
   end
@@ -21,7 +21,7 @@ class FoodsMealsController < ApplicationController
     @foods_meal = FoodsMeal.new(foods_meals_params)
     @foods_meal.user_id = 1
     if @foods_meal.save
-      redirect_to new_foods_meal_path(meal_id: params[:meal_id])
+      redirect_to new_foods_meal_path(meal_id: @foods_meal.meal_id)
     else
       render :new
     end
@@ -29,7 +29,7 @@ class FoodsMealsController < ApplicationController
 
 
   def edit
-    
+    @meal = Meal.find(params[:id])
   end
 
 
@@ -39,7 +39,11 @@ class FoodsMealsController < ApplicationController
 
 
   def destroy
-    
+    foods_meal = FoodsMeal.find(params[:id])
+    meal_id = foods_meal.meal_id
+    if foods_meal.destroy
+      redirect_to edit_foods_meal_path(id: meal_id)
+    end
   end
 
   private
