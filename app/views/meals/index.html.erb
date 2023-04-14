@@ -1,3 +1,46 @@
-<%= @meals.each do |meal| %>
-  <%= meal.meal_name %>
-<%end%>
+
+
+  <div class="diary-form-modal" id="food-list-form-modal">
+    <div id="add-item-card">
+      <div class="add-item-card">
+        <form  class="food-list-search-bar">
+          <input type='text' placeholder="searchbar">
+          <button>Search</button>
+        </form>
+        <ul>
+          <li >Foods</li>
+          <li class="active">Meals</li>
+          <li>Search Results</li>
+        </ul>
+        <div class="food-list">
+        <%= link_to "Make Custom Meal", new_foods_meal_path %>
+          <% @meals.each do |meal| %>
+            <%= form_with model: @diary do |f| %>
+              <div class="meal-item">
+                <div class="meal-item-name">
+                  <%= meal.meal_name%>
+                </div>
+                <div class="meal-item-macros">
+                  <%= meal.foods.sum(:calories) %>
+                  <%= meal.foods.sum(:protein) %>
+                  <%= meal.foods.sum(:fats) %>
+                  <%= meal.foods.sum(:carbs) %>
+                  <%= f.submit "Add item", class:"meal-item-btn"%>
+                  <%= link_to "Edit Meal", edit_foods_meal_path(id: meal.id) %>
+                </div>
+              </div>
+              <%= f.hidden_field :calories, value: meal.foods.sum(:calories) %>
+              <%= f.hidden_field :protein, value: meal.foods.sum(:protein)%>
+              <%= f.hidden_field :fats, value: meal.foods.sum(:fats)%>
+              <%= f.hidden_field :carbs, value: meal.foods.sum(:carbs)%>
+              <%= f.hidden_field :time_of_day, value: "Breakfast" %>
+              <%= f.hidden_field :food_id, value: meal.id %>
+            <%end%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
