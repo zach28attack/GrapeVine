@@ -1,9 +1,41 @@
-<%= @meal %>
-<% @foods.each do |food|%>
-  <%= form_with model: @foods_meal do |f| %>
-    <%=food.food_name%>
-    <%=f.hidden_field :meal_id, value: @meal.id%>
-    <%=f.hidden_field :food_id, value: food.id%>
-    <%=f.submit "Add food"%>
-  <% end %>
-<% end %>
+<div class="diary-form-modal" id="food-list-form-modal">
+  <div id="add-item-card">
+    <div class="add-item-card">
+      <form  class="food-list-search-bar">
+        <input type='text' placeholder="searchbar">
+        <button>Search</button>
+      </form>
+      <ul>
+        <li>Foods</li>
+        <li class="active">Meals</li>
+        <li>Search Results</li>
+      </ul>
+      <div class="meal-food-form-list">
+        <% if @meal.id %>
+          <div class="meal-food-form-header">
+            <h3>new_foods_meal_path: <%= @meal.meal_name %></h3>
+            Total Cals:<%= @meal.foods.sum(:calories) %>
+            <%= link_to "go back", meals_path %>
+          </div>
+          <% @foods.each do |food|%>
+            <div class="meal-item">
+              <div class="meal-item-name">
+                <%= form_with model: @foods_meal do |f| %>
+                  <%=food.food_name%>
+                  <%=f.hidden_field :meal_id, value: @meal.id%>
+                  <%=f.hidden_field :food_id, value: food.id%>
+                  <%=f.submit "Add food"%>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <%else%>
+          <h1>Create new meal</h1>
+          <%= render 'meals/form' %>
+          <%= link_to "go back", meals_path %>
+        <%end%>
+        
+      </div>
+    </div>
+  </div>
+</div>
