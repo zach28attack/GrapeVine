@@ -138,7 +138,7 @@
   background-color: white;
   margin: 5px;
   border-radius: 10px;
-  padding: 10px;
+  padding: 1rem;
   overflow: scroll;
   scrollbar-width: thin;
 }
@@ -179,6 +179,7 @@
   padding: 10px;
   cursor: pointer;
   font-size: 2rem;
+  letter-spacing: -1px;
 }
 
 .add-item-card ul li.active {
@@ -186,4 +187,33 @@
   background-color: var(--secondary);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+}
+.meal-food-form-list {
+  padding: 0.1rem;
+  border: 0.2rem solid var(--secondary);
+  background-color: var(--secondary);
+  border-radius: 10px;
+  overflow-y: scroll;
+}
+.meal-item {
+  background-color: white;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  margin: 0.4rem;
+}
+.meal-item-name {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+.meal-food-form-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 1rem;
+}
+.meal-food-form-header h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
 }
