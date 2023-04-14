@@ -1,0 +1,37 @@
+<div class="diary-form-modal" id="food-list-form-modal">
+  <div id="add-item-card">
+    <div class="add-item-card">
+      <form  class="food-list-search-bar">
+        <input type='text' placeholder="searchbar">
+        <button>Search</button>
+      </form>
+      <ul>
+        <li>Foods</li>
+        <li class="active">Meals</li>
+        <li>Search Results</li>
+      </ul>
+      <div class="meal-food-form-list">
+        <% if @meal.id %>
+          <div class="meal-food-form-header">
+            <h3><%= @meal.meal_name %></h3>
+            Total Cals:<%= @meal.foods.sum(:calories) %>
+            <%= link_to "go back", meals_path %>
+            <%= link_to "Food list", new_foods_meal_path(meal_id: @meal.id) %>
+          </div>
+          <% @meal.foods.each do |food|%>
+            <div class="meal-item">
+              <div class="meal-item-name">
+                <%=food.food_name%>
+                <%= button_to "Remove food", foods_meal_path(FoodsMeal.find_by(food_id: food.id, meal_id: @meal.id)), method: :delete%>
+              </div>
+            </div>
+          <% end %>
+        <%else%>
+          <h1>Create new meal</h1>
+          <%= render 'meals/form' %>
+          <%= link_to "go back", meals_path %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
