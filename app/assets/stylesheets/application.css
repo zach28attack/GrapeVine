@@ -188,7 +188,7 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
-.meal-food-form-list {
+.meal-food-list {
   padding: 0.1rem;
   border: 0.2rem solid var(--secondary);
   background-color: var(--secondary);
@@ -208,18 +208,18 @@
   margin-bottom: 1rem;
   padding: 0.5rem;
 }
-.meal-food-form-header {
+.meal-food-header {
   display: flex;
   justify-content: space-between;
   margin: 0.5rem 1rem;
 }
-.meal-food-form-header h2 {
+.meal-food-header h2 {
   font-size: 2.5rem;
   font-weight: 500;
   color: white;
   -webkit-text-stroke: 1px var(--primary);
 }
-.meal-food-form-header h4,
+.meal-food-header h4,
 p {
   font-size: 1.3rem;
   font-weight: 500;
