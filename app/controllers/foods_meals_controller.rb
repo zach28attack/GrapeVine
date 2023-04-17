@@ -20,11 +20,6 @@ class FoodsMealsController < ApplicationController
   def create
     @foods_meal = FoodsMeal.new(foods_meals_params)
     @foods_meal.user_id = 1
-    # if @foods_meal.save
-    #   redirect_to new_foods_meal_path(meal_id: @foods_meal.meal_id)
-    # else
-    #   render :new
-    # end
     if @foods_meal.save
       # Return the updated data as JSON
       render json: { status: 'success', data: sum_of_calories }, status: :ok
@@ -46,10 +41,12 @@ class FoodsMealsController < ApplicationController
 
 
   def destroy
-    foods_meal = FoodsMeal.find(params[:id])
-    meal_id = foods_meal.meal_id
-    if foods_meal.destroy
-      redirect_to edit_foods_meal_path(id: meal_id)
+    @foods_meal = FoodsMeal.find(params[:id])
+    # meal_id = foods_meal.meal_id
+    if @foods_meal.destroy
+      render json: { status: 'success', data: sum_of_calories }, status: :ok
+    else
+      render json: { status: 'error', message: 'Delete failed' }, status: :unprocessable_entity
     end
   end
 
@@ -63,6 +60,4 @@ class FoodsMealsController < ApplicationController
     meal = Meal.find(@foods_meal.meal_id)
     meal.foods.sum(:calories)
   end
-  
-
 end
