@@ -20,10 +20,17 @@ class FoodsMealsController < ApplicationController
   def create
     @foods_meal = FoodsMeal.new(foods_meals_params)
     @foods_meal.user_id = 1
+    # if @foods_meal.save
+    #   redirect_to new_foods_meal_path(meal_id: @foods_meal.meal_id)
+    # else
+    #   render :new
+    # end
     if @foods_meal.save
-      redirect_to new_foods_meal_path(meal_id: @foods_meal.meal_id)
+      # Return the updated data as JSON
+      render json: { status: 'success', data: sum_of_calories }, status: :ok
     else
-      render :new
+      # Return an error message as JSON
+      render json: { status: 'error', message: 'Save failed' }, status: :unprocessable_entity
     end
   end
 
@@ -50,6 +57,11 @@ class FoodsMealsController < ApplicationController
 
   def foods_meals_params
     params.require(:foods_meal).permit(:meal_id, :food_id)
+  end
+
+  def sum_of_calories
+    meal = Meal.find(@foods_meal.meal_id)
+    meal.foods.sum(:calories)
   end
   
 

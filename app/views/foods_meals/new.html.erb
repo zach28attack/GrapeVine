@@ -15,12 +15,12 @@
           <div class="meal-food-form-header">
             <h2 ><%= @meal.meal_name %></h2>
             <h4>add items</h4>
-            <p>Total Cals:<%= @meal.foods.sum(:calories) %></p>
+            <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %></p>
           </div>
           <% @foods.each do |food|%>
             <div class="meal-item">
               <div class="meal-item-name">
-                <%= form_with model: @foods_meal, remote: true do |f| %>
+                <%= form_with model: @foods_meal, remote: true, id: "new-foods-meal-form" do |f| %>
                   <%=food.food_name%>
                   <%=f.hidden_field :meal_id, value: @meal.id%>
                   <%=f.hidden_field :food_id, value: food.id%>

@@ -70,3 +70,36 @@ foodListFormToggles.forEach((formToggle) => {
     });
   });
 });
+
+const newFoodsMealForms = document.querySelectorAll("#new-foods-meal-form");
+newFoodsMealForms.forEach((newFoodsMealForm) => {
+  newFoodsMealForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    submitForm(event.target);
+  });
+});
+
+async function submitForm(form) {
+  const formData = new FormData(form);
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: formData,
+    headers: {
+      Accept: "application/json",
+      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+    },
+    credentials: "same-origin",
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    console.log(data);
+
+    updateCalorieSum(data.data);
+  }
+}
+
+async function updateCalorieSum(data) {
+  document.querySelector("#sum-of-calories").textContent = `Total Cals:${data}`;
+}
