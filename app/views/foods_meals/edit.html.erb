@@ -13,10 +13,10 @@
       <div class="meal-food-form-list">
         <% if @meal.id %>
           <div class="meal-food-form-header">
-            <h3><%= @meal.meal_name %></h3>
-            Total Cals:<%= @meal.foods.sum(:calories) %>
-            <%= link_to "go back", meals_path %>
-            <%= link_to "Food list", new_foods_meal_path(meal_id: @meal.id) %>
+            <h2><%= @meal.meal_name %></h2>
+            <p> Remove items</p>
+            <p>Total Cals:<%= @meal.foods.sum(:calories) %><p>
+            
           </div>
           <% @meal.foods.each do |food|%>
             <div class="meal-item">
@@ -30,6 +30,12 @@
           <h1>Create new meal</h1>
           <%= render 'meals/form' %>
           <%= link_to "go back", meals_path %>
+        <%end%>
+      </div>
+      <div class="meal-btns">
+        <%= link_to "go back", meals_path %>
+        <% if @meal.id %>
+         <%= link_to "Add items", new_foods_meal_path(meal_id: @meal.id) %>
         <%end%>
       </div>
     </div>

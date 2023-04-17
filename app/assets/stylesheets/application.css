@@ -213,7 +213,21 @@
   justify-content: space-between;
   margin: 0.5rem 1rem;
 }
-.meal-food-form-header h3 {
-  font-size: 1.5rem;
+.meal-food-form-header h2 {
+  font-size: 2.5rem;
   font-weight: 500;
+  color: white;
+  -webkit-text-stroke: 1px var(--primary);
+}
+.meal-food-form-header h4,
+p {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--primary);
+  margin: auto 0;
+  align-self: flex-end;
+}
+.meal-btns {
+  display: flex;
+  justify-content: space-evenly;
 }

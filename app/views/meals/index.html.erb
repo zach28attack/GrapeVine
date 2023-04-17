@@ -13,7 +13,12 @@
           <li>Search Results</li>
         </ul>
         <div class="food-list">
-        <%= link_to "Make Custom Meal", new_foods_meal_path %>
+        <div class="meal-food-form-header">
+            <h2 ></h2>
+            <h4>Choose Meal</h4>
+            <%= link_to "Make Custom Meal", new_foods_meal_path %>
+          </div>
+        
           <% @meals.each do |meal| %>
             <%= form_with model: @diary do |f| %>
               <div class="meal-item">
@@ -25,8 +30,8 @@
                   <%= meal.foods.sum(:protein) %>
                   <%= meal.foods.sum(:fats) %>
                   <%= meal.foods.sum(:carbs) %>
-                  <%= f.submit "Add item", class:"meal-item-btn"%>
-                  <%= link_to "Edit Meal", edit_foods_meal_path(id: meal.id) %>
+                  <%= f.submit "Add", class:"meal-item-btn"%>
+                  <button><%= link_to "Edit", edit_foods_meal_path(id: meal.id) %></button>
                 </div>
               </div>
               <%= f.hidden_field :calories, value: meal.foods.sum(:calories) %>
