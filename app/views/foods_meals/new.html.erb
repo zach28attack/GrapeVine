@@ -10,9 +10,9 @@
         <li class="active">Meals</li>
         <li>Search Results</li>
       </ul>
-      <div class="meal-food-form-list">
+      <div class="meal-food-list">
         <% if @meal.id %>
-          <div class="meal-food-form-header">
+          <div class="meal-food-header">
             <h2 ><%= @meal.meal_name %></h2>
             <h4>add items</h4>
             <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %></p>
@@ -29,13 +29,11 @@
               </div>
             </div>
           <% end %>
-            
         <%else%>
           <h1>Create new meal</h1>
           <%= render 'meals/form' %>
           <%= link_to "go back", meals_path %>
         <%end%>
-        
       </div>
       <div class="meal-btns">
       <%= link_to "go back", meals_path %>
