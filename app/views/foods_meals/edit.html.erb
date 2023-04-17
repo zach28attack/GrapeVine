@@ -10,19 +10,20 @@
         <li class="active">Meals</li>
         <li>Search Results</li>
       </ul>
-      <div class="meal-food-form-list">
+      <div class="meal-food-list">
         <% if @meal.id %>
-          <div class="meal-food-form-header">
+          <div class="meal-food-header">
             <h2><%= @meal.meal_name %></h2>
             <p> Remove items</p>
-            <p>Total Cals:<%= @meal.foods.sum(:calories) %><p>
-            
+            <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %><p>
           </div>
           <% @meal.foods.each do |food|%>
             <div class="meal-item">
               <div class="meal-item-name">
                 <%=food.food_name%>
-                <%= button_to "Remove food", foods_meal_path(FoodsMeal.find_by(food_id: food.id, meal_id: @meal.id)), method: :delete%>
+                <div id="remove-food-button" data-meal-id=<%= get_foods_meal_id(food.id, @meal.id)%>>
+                  <%= button_to "Remove food", foods_meal_path(FoodsMeal.find(get_foods_meal_id(food.id, @meal.id))), method: :delete%>
+                </div>
               </div>
             </div>
           <% end %>
