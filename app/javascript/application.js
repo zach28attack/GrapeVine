@@ -100,6 +100,7 @@ const renderFormModal = (e) => {
   formModal.addEventListener("click", (e) => {
     if (e.target === formModal) {
       formModal.remove();
+      location.reload();
     }
   });
 };
