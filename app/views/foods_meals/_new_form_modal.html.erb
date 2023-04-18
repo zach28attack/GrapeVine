@@ -1,4 +1,4 @@
-<div class="food-list hidden" data-id="new-form-modal" id="meals-form">
+<div class="food-list hidden" id="meals-form">
   <% if @meal.id %>
     <div class="meal-header">
       <h2 ><%= @meal.meal_name %></h2>
@@ -32,8 +32,8 @@
   <div class="meal-btns">
     <%= link_to "go back", meals_path %>
     <% if @meal.id %>
-      <%= link_to "Edit Meal" %>
+      <button id="foods-meal-form-toggle"><%= link_to "Remove foods" %></button>
     <%end%>
-</div>
+  </div>
 </div>
 
