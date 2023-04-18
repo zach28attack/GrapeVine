@@ -11,8 +11,9 @@
           <li  id="meals-tab" data-form="meals">Meals</li>
           <li id="search-tab" data-form="meals">Search Results</li>
         </ul>
-        <%= render 'foods_meals/edit_form_modal'%>
+        
         <%= render 'foods_meals/new_form_modal'%>
+        <%= render 'foods_meals/edit_form_modal'%>
         <%= render 'foods/form_list', time_of_day: time_of_day %>
         <%= render 'meals/form_list', time_of_day: time_of_day %>
       </div>
