@@ -13,6 +13,7 @@ before_action :init_diary
 
     @foods = Food.all
     @meals = Meal.all
+    @meal = Meal.last
   end
 
   def show
