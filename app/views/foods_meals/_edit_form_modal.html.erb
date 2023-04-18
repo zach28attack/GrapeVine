@@ -1,4 +1,4 @@
-<div class="food-list hidden" id="meals-form" >
+<div class="food-list hidden" id="meals-form"  data-form-type="edit" >
   <% if @meal.id %>
     <div class="meal-header">
       <h2><%= @meal.meal_name %></h2>
@@ -10,9 +10,7 @@
         <div class="meal-item">
           <div class="meal-item-name">
             <%=food.food_name%>
-            <div id="remove-food-button" data-meal-id=<%= get_foods_meal_id(food.id, @meal.id)%>>
-              <%= button_to "Remove food", foods_meal_path(FoodsMeal.find(get_foods_meal_id(food.id, @meal.id))), method: :delete%>
-            </div>
+            <button  id="remove-food-button" data-meal-id=<%= get_foods_meal_id(food.id, @meal.id)%>>Remove food</button>
           </div>
         </div>
       <% end %>
