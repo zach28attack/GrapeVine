@@ -1,6 +1,6 @@
 <div class="food-list hidden" data-id="edit-form-modal">
   <% if @meal.id %>
-    <div class="meal-food-header">
+    <div class="meal-header">
       <h2><%= @meal.meal_name %></h2>
       <p> Remove items</p>
       <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %><p>
@@ -20,10 +20,10 @@
     <%= render 'meals/form' %>
     <%= link_to "go back" %>
   <%end%>
-</div>
-<div class="meal-btns">
-  <%= link_to "go back" %>
-  <% if @meal.id %>
-    <%= link_to "Add items", id:"new-form-modal" %>
-  <%end%>
+  <div class="meal-btns">
+    <%= link_to "go back", meals_path %>
+    <% if @meal.id %>
+      <%= link_to "Edit Meal" %>
+    <%end%>
+  </div>
 </div>

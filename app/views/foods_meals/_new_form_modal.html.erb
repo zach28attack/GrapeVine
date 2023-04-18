@@ -1,22 +1,29 @@
 <div class="food-list hidden" data-id="new-form-modal" id="meals-form">
   <% if @meal.id %>
-    <div class="meal-food-header">
+    <div class="meal-header">
       <h2 ><%= @meal.meal_name %></h2>
       <h4>add items</h4>
       <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %></p>
     </div>
-    <% @foods.each do |food|%>
-      <div class="meal-item">
-        <div class="meal-item-name">
-          <%= form_with model: @foods_meal, remote: true, id: "new-foods-meal-form" do |f| %>
-            <%=food.food_name%>
-            <%=f.hidden_field :meal_id, value: @meal.id%>
-            <%=f.hidden_field :food_id, value: food.id%>
-            <%=f.submit "Add food"%>
-          <% end %>
+    <div class="meal-body">
+      <% @foods.each do |food|%>
+        <div class="meal-item">
+          <div class="meal-item-name">
+            <%= form_with model: @foods_meal, id: "new-foods-meal-form" do |f| %>
+              <%=food.food_name%>
+              <%=f.hidden_field :meal_id, value: @meal.id%>
+              <%=f.hidden_field :food_id, value: food.id%>
+
+              <% if @meal.foods.include?(food) %>
+                <%=f.submit "Add food", id: "submit-button", class: 'disabled'%>
+              <%else%>
+                <%=f.submit "Add food", id: "submit-button"%>
+              <%end%>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   <%else%>
     <h1>Create new meal</h1>
     <%= render 'meals/form' %>
@@ -27,5 +34,6 @@
     <% if @meal.id %>
       <%= link_to "Edit Meal" %>
     <%end%>
-  </div>
 </div>
+</div>
+
