@@ -50,58 +50,6 @@ document.addEventListener("keypress", (e) => {
   }
 });
 
-async function submitForm(form) {
-  // get data from submitted form
-  const formData = new FormData(form);
-
-  // send form data to controller and handle response
-  const response = await fetch(form.action, {
-    method: form.method,
-    body: formData,
-    headers: {
-      Accept: "application/json",
-      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
-    },
-    credentials: "same-origin",
-  });
-
-  // if successful update page
-  if (response.ok) {
-    const data = await response.json();
-    updateCalorieSum(data.data);
-  }
-}
-
-async function updateCalorieSum(data) {
-  document.querySelector("#sum-of-calories").textContent = `Total Cals:${data}`;
-}
-
-const removeFoodButtons = document.querySelectorAll("#remove-food-button");
-removeFoodButtons.forEach((removeFoodButton) => {
-  removeFoodButton.addEventListener("click", (event) => {
-    const mealItem = event.target.closest(".meal-item");
-    event.preventDefault();
-    const mealId = event.target.closest("#remove-food-button").dataset.mealId;
-    deleteFood(mealId, mealItem);
-  });
-});
-
-async function deleteFood(id, object) {
-  const response = await fetch(`/foods_meals/${id}`, {
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
-    },
-  });
-  if (response.ok) {
-    const data = await response.json();
-    object.remove();
-    updateCalorieSum(data.data);
-  } else {
-    console.error("Error");
-  }
-}
 const activateTabs = () => {
   const tabs = document.querySelector("#tabs");
   const [...tabsChildren] = tabs.children;
@@ -164,10 +112,80 @@ const renderFormModal = (e) => {
 
 const formModalTemplateButtons =
   document.querySelectorAll("#form-modal-toggle");
-// console.log(formModalTemplateButtons);
+
+// display respective form modal when 'add food/meal' button clicked
 formModalTemplateButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     renderFormModal(e);
     activateTabs();
+    onNewFoodsMealSubmit();
   });
 });
+
+const onNewFoodsMealSubmit = () => {
+  const newFoodsMealForms = document.querySelectorAll("#new-foods-meal-form");
+  newFoodsMealForms.forEach((form) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      submitForm(e.target);
+    });
+  });
+};
+
+// handle new_foods_meal form submission
+async function submitForm(form) {
+  // get data from submitted form
+  const formData = new FormData(form);
+
+  // send form data to controller and handle response
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: formData,
+    headers: {
+      Accept: "application/json",
+      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+    },
+    credentials: "same-origin",
+  });
+
+  // if successful update page
+  if (response.ok) {
+    const data = await response.json();
+    updateCalorieSum(data.data);
+    // disable 'Add food' button
+    form.querySelector("#submit-button").classList.add("disabled");
+  }
+}
+
+async function updateCalorieSum(data) {
+  document
+    .querySelector("#meals-form")
+    .querySelector("#sum-of-calories").textContent = `Total Cals:${data}`;
+}
+
+// const removeFoodButtons = document.querySelectorAll("#remove-food-button");
+// removeFoodButtons.forEach((removeFoodButton) => {
+//   removeFoodButton.addEventListener("click", (event) => {
+//     const mealItem = event.target.closest(".meal-item");
+//     event.preventDefault();
+//     const mealId = event.target.closest("#remove-food-button").dataset.mealId;
+//     deleteFood(mealId, mealItem);
+//   });
+// });
+
+// async function deleteFood(id, object) {
+//   const response = await fetch(`/foods_meals/${id}`, {
+//     method: "DELETE",
+//     headers: {
+//       Accept: "application/json",
+//       "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+//     },
+//   });
+//   if (response.ok) {
+//     const data = await response.json();
+//     object.remove();
+//     updateCalorieSum(data.data);
+//   } else {
+//     console.error("Error");
+//   }
+// }
