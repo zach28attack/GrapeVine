@@ -118,6 +118,7 @@ const enableFoodsMealButtons = (buttons) => {
 
         if (form.dataset.formType === "edit") {
           onClickRemoveFood();
+          updateFoodList(form);
         }
       });
     });
@@ -146,6 +147,8 @@ const onNewFoodsMealSubmit = () => {
   });
 };
 
+let food = "";
+
 // handle new_foods_meal form submission
 async function submitForm(form) {
   // get data from submitted form
@@ -166,17 +169,43 @@ async function submitForm(form) {
   if (response.ok) {
     const data = await response.json();
     updateCalorieSum(data.data);
+    food = data.food_item;
+
     // disable 'Add food' button
     form.querySelector("#submit-button").classList.add("disabled");
   }
 }
 
-function updateCalorieSum(data) {
+const updateCalorieSum = (data) => {
   const calsCounters = document.querySelectorAll("#sum-of-calories");
   calsCounters.forEach((calsCounter) => {
     calsCounter.textContent = `Total Cals:${data}`;
   });
-}
+};
+
+const updatedMealItemHTML = (food) => {
+  const mealItem = document.createElement("div");
+  const mealItemName = document.createElement("div");
+  const notification = document.createElement("small");
+
+  mealItem.className = "meal-item";
+  mealItemName.className = "meal-item-name";
+  notification.className = "meal-item-notification";
+
+  mealItemName.innerHTML = `${food.food_name} `;
+
+  notification.innerHTML = "just added";
+
+  mealItemName.appendChild(notification);
+  mealItem.appendChild(mealItemName);
+  return mealItem;
+};
+
+const updateFoodList = (form) => {
+  if (food !== "") {
+    form.querySelector(".meal-body").appendChild(updatedMealItemHTML(food));
+  }
+};
 
 // function to remove food items from foods_meal page
 const onClickRemoveFood = () => {
