@@ -183,6 +183,7 @@ const updateCalorieSum = (data) => {
   });
 };
 
+// create a new meal-item node element containing new_foods_meal food
 const updatedMealItemHTML = (food) => {
   const mealItem = document.createElement("div");
   const mealItemName = document.createElement("div");
@@ -201,6 +202,7 @@ const updatedMealItemHTML = (food) => {
   return mealItem;
 };
 
+//append new edit_foods_meal food item if any were added
 const updateFoodList = (form) => {
   if (food !== "") {
     form.querySelector(".meal-body").appendChild(updatedMealItemHTML(food));
