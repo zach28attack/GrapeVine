@@ -1,0 +1,17 @@
+<div class="diary-form-modal" id="food-list-form-modal">
+  <div id="add-item-card">
+    <div class="add-item-card">
+      <form  class="food-list-search-bar">
+        <input type='text' placeholder="searchbar">
+        <button>Search</button>
+      </form>
+      <ul id="tabs">
+        <li id="foods-tab" class="active">Foods</li>
+        <li  id="meals-tab">Meals</li>
+        <li id="search-tab">Search Results</li>
+      </ul>
+      <%= render 'foods_meals/edit_form_modal' %>
+      <%= render 'foods_meals/new_form_modal' %>
+    </div>
+  </div>
+</div>
