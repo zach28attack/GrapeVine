@@ -1,0 +1,29 @@
+<div class="meal-food-list" data-id="edit-form-modal">
+  <% if @meal.id %>
+    <div class="meal-food-header">
+      <h2><%= @meal.meal_name %></h2>
+      <p> Remove items</p>
+      <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %><p>
+    </div>
+    <% @meal.foods.each do |food|%>
+      <div class="meal-item">
+        <div class="meal-item-name">
+          <%=food.food_name%>
+          <div id="remove-food-button" data-meal-id=<%= get_foods_meal_id(food.id, @meal.id)%>>
+            <%= button_to "Remove food", foods_meal_path(FoodsMeal.find(get_foods_meal_id(food.id, @meal.id))), method: :delete%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <%else%>
+    <h1>Create new meal</h1>
+    <%= render 'meals/form' %>
+    <%= link_to "go back" %>
+  <%end%>
+</div>
+<div class="meal-btns">
+  <%= link_to "go back" %>
+  <% if @meal.id %>
+    <%= link_to "Add items", id:"new-form-modal" %>
+  <%end%>
+</div>
