@@ -1,8 +1,3 @@
-<header>
-  
-  <%= link_to "Create new FoodsMeal", new_foods_meal_path %>
-  <hr/>
-</header>
 <main class="container">
   <div class="card">
     <%= render "summary", diaries: @breakfast_diaries%>
@@ -16,8 +11,18 @@
   <hr/>
 </main>
 <%= render "foods/form_list", time_of_day: "Breakfast", id: "breakfast-form" %>
-<%= render "foods/form_list", time_of_day: "Lunch", id: "lunch-form" %>
-<%= render "foods/form_list", time_of_day: "Dinner", id: "dinner-form" %>
 <%= render "form", time_of_day: "Breakfast", id: "breakfast-diary-form-template" %>
+
+
+<%= render "foods/form_list", time_of_day: "Lunch", id: "lunch-form" %>
 <%= render "form", time_of_day: "Lunch", id: "lunch-diary-form-template" %>
+
+
+<%= render "foods/form_list", time_of_day: "Dinner", id: "dinner-form" %>
 <%= render "form", time_of_day: "Dinner", id: "dinner-diary-form-template" %>
+<%= render "form_modal", time_of_day: "Dinner" %>
+
+
+
+
+
