@@ -50,36 +50,6 @@ document.addEventListener("keypress", (e) => {
   }
 });
 
-// // assign event listeners to each food list form button
-// foodListFormToggles.forEach((formToggle) => {
-//   formToggle.addEventListener("click", (e) => {
-//     // select time of day from data set in summary card
-//     const timeOfDay = getTimeOfDay(e);
-//     const foodListFormTemplate = document.querySelector(
-//       `#${timeOfDay}-form`
-//     ).content;
-//     const foodListFormModal = foodListFormTemplate
-//       .querySelector(".diary-form-modal")
-//       .cloneNode(true);
-//     // add form modal to page and add event listener to close
-//     document.querySelector("body").appendChild(foodListFormModal);
-//     foodListFormModal.addEventListener("click", (e) => {
-//       if (e.target === foodListFormModal) {
-//         foodListFormModal.remove();
-//       }
-//     });
-//   });
-// });
-
-// // assign event to every foods_meal form
-// const newFoodsMealForms = document.querySelectorAll("#new-foods-meal-form");
-// newFoodsMealForms.forEach((newFoodsMealForm) => {
-//   newFoodsMealForm.addEventListener("submit", (event) => {
-//     event.preventDefault();
-//     submitForm(event.target);
-//   });
-// });
-
 async function submitForm(form) {
   // get data from submitted form
   const formData = new FormData(form);
@@ -132,24 +102,39 @@ async function deleteFood(id, object) {
     console.error("Error");
   }
 }
-
-const tabs = document.querySelector("#tabs");
-const [...tabsChildren] = tabs.children;
-tabsChildren.forEach((tab) => {
-  console.log("tab");
-  tab.addEventListener("click", (e) => {
-    console.log("tab click");
-    // Remove the "active" class from all tabs
-    tabsChildren.forEach((child) => {
-      if (child.classList.contains("active")) {
-        child.classList.remove("active");
-      }
+const activateTabs = () => {
+  const tabs = document.querySelector("#tabs");
+  const [...tabsChildren] = tabs.children;
+  tabsChildren.forEach((tab) => {
+    tab.addEventListener("click", (e) => {
+      // Remove the "active" class from all tabs
+      tabsChildren.forEach((child) => {
+        if (child.classList.contains("active")) {
+          child.classList.remove("active");
+        }
+      });
+      // Add the "active" class to the clicked tab
+      e.target.classList.add("active");
     });
-    console.log("ckckc");
-    // Add the "active" class to the clicked tab
-    e.target.classList.add("active");
   });
-});
+};
+const renderFormModal = (e) => {
+  const timeOfDay = e.target.closest(".summary-table").dataset.tod;
+  const formModalTemplate = document.querySelector(
+    `#${timeOfDay}-form-modal-template`
+  ).content;
+  const formModal = formModalTemplate
+    .querySelector("#form-modal")
+    .cloneNode(true);
+  document.querySelector("body").appendChild(formModal);
+
+  // close modal
+  formModal.addEventListener("click", (e) => {
+    if (e.target === formModal) {
+      formModal.remove();
+    }
+  });
+};
 
 // const editFormModalButton = document.querySelector("#edit-form-modal");
 // console.log(editFormModalButton);
@@ -161,3 +146,13 @@ tabsChildren.forEach((tab) => {
 //     }
 //   });
 // });
+
+const formModalTemplateButtons =
+  document.querySelectorAll("#form-modal-toggle");
+// console.log(formModalTemplateButtons);
+formModalTemplateButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    renderFormModal(e);
+    activateTabs();
+  });
+});
