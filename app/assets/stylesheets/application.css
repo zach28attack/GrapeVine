@@ -29,7 +29,14 @@
   font-family: "Roboto Slab", serif;
   box-sizing: border-box;
 }
-
+.hidden {
+  display: none;
+}
+input[type="submit"].disabled {
+  pointer-events: none;
+  background-color: rgb(206, 206, 206);
+  border-radius: 20px;
+}
 /* 
 ### DIARY STYLING
 */
@@ -43,9 +50,7 @@
   width: 70%;
   border-radius: 20px;
 }
-.hidden {
-  display: none;
-}
+
 .summary-table {
   font-weight: 300;
   width: 100%;
@@ -134,20 +139,17 @@
   /* border: 1px solid; */
   width: 100%;
   min-height: 15rem;
-  max-height: 30rem;
+  max-height: 35rem;
   background-color: white;
   margin: 5px;
   border-radius: 10px;
   padding: 1rem;
-  overflow: scroll;
-  scrollbar-width: thin;
 }
 .food-list {
   padding: 0.1rem;
   border: 0.2rem solid var(--secondary);
   background-color: var(--secondary);
   border-radius: 10px;
-  overflow-y: scroll;
 }
 .food-item {
   background-color: white;
@@ -167,6 +169,16 @@
 }
 .food-list-search-bar {
   padding: 1rem;
+}
+.food-header {
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+.food-body {
+  overflow-y: scroll;
+  max-height: 15rem;
+  margin: 1rem 0;
+  scrollbar-width: thin;
 }
 .add-item-card ul {
   list-style-type: none;
@@ -188,13 +200,6 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
-.meal-food-list {
-  padding: 0.1rem;
-  border: 0.2rem solid var(--secondary);
-  background-color: var(--secondary);
-  border-radius: 10px;
-  overflow-y: scroll;
-}
 .meal-item {
   background-color: white;
   display: flex;
@@ -208,18 +213,18 @@
   margin-bottom: 1rem;
   padding: 0.5rem;
 }
-.meal-food-header {
+.meal-header {
   display: flex;
   justify-content: space-between;
   margin: 0.5rem 1rem;
 }
-.meal-food-header h2 {
+.meal-header h2 {
   font-size: 2.5rem;
   font-weight: 500;
   color: white;
   -webkit-text-stroke: 1px var(--primary);
 }
-.meal-food-header h4,
+.meal-header h4,
 p {
   font-size: 1.3rem;
   font-weight: 500;
@@ -230,4 +235,10 @@ p {
 .meal-btns {
   display: flex;
   justify-content: space-evenly;
+}
+.meal-body {
+  overflow-y: scroll;
+  max-height: 15rem;
+  margin: 1rem 0;
+  scrollbar-width: thin;
 }
