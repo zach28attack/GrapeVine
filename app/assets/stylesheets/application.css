@@ -182,7 +182,7 @@
   letter-spacing: -1px;
 }
 
-.add-item-card ul li.active {
+.active {
   color: white;
   background-color: var(--secondary);
   border-top-right-radius: 10px;
