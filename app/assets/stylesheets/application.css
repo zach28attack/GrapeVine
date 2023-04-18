@@ -242,3 +242,9 @@ p {
   margin: 1rem 0;
   scrollbar-width: thin;
 }
+.meal-item-notification {
+  font-weight: 300;
+  /* color: rgba(255, 255, 255, 0.734); */
+  font-style: italic;
+  font-size: 0.7rem;
+}
