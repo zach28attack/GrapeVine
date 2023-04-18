@@ -20,9 +20,10 @@ class FoodsMealsController < ApplicationController
   def create
     @foods_meal = FoodsMeal.new(foods_meals_params)
     @foods_meal.user_id = 1
+    food = Food.find(@foods_meal.food_id)
     if @foods_meal.save
       # Return the updated data as JSON
-      render json: { status: 'success', data: sum_of_calories }, status: :ok
+      render json: { status: 'success', data: sum_of_calories, food_item: food }, status: :ok
     else
       # Return an error message as JSON
       render json: { status: 'error', message: 'Save failed' }, status: :unprocessable_entity
