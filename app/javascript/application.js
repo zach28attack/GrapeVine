@@ -77,6 +77,9 @@ const activateTabs = () => {
         // remove hidden class from form
         const activeForm = document.querySelector(`#${tab.dataset.form}-form`);
         activeForm.classList.toggle("hidden");
+
+        const buttons = document.querySelectorAll("#foods-meal-form-toggle");
+        enableFoodsMealButtons(buttons);
       }
     });
   });
@@ -98,17 +101,18 @@ const renderFormModal = (e) => {
     }
   });
 };
+const enableFoodsMealButtons = (buttons) => {
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
 
-// const editFormModalButton = document.querySelector("#edit-form-modal");
-// console.log(editFormModalButton);
-// editFormModalButton.addEventListener("click", (e) => {
-//   e.preventDefault()
-//   tabsChildren.forEach((tab) => {
-//     if (tab.dataset.id === e.target.id) {
-//       tab.classList.remove("hidden");
-//     }
-//   });
-// });
+      // toggle hidden class of new/edit meal forms
+      buttons.forEach((button) => {
+        button.closest(".food-list").classList.toggle("hidden");
+      });
+    });
+  });
+};
 
 const formModalTemplateButtons =
   document.querySelectorAll("#form-modal-toggle");
