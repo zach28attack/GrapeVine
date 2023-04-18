@@ -78,12 +78,14 @@ const activateTabs = () => {
         const activeForm = document.querySelector(`#${tab.dataset.form}-form`);
         activeForm.classList.toggle("hidden");
 
+        // add event listeners to foods_meal forms to toggle new/edit forms
         const buttons = document.querySelectorAll("#foods-meal-form-toggle");
         enableFoodsMealButtons(buttons);
       }
     });
   });
 };
+
 const renderFormModal = (e) => {
   const timeOfDay = e.target.closest(".summary-table").dataset.tod;
   const formModalTemplate = document.querySelector(
@@ -101,6 +103,7 @@ const renderFormModal = (e) => {
     }
   });
 };
+
 const enableFoodsMealButtons = (buttons) => {
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -108,7 +111,13 @@ const enableFoodsMealButtons = (buttons) => {
 
       // toggle hidden class of new/edit meal forms
       buttons.forEach((button) => {
-        button.closest(".food-list").classList.toggle("hidden");
+        const form = button.closest(".food-list");
+
+        form.classList.toggle("hidden");
+
+        if (form.dataset.formType === "edit") {
+          onClickRemoveFood();
+        }
       });
     });
   });
@@ -161,35 +170,44 @@ async function submitForm(form) {
   }
 }
 
-async function updateCalorieSum(data) {
-  document
-    .querySelector("#meals-form")
-    .querySelector("#sum-of-calories").textContent = `Total Cals:${data}`;
+function updateCalorieSum(data) {
+  const calsCounters = document.querySelectorAll("#sum-of-calories");
+  calsCounters.forEach((calsCounter) => {
+    calsCounter.textContent = `Total Cals:${data}`;
+  });
 }
 
-// const removeFoodButtons = document.querySelectorAll("#remove-food-button");
-// removeFoodButtons.forEach((removeFoodButton) => {
-//   removeFoodButton.addEventListener("click", (event) => {
-//     const mealItem = event.target.closest(".meal-item");
-//     event.preventDefault();
-//     const mealId = event.target.closest("#remove-food-button").dataset.mealId;
-//     deleteFood(mealId, mealItem);
-//   });
-// });
+// function to remove food items from foods_meal page
+const onClickRemoveFood = () => {
+  // grab 'remove food'
+  const removeFoodButtons = document.querySelectorAll("#remove-food-button");
+  removeFoodButtons.forEach((removeFoodButton) => {
+    removeFoodButton.addEventListener("click", (e) => {
+      const FoodsMealItem = e.target.closest(".meal-item");
+      const foodsMealId = e.target.closest("#remove-food-button").dataset
+        .mealId;
+      e.preventDefault();
 
-// async function deleteFood(id, object) {
-//   const response = await fetch(`/foods_meals/${id}`, {
-//     method: "DELETE",
-//     headers: {
-//       Accept: "application/json",
-//       "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
-//     },
-//   });
-//   if (response.ok) {
-//     const data = await response.json();
-//     object.remove();
-//     updateCalorieSum(data.data);
-//   } else {
-//     console.error("Error");
-//   }
-// }
+      deleteFood(foodsMealId, FoodsMealItem);
+    });
+  });
+};
+
+async function deleteFood(id, object) {
+  const response = await fetch(`/foods_meals/${id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+    },
+  });
+  if (response.ok) {
+    const data = await response.json();
+    object.remove();
+    updateCalorieSum(data.data);
+  } else {
+    console.error("Error");
+  }
+}
+
+const updateForms = () => {};
