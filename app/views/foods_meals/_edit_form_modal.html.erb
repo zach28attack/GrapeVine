@@ -7,12 +7,14 @@
     </div>
     <div class="meal-body">
       <% @meal.foods.each do |food|%>
+
         <div class="meal-item">
           <div class="meal-item-name">
             <%=food.food_name%>
-            <button  id="remove-food-button" data-meal-id=<%= get_foods_meal_id(food.id, @meal.id)%>>Remove food</button>
           </div>
+          <button  id="remove-food-button" data-meal-id=<%= get_foods_meal_id(food.id, @meal.id)%>>Remove food</button>
         </div>
+
       <% end %>
     </div>
   <%else%>
