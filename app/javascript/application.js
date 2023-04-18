@@ -115,6 +115,21 @@ const activateTabs = () => {
       });
       // Add the "active" class to the clicked tab
       e.target.classList.add("active");
+
+      // depending on which list item is active display respective form
+      if (tab.classList.contains("active")) {
+        const forms = document.querySelectorAll(".food-list");
+
+        // give every form class of hidden
+        forms.forEach((form) => {
+          if (!form.classList.contains("hidden")) {
+            form.classList.add("hidden");
+          }
+        });
+        // remove hidden class from form
+        const activeForm = document.querySelector(`#${tab.dataset.form}-form`);
+        activeForm.classList.toggle("hidden");
+      }
     });
   });
 };
