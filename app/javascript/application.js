@@ -241,8 +241,3 @@ async function deleteFood(id, object) {
 }
 
 const updateForms = () => {};
-
-//when new_foods_meal item is added only one element gets created. fix it so that multiple
-// food items can be created and saved to an array that will get iterated and appended to page
-//
-// duplicate foods are added to foods_meal when forms are cycled
