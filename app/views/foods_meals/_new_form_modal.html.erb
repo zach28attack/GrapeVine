@@ -1,7 +1,6 @@
-<div class="food-list hidden" id="meals-form">
-  <% if @meal.id %>
+<div class="food-list hidden" id="foods-meal-form">
     <div class="meal-header">
-      <h2 ><%= @meal.meal_name %></h2>
+      <h2 id="meal-name"><%= @meal.meal_name %></h2>
       <h4>add items</h4>
       <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %></p>
     </div>
@@ -25,11 +24,6 @@
         </div>
       <% end %>
     </div>
-  <%else%>
-    <h1>Create new meal</h1>
-    <%= render 'meals/form' %>
-    <%= link_to "go back", meals_path %>
-  <%end%>
   <div class="meal-btns">
     <%= link_to "go back", meals_path %>
     <% if @meal.id %>

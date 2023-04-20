@@ -1,4 +1,4 @@
-<div class="food-list hidden" id="meals-form"  data-form-type="edit" >
+<div class="food-list hidden" id="foods-meal-form"  data-form-type="edit" >
   <% if @meal.id %>
     <div class="meal-header">
       <h2><%= @meal.meal_name %></h2>
@@ -7,14 +7,12 @@
     </div>
     <div class="meal-body">
       <% @meal.foods.each do |food|%>
-
         <div class="meal-item">
           <div class="meal-item-name">
             <%=food.food_name%>
           </div>
           <button  id="remove-food-button" data-meal-id=<%= get_foods_meal_id(food.id, @meal.id)%>>Remove food</button>
         </div>
-
       <% end %>
     </div>
   <%else%>
