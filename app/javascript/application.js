@@ -52,36 +52,95 @@ const activateTabs = () => {
   const [...tabsChildren] = tabs.children;
   tabsChildren.forEach((tab) => {
     tab.addEventListener("click", (e) => {
+      const forms = document.querySelectorAll(".food-list");
+
       // Remove the "active" class from all tabs
       tabsChildren.forEach((child) => {
         if (child.classList.contains("active")) {
           child.classList.remove("active");
         }
       });
+
       // Add the "active" class to the clicked tab
       e.target.classList.add("active");
 
-      // depending on which list item is active display respective form
-      if (tab.classList.contains("active")) {
-        const forms = document.querySelectorAll(".food-list");
+      // give every form class of hidden
+      forms.forEach((form) => {
+        if (!form.classList.contains("hidden")) {
+          form.classList.add("hidden");
+        }
+      });
 
-        // give every form class of hidden
-        forms.forEach((form) => {
-          if (!form.classList.contains("hidden")) {
-            form.classList.add("hidden");
-          }
-        });
-        // remove hidden class from form
-        const activeForm = document.querySelector(`#${tab.dataset.form}-form`);
-        activeForm.classList.toggle("hidden");
+      // select form by active tab
+      const activeTab = document.querySelector(`#${tab.dataset.form}-form`);
+      // remove hidden class from selected form
+      activeTab.classList.toggle("hidden");
 
-        // add event listeners to foods_meal forms to toggle new/edit forms
-        const buttons = document.querySelectorAll("#foods-meal-form-toggle");
-        enableFoodsMealButtons(buttons);
+      if (activeTab.id === "meals-form") {
+        onEditMealClick();
       }
     });
   });
 };
+
+// when edit btn is clicked render new foods_meal
+const onEditMealClick = () => {
+  const editMealButtons = document.querySelectorAll(".meal-edit-button");
+  editMealButtons.forEach((editMealButton) => {
+    editMealButton.addEventListener("click", async (e) => {
+      const mealId = e.target.closest(".meal-item").dataset.id;
+      e.preventDefault();
+
+      const data = await getFoods(mealId);
+
+      renderNewFoodsMealForm(data);
+
+      // add event listeners to foods_meal forms to toggle new/edit forms
+      const foodsMealButtons = document.querySelectorAll(
+        "#foods-meal-form-toggle"
+      );
+      enableFoodsMealButtons(foodsMealButtons);
+    });
+  });
+};
+
+const renderNewFoodsMealForm = (data) => {
+  const foods = data.foods;
+  const meal = data.meal;
+  const forms = document.querySelectorAll(".food-list");
+  forms.forEach((form) => {
+    // hide all forms
+    if (!form.classList.contains("hidden")) {
+      form.classList.add("hidden");
+    }
+
+    if (form.id === "foods-meal-form" && form.dataset.formType === undefined) {
+      form.classList.remove("hidden");
+      updateteNewFoodsMealHTML(form, foods, meal);
+    }
+  });
+};
+//
+const updateteNewFoodsMealHTML = (form, foods, meal) => {
+  const name = form.querySelector("#meal-name");
+  name.innerHTML = meal.meal_name;
+  foods.forEach((food) => {});
+};
+
+async function getFoods(mealId) {
+  const response = await fetch(`/foods_meals/${mealId}/edit`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+    },
+  });
+  if (response.ok) {
+    const data = await response.json();
+
+    return data;
+  }
+}
 
 const renderFormModal = (e) => {
   const timeOfDay = e.target.closest(".summary-table").dataset.tod;
@@ -196,7 +255,7 @@ const updatedMealItemHTML = (food) => {
 //append new edit_foods_meal food item if any were added
 const updateFoodList = (food) => {
   if (food !== "") {
-    const forms = document.querySelectorAll("#meals-form");
+    const forms = document.querySelectorAll("#foods-meal-form");
     forms.forEach((form) => {
       if (form.dataset.formType === "edit") {
         form.querySelector(".meal-body").appendChild(updatedMealItemHTML(food));
@@ -237,5 +296,3 @@ async function deleteFood(id, object) {
     console.error("Error");
   }
 }
-
-const updateForms = () => {};
