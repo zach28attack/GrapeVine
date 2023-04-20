@@ -34,7 +34,8 @@ class FoodsMealsController < ApplicationController
   def edit
     @meal = Meal.find(params[:id])
     if @meal
-      render json: {status: 'success', meal: @meal, foods: @meal.foods}
+      render json: {status: 'success', meal: @meal, foods: Food.all} 
+                                                      #change to user.foods.all
     else
       render json: { status: 'error', message: 'Meal could not be found' }
     end
