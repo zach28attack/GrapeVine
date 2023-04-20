@@ -120,11 +120,29 @@ const renderNewFoodsMealForm = (data) => {
     }
   });
 };
-//
+
+//update foods meal form with selected meal
 const updateteNewFoodsMealHTML = (form, foods, meal) => {
-  const name = form.querySelector("#meal-name");
-  name.innerHTML = meal.meal_name;
-  foods.forEach((food) => {});
+  const mealName = form.querySelector("#meal-name");
+  const mealBody = form.querySelector(".meal-body");
+
+  mealName.innerHTML = meal.meal_name;
+
+  foods.forEach((food) => {
+    const foodForm = document
+      .querySelector("#new-foods-meal-form")
+      .cloneNode(true);
+    const foodName = foodForm.querySelector(".food-name");
+    const mealId = foodForm.querySelector("input[name='foods_meal[meal_id]']");
+    const foodId = foodForm.querySelector("input[name='foods_meal[food_id]']");
+
+    mealId.value = meal.id;
+    foodId.value = food.id;
+
+    foodName.innerHTML = `${food.food_name}`;
+
+    mealBody.appendChild(foodForm);
+  });
 };
 
 async function getFoods(mealId) {
