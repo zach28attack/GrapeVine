@@ -6,22 +6,21 @@
     </div>
     <div class="meal-body">
       <% @foods.each do |food|%>
-        <div class="meal-item">
-          <div class="meal-item-name">
-            <%= form_with model: @foods_meal, id: "new-foods-meal-form" do |f| %>
-              <%=food.food_name%>
-              <%=f.hidden_field :meal_id, value: @meal.id%>
-              <%=f.hidden_field :food_id, value: food.id%>
-
-              <% if @meal.foods.include?(food) %>
-                <%=f.submit "Add food", id: "submit-button", class: 'disabled'%>
-              <%else%>
-                <%=f.submit "Add food", id: "submit-button"%>
-                <small class="meal-item-notification hidden">item added</small>
-              <%end%>
-            <% end %>
+        <%= form_with model: @foods_meal, id: "new-foods-meal-form", class: "meal-item meal-item-name" do |f| %>
+          <div class="food-name">
+            <%=food.food_name%>
           </div>
-        </div>
+          
+          <%=f.hidden_field :meal_id, value: @meal.id%>
+          <%=f.hidden_field :food_id, value: food.id%>
+
+          <% if @meal.foods.include?(food) %>
+            <%=f.submit "Add food", id: "submit-button", class: 'disabled'%>
+          <%else%>
+            <%=f.submit "Add food", id: "submit-button"%>
+            <small class="meal-item-notification hidden">item added</small>
+          <%end%>
+        <% end %>
       <% end %>
     </div>
   <div class="meal-btns">
