@@ -3,9 +3,6 @@ import "@hotwired/turbo-rails";
 import "controllers";
 
 const diaryFormToggles = document.querySelectorAll("#diary-form-toggle");
-const foodListFormToggles = document.querySelectorAll(
-  "#add-summary-item-toggle"
-);
 const getTimeOfDay = (e) => {
   return e.target.closest("#time-of-day").dataset.tod.toLowerCase();
 };
@@ -118,7 +115,6 @@ const enableFoodsMealButtons = (buttons) => {
 
         if (form.dataset.formType === "edit") {
           onClickRemoveFood();
-          updateFoodList(form);
         }
       });
     });
@@ -147,8 +143,6 @@ const onNewFoodsMealSubmit = () => {
   });
 };
 
-let food = "";
-
 // handle new_foods_meal form submission
 async function submitForm(form) {
   // get data from submitted form
@@ -169,8 +163,7 @@ async function submitForm(form) {
   if (response.ok) {
     const data = await response.json();
     updateCalorieSum(data.data);
-    food = data.food_item;
-
+    updateFoodList(data.food_item);
     // disable 'Add food' button
     form.querySelector("#submit-button").classList.add("disabled");
   }
@@ -203,9 +196,14 @@ const updatedMealItemHTML = (food) => {
 };
 
 //append new edit_foods_meal food item if any were added
-const updateFoodList = (form) => {
+const updateFoodList = (food) => {
   if (food !== "") {
-    form.querySelector(".meal-body").appendChild(updatedMealItemHTML(food));
+    const forms = document.querySelectorAll("#meals-form");
+    forms.forEach((form) => {
+      if (form.dataset.formType === "edit") {
+        form.querySelector(".meal-body").appendChild(updatedMealItemHTML(food));
+      }
+    });
   }
 };
 
@@ -243,3 +241,8 @@ async function deleteFood(id, object) {
 }
 
 const updateForms = () => {};
+
+//when new_foods_meal item is added only one element gets created. fix it so that multiple
+// food items can be created and saved to an array that will get iterated and appended to page
+//
+// duplicate foods are added to foods_meal when forms are cycled
