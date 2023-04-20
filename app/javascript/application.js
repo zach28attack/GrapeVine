@@ -165,7 +165,8 @@ async function submitForm(form) {
     updateCalorieSum(data.data);
     updateFoodList(data.food_item);
     // disable 'Add food' button
-    form.querySelector("#submit-button").classList.add("disabled");
+    form.querySelector("#submit-button").classList.add("hidden");
+    form.querySelector(".meal-item-notification").classList.remove("hidden");
   }
 }
 
@@ -185,11 +186,8 @@ const updatedMealItemHTML = (food) => {
   mealItem.className = "meal-item";
   mealItemName.className = "meal-item-name";
   notification.className = "meal-item-notification";
-
   mealItemName.innerHTML = `${food.food_name} `;
-
-  notification.innerHTML = "just added";
-
+  notification.innerHTML = "recently added";
   mealItemName.appendChild(notification);
   mealItem.appendChild(mealItemName);
   return mealItem;
