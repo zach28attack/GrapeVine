@@ -34,8 +34,15 @@ class FoodsMealsController < ApplicationController
   def edit
     @meal = Meal.find(params[:id])
     if @meal
-      render json: {status: 'success', meal: @meal, foods: Food.all} 
-                                                      #change to user.foods.all
+      render json: 
+      {status: 'success',
+        meal: @meal,
+        foods: Food.all,#scope to user's foods
+        sum_of_calories: @meal.foods.sum(:calories),
+        foods_in_meal: @meal.foods,
+        foods_meals: @meal.foods_meals
+      } 
+                                                      
     else
       render json: { status: 'error', message: 'Meal could not be found' }
     end
@@ -49,7 +56,6 @@ class FoodsMealsController < ApplicationController
 
   def destroy
     @foods_meal = FoodsMeal.find(params[:id])
-    # meal_id = foods_meal.meal_id
     if @foods_meal.destroy
       render json: { status: 'success', data: sum_of_calories }, status: :ok
     else
