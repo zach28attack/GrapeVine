@@ -92,7 +92,6 @@ const onEditMealClick = () => {
       e.preventDefault();
 
       const data = await getFoods(mealId);
-
       // remove all forms if they exist
       const customHTMLForms = document.querySelectorAll("#new-foods-meal-form");
       customHTMLForms.forEach((form) => {
@@ -100,6 +99,16 @@ const onEditMealClick = () => {
       });
 
       renderNewFoodsMealForm(data);
+      updateCalorieSum(data.sum_of_calories);
+
+      //iterate through array of foods_meal objects with meal.id
+      data.foods_meals.forEach((foodsMeal) => {
+        data.foods_in_meal.forEach((food) => {
+          if (foodsMeal.food_id === food.id) {
+            updateFoodList(food, foodsMeal.id);
+          }
+        });
+      });
     });
   });
 };
@@ -107,6 +116,7 @@ const onEditMealClick = () => {
 const renderNewFoodsMealForm = (data) => {
   const foods = data.foods;
   const meal = data.meal;
+  const foodsInMeal = data.foods_in_meal;
   const forms = document.querySelectorAll(".food-list");
   forms.forEach((form) => {
     // hide all forms
@@ -116,7 +126,7 @@ const renderNewFoodsMealForm = (data) => {
 
     if (form.id === "foods-meal-form" && form.dataset.formType === undefined) {
       form.classList.remove("hidden");
-      updateteNewFoodsMealHTML(form, foods, meal);
+      updateNewFoodsMealHTML(form, foods, meal, foodsInMeal);
 
       // add event listeners to foods_meal forms to toggle new/edit forms
       const foodsMealButtons = document.querySelectorAll(
@@ -129,29 +139,34 @@ const renderNewFoodsMealForm = (data) => {
 };
 
 //update foods meal form with selected meal
-const updateteNewFoodsMealHTML = (form, foods, meal) => {
+const updateNewFoodsMealHTML = (form, foods, meal, foodsInMeal) => {
   const mealName = form.querySelector("#meal-name");
   const mealBody = form.querySelector(".meal-body");
+  // grab new_foods_meal template
+  const formTemplate = document.querySelector(
+    "#new-foods-meal-template"
+  ).content;
 
   mealName.innerHTML = meal.meal_name;
 
   foods.forEach((food) => {
-    const formTemplate = document.querySelector(
-      "#new-foods-meal-template"
-    ).content;
+    //clone templated form
     const foodForm = formTemplate
       .querySelector("#new-foods-meal-form")
       .cloneNode(true);
-    foodForm.classList.remove("hidden");
+
     const foodName = foodForm.querySelector(".food-name");
     const mealId = foodForm.querySelector("input[name='foods_meal[meal_id]']");
     const foodId = foodForm.querySelector("input[name='foods_meal[food_id]']");
+    const sumbitButton = foodForm.querySelector("#submit-button");
 
     mealId.value = meal.id;
     foodId.value = food.id;
-
     foodName.innerHTML = `${food.food_name}`;
-
+    if (foodsInMeal.some((item) => item.id === food.id)) {
+      console.log("Disabled");
+      sumbitButton.classList.add("disabled");
+    }
     mealBody.appendChild(foodForm);
   });
 };
@@ -194,16 +209,10 @@ const enableFoodsMealButtons = (buttons) => {
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
-
       // toggle hidden class of new/edit meal forms
       buttons.forEach((button) => {
         const form = button.closest(".food-list");
-
         form.classList.toggle("hidden");
-
-        if (form.dataset.formType === "edit") {
-          onClickRemoveFood();
-        }
       });
     });
   });
@@ -251,9 +260,9 @@ async function submitForm(form) {
     const data = await response.json();
     updateCalorieSum(data.data);
     updateFoodList(data.food_item);
+    console.log(form);
     // disable 'Add food' button
-    form.querySelector("#submit-button").classList.add("hidden");
-    form.querySelector(".meal-item-notification").classList.remove("hidden");
+    form.querySelector("#submit-button").classList.add("disabled");
   }
 }
 
@@ -265,51 +274,44 @@ const updateCalorieSum = (data) => {
 };
 
 // create a new meal-item node element containing new_foods_meal food
-const updatedMealItemHTML = (food) => {
-  const mealItem = document.createElement("div");
-  const mealItemName = document.createElement("div");
-  const notification = document.createElement("small");
-
-  mealItem.className = "meal-item";
-  mealItemName.className = "meal-item-name";
-  notification.className = "meal-item-notification";
-  mealItemName.innerHTML = `${food.food_name} `;
-  notification.innerHTML = "recently added";
-  mealItemName.appendChild(notification);
-  mealItem.appendChild(mealItemName);
+const updatedMealItemHTML = (food, foodsMealId) => {
+  const mealItemTemplate = document.querySelector(
+    "#meal-item-template"
+  ).content;
+  const mealItem = mealItemTemplate.querySelector(".meal-item").cloneNode(true);
+  mealItem.dataset.id = `${foodsMealId}`;
+  mealItem.querySelector(".meal-item-name").innerHTML = `${food.food_name}`;
   return mealItem;
 };
 
-//append new edit_foods_meal food item if any were added
-const updateFoodList = (food) => {
-  if (food !== "") {
-    const forms = document.querySelectorAll("#foods-meal-form");
-    forms.forEach((form) => {
-      if (form.dataset.formType === "edit") {
-        form.querySelector(".meal-body").appendChild(updatedMealItemHTML(food));
-      }
-    });
-  }
-};
-
-// function to remove food items from foods_meal page
-const onClickRemoveFood = () => {
-  // grab 'remove food'
-  const removeFoodButtons = document.querySelectorAll("#remove-food-button");
-  removeFoodButtons.forEach((removeFoodButton) => {
-    removeFoodButton.addEventListener("click", (e) => {
-      const FoodsMealItem = e.target.closest(".meal-item");
-      const foodsMealId = e.target.closest("#remove-food-button").dataset
-        .mealId;
-      e.preventDefault();
-
-      deleteFood(foodsMealId, FoodsMealItem);
-    });
+//append every food item to edit_foods_meal page
+const updateFoodList = (food, foodsMealId) => {
+  const forms = document.querySelectorAll("#foods-meal-form");
+  forms.forEach((form) => {
+    if (form.dataset.formType === "edit") {
+      form
+        .querySelector(".meal-body")
+        .appendChild(updatedMealItemHTML(food, foodsMealId));
+      onClickRemoveFood(foodsMealId);
+    }
   });
 };
 
-async function deleteFood(id, object) {
-  const response = await fetch(`/foods_meals/${id}`, {
+// function to remove food items from foods_meal page
+const onClickRemoveFood = (foodsMealId) => {
+  // grab 'remove food'
+  const removeFoodButton = document.querySelector(`[data-id='${foodsMealId}']`);
+  removeFoodButton.addEventListener("click", (e) => {
+    const FoodsMealItem = e.target.closest(".meal-item");
+    e.preventDefault();
+    console.log(removeFoodButton);
+
+    deleteFood(foodsMealId, FoodsMealItem);
+  });
+};
+
+async function deleteFood(foodsMealId, object) {
+  const response = await fetch(`/foods_meals/${foodsMealId}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
