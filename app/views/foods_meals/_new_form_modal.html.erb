@@ -5,23 +5,16 @@
       <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %></p>
     </div>
     <div class="meal-body">
-      <% @foods.each do |food|%>
-        <%= form_with model: @foods_meal, id: "new-foods-meal-form", class: "meal-item meal-item-name" do |f| %>
-          <div class="food-name">
-            <%=food.food_name%>
-          </div>
-          
-          <%=f.hidden_field :meal_id, value: @meal.id%>
-          <%=f.hidden_field :food_id, value: food.id%>
-
-          <% if @meal.foods.include?(food) %>
-            <%=f.submit "Add food", id: "submit-button", class: 'disabled'%>
-          <%else%>
+        <template id="new-foods-meal-template">
+          <%= form_with model: @foods_meal, id: "new-foods-meal-form", class: "meal-item meal-item-name" do |f| %>
+            <div class="food-name">
+              ERROR
+            </div>
+            <%=f.hidden_field :meal_id, value: @meal.id%>
+            <%=f.hidden_field :food_id, value: Food.first%>
             <%=f.submit "Add food", id: "submit-button"%>
-            <small class="meal-item-notification hidden">item added</small>
-          <%end%>
-        <% end %>
-      <% end %>
+          <% end %>
+        </template>
     </div>
   <div class="meal-btns">
     <%= link_to "go back", meals_path %>
