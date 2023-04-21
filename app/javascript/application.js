@@ -93,6 +93,12 @@ const onEditMealClick = () => {
 
       const data = await getFoods(mealId);
 
+      // remove all forms if they exist
+      const customHTMLForms = document.querySelectorAll("#new-foods-meal-form");
+      customHTMLForms.forEach((form) => {
+        form.remove();
+      });
+
       renderNewFoodsMealForm(data);
     });
   });
