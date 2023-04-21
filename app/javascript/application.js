@@ -94,12 +94,6 @@ const onEditMealClick = () => {
       const data = await getFoods(mealId);
 
       renderNewFoodsMealForm(data);
-
-      // add event listeners to foods_meal forms to toggle new/edit forms
-      const foodsMealButtons = document.querySelectorAll(
-        "#foods-meal-form-toggle"
-      );
-      enableFoodsMealButtons(foodsMealButtons);
     });
   });
 };
@@ -117,6 +111,13 @@ const renderNewFoodsMealForm = (data) => {
     if (form.id === "foods-meal-form" && form.dataset.formType === undefined) {
       form.classList.remove("hidden");
       updateteNewFoodsMealHTML(form, foods, meal);
+
+      // add event listeners to foods_meal forms to toggle new/edit forms
+      const foodsMealButtons = document.querySelectorAll(
+        "#foods-meal-form-toggle"
+      );
+      enableFoodsMealButtons(foodsMealButtons);
+      onNewFoodsMealSubmit();
     }
   });
 };
@@ -129,9 +130,13 @@ const updateteNewFoodsMealHTML = (form, foods, meal) => {
   mealName.innerHTML = meal.meal_name;
 
   foods.forEach((food) => {
-    const foodForm = document
+    const formTemplate = document.querySelector(
+      "#new-foods-meal-template"
+    ).content;
+    const foodForm = formTemplate
       .querySelector("#new-foods-meal-form")
       .cloneNode(true);
+    foodForm.classList.remove("hidden");
     const foodName = foodForm.querySelector(".food-name");
     const mealId = foodForm.querySelector("input[name='foods_meal[meal_id]']");
     const foodId = foodForm.querySelector("input[name='foods_meal[food_id]']");
@@ -206,7 +211,6 @@ formModalTemplateButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     renderFormModal(e);
     activateTabs();
-    onNewFoodsMealSubmit();
   });
 });
 
