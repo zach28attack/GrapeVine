@@ -6,14 +6,14 @@
       <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %><p>
     </div>
     <div class="meal-body">
-      <% @meal.foods.each do |food|%>
-        <div class="meal-item">
-          <div class="meal-item-name">
-            <%=food.food_name%>
+      
+        <template id="meal-item-template">
+          <div class="meal-item">
+            <div class="meal-item-name">
+            </div>
+            <button type="submit" id="remove-food-button">Remove food</button>
           </div>
-          <button  id="remove-food-button" data-meal-id=<%= get_foods_meal_id(food.id, @meal.id)%>>Remove food</button>
-        </div>
-      <% end %>
+        </template>
     </div>
   <%else%>
     <h1>Create new meal</h1>
