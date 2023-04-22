@@ -24,7 +24,7 @@
       <%= f.hidden_field :protein, value: meal.foods.sum(:protein)%>
       <%= f.hidden_field :fats, value: meal.foods.sum(:fats)%>
       <%= f.hidden_field :carbs, value: meal.foods.sum(:carbs)%>
-      <%= f.hidden_field :time_of_day, value: "Breakfast" %>
+      <%= f.hidden_field :time_of_day, value: time_of_day %>
       <%= f.hidden_field :food_id, value: meal.id %>
     <%end%>
   <%end%>
