@@ -6,7 +6,7 @@
       <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %><p>
     </div>
     <div class="meal-body">
-      
+
         <template id="meal-item-template">
           <div class="meal-item">
             <div class="meal-item-name">
@@ -21,7 +21,7 @@
     <%= link_to "go back" %>
   <%end%>
   <div class="meal-btns">
-    <%= link_to "go back", meals_path %>
+    <a class="cancel-button" href="#">Go back to meal list</a>
     <% if @meal.id %>
       <button id="foods-meal-form-toggle"><%= link_to "Add foods" %></button>
     <%end%>

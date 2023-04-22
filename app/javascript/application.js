@@ -78,6 +78,7 @@ const activateTabs = () => {
 
       if (activeTab.id === "meals-form") {
         onEditMealClick();
+        enableCancelButton();
       }
     });
   });
@@ -164,7 +165,6 @@ const updateNewFoodsMealHTML = (form, foods, meal, foodsInMeal) => {
     foodId.value = food.id;
     foodName.innerHTML = `${food.food_name}`;
     if (foodsInMeal.some((item) => item.id === food.id)) {
-      console.log("Disabled");
       sumbitButton.classList.add("disabled");
     }
     mealBody.appendChild(foodForm);
@@ -260,7 +260,6 @@ async function submitForm(form) {
     const data = await response.json();
     updateCalorieSum(data.data);
     updateFoodList(data.food_item);
-    console.log(form);
     // disable 'Add food' button
     form.querySelector("#submit-button").classList.add("disabled");
   }
@@ -304,8 +303,6 @@ const onClickRemoveFood = (foodsMealId) => {
   removeFoodButton.addEventListener("click", (e) => {
     const FoodsMealItem = e.target.closest(".meal-item");
     e.preventDefault();
-    console.log(removeFoodButton);
-
     deleteFood(foodsMealId, FoodsMealItem);
   });
 };
@@ -326,3 +323,17 @@ async function deleteFood(foodsMealId, object) {
     console.error("Error");
   }
 }
+
+const enableCancelButton = () => {
+  const buttons = document.querySelectorAll(".cancel-button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.target.closest("#foods-meal-form").classList.add("hidden");
+      e.target
+        .closest(".add-item-card")
+        .querySelector("#meals-form")
+        .classList.remove("hidden");
+    });
+  });
+};
