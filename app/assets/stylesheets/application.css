@@ -248,3 +248,10 @@ p {
   font-style: italic;
   font-size: 0.7rem;
 }
+.meal-item-macros {
+  display: flex;
+  gap: 0.3rem;
+  font-size: 0.5rem;
+  font-style: italic;
+  opacity: 80%;
+}
