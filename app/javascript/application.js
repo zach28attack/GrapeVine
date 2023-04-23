@@ -396,6 +396,14 @@ const enableCancelButton = () => {
         .closest(".add-item-card")
         .querySelector("#meals-form")
         .classList.remove("hidden");
+
+      const mealsForm = document.querySelector("#meals-form");
+      const meals = mealsForm.querySelectorAll("form");
+
+      meals.forEach((meal) => {
+        meal.remove();
+      });
+      getMeals();
     });
   });
 };
