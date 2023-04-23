@@ -13,7 +13,7 @@ before_action :init_diary
 
     @foods = Food.all
     @meals = Meal.all
-    @meal = Meal.last
+    @meal = Meal.new
     @foods_meal = FoodsMeal.new
   end
 
