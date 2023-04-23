@@ -4,8 +4,21 @@ class MealsController < ApplicationController
   end
   
   def index
-    @meals = Meal.all
-    @diary = Diary.new
+    meals_array = []
+    meals = Meal.all
+    # @diary = Diary.new
+
+    meals.each do |meal|
+      meals_array << {
+        meal: meal,
+        calories: meal.foods.sum(:calories),
+        protein: meal.foods.sum(:protein),
+        fats: meal.foods.sum(:fats),
+        carbs: meal.foods.sum(:carbs)
+      }
+    end
+    
+    render json: { meals: meals_array }
   end
 
   def show
