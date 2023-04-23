@@ -309,7 +309,7 @@ async function submitForm(form) {
   if (response.ok) {
     const data = await response.json();
     updateCalorieSum(data.data);
-    updateFoodList(data.food_item);
+    updateFoodList(data.food_item, data.id);
     // disable 'Add food' button
     form.querySelector("#submit-button").classList.add("disabled");
   }
@@ -329,6 +329,7 @@ const updatedMealItemHTML = (food, foodsMealId) => {
   ).content;
   const mealItem = mealItemTemplate.querySelector(".meal-item").cloneNode(true);
   mealItem.dataset.id = `${foodsMealId}`;
+  console.log(`id:${mealItem.dataset.id}`);
   mealItem.querySelector(".meal-item-name").innerHTML = `${food.food_name}`;
   return mealItem;
 };
