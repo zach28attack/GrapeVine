@@ -23,7 +23,7 @@ class FoodsMealsController < ApplicationController
     food = Food.find(@foods_meal.food_id)
     if @foods_meal.save
       # Return the updated data as JSON
-      render json: { status: 'success', data: sum_of_calories, food_item: food }, status: :ok
+      render json: { status: 'success', data: sum_of_calories, food_item: food, id:@foods_meal.id }, status: :ok
     else
       # Return an error message as JSON
       render json: { status: 'error', message: 'Save failed' }, status: :unprocessable_entity
