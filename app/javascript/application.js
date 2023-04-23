@@ -55,9 +55,9 @@ const activateTabs = () => {
       const forms = document.querySelectorAll(".food-list");
 
       // Remove the "active" class from all tabs
-      tabsChildren.forEach((child) => {
-        if (child.classList.contains("active")) {
-          child.classList.remove("active");
+      tabsChildren.forEach((tab) => {
+        if (tab.classList.contains("active")) {
+          tab.classList.remove("active");
         }
       });
 
@@ -77,38 +77,98 @@ const activateTabs = () => {
       activeTab.classList.toggle("hidden");
 
       if (activeTab.id === "meals-form") {
-        onEditMealClick();
+        getMeals();
         enableCancelButton();
       }
     });
   });
 };
 
+async function getMeals() {
+  const response = await fetch("/meals", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+    },
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    mealsHTML(data);
+  }
+}
+
+const mealsHTML = (data) => {
+  const mealBody = document
+    .querySelector("#meals-form")
+    .querySelector(".meal-body");
+  const mealTemplate = mealBody.querySelector("#meal-template").content;
+  const mealsArray = data.meals;
+
+  mealsArray.forEach((mealObj) => {
+    const mealNode = mealTemplate.querySelector("form").cloneNode(true);
+    const mealName = mealNode.querySelector(".meal-item-name");
+    const mealItemId = mealNode.querySelector(".meal-item");
+    const mealCalSum = mealNode.querySelector("#meal-cal-sum");
+    const mealCalInput = mealNode.querySelector(
+      "input[name='diary[calories]']"
+    );
+
+    const mealProteinSum = mealNode.querySelector("#meal-protein-sum");
+    const mealProteinInput = mealNode.querySelector(
+      "input[name='diary[protein]']"
+    );
+
+    const mealFatsSum = mealNode.querySelector("#meal-fats-sum");
+    const mealFatsInput = mealNode.querySelector("input[name='diary[fats]']");
+
+    const mealCarbSum = mealNode.querySelector("#meal-carbs-sum");
+    const mealCarbInput = mealNode.querySelector("input[name='diary[carbs]']");
+
+    mealName.innerHTML = mealObj.meal.meal_name;
+    mealItemId.dataset.id = mealObj.meal.id;
+
+    mealCalSum.innerHTML = `Cals. ${mealObj.calories}/`;
+    mealCalInput.value = mealObj.calories;
+
+    mealFatsSum.innerHTML = ` Fats ${mealObj.fats}/`;
+    mealFatsInput.value = mealObj.fats;
+
+    mealProteinSum.innerHTML = ` Prot. ${mealObj.protein}/`;
+    mealProteinInput.value = mealObj.protein;
+
+    mealCarbSum.innerHTML = `Carbs. ${mealObj.carbs}`;
+    mealCarbInput.value = mealObj.carbs;
+
+    mealBody.appendChild(mealNode);
+    onEditMealClick(mealNode);
+  });
+};
+
 // when edit btn is clicked render new foods_meal
-const onEditMealClick = () => {
-  const editMealButtons = document.querySelectorAll(".meal-edit-button");
-  editMealButtons.forEach((editMealButton) => {
-    editMealButton.addEventListener("click", async (e) => {
-      const mealId = e.target.closest(".meal-item").dataset.id;
-      e.preventDefault();
+const onEditMealClick = (mealNode) => {
+  const editMealButton = mealNode.querySelector(".meal-edit-button");
+  editMealButton.addEventListener("click", async (e) => {
+    const mealId = e.target.closest(".meal-item").dataset.id;
+    e.preventDefault();
 
-      const data = await getFoods(mealId);
-      // remove all forms if they exist
-      const customHTMLForms = document.querySelectorAll("#new-foods-meal-form");
-      customHTMLForms.forEach((form) => {
-        form.remove();
-      });
+    const data = await getFoods(mealId);
+    // remove all forms if they exist
+    const customHTMLForms = document.querySelectorAll("#new-foods-meal-form");
+    customHTMLForms.forEach((form) => {
+      form.remove();
+    });
 
-      renderNewFoodsMealForm(data);
-      updateCalorieSum(data.sum_of_calories);
+    renderNewFoodsMealForm(data);
+    updateCalorieSum(data.sum_of_calories);
 
-      //iterate through array of foods_meal objects with meal.id
-      data.foods_meals.forEach((foodsMeal) => {
-        data.foods_in_meal.forEach((food) => {
-          if (foodsMeal.food_id === food.id) {
-            updateFoodList(food, foodsMeal.id);
-          }
-        });
+    //iterate through array of foods_meal objects with meal.id
+    data.foods_meals.forEach((foodsMeal) => {
+      data.foods_in_meal.forEach((food) => {
+        if (foodsMeal.food_id === food.id) {
+          updateFoodList(food, foodsMeal.id);
+        }
       });
     });
   });
