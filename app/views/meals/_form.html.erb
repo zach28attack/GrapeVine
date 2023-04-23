@@ -1,6 +1,8 @@
-<%= form_with model: @meal do |f| %>
-
-  <%= f.label :meal_name%>
-  <%= f.text_field :meal_name %>
-  <%= f.submit "Save Meal Name"%>
-<%end%>
+<div class="new-meal-form hidden">
+  <%= form_with model: @meal do |f| %>
+    <%= f.label :meal_name%>
+    <%= f.text_field :meal_name %>
+    <%= f.submit "Save Meal Name", class:"new-meal-form-submit"%>
+  <%end%>
+</div>
+ 
