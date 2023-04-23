@@ -34,9 +34,9 @@ document.addEventListener("keypress", (e) => {
     e.key === "Escape" &&
     document
       .querySelector("body")
-      .contains(document.querySelector("#diary-form-modal"))
+      .contains(document.querySelector(".diary-form-modal"))
   ) {
-    document.querySelector("#diary-form-modal").remove();
+    document.querySelector(".diary-form-modal").remove();
   } else if (
     e.key === "Escape" &&
     document
@@ -310,6 +310,7 @@ async function submitForm(form) {
     const data = await response.json();
     updateCalorieSum(data.data);
     updateFoodList(data.food_item, data.id);
+
     // disable 'Add food' button
     form.querySelector("#submit-button").classList.add("disabled");
   }
@@ -329,7 +330,6 @@ const updatedMealItemHTML = (food, foodsMealId) => {
   ).content;
   const mealItem = mealItemTemplate.querySelector(".meal-item").cloneNode(true);
   mealItem.dataset.id = `${foodsMealId}`;
-  console.log(`id:${mealItem.dataset.id}`);
   mealItem.querySelector(".meal-item-name").innerHTML = `${food.food_name}`;
   return mealItem;
 };
@@ -355,6 +355,17 @@ const onClickRemoveFood = (foodsMealId) => {
     const FoodsMealItem = e.target.closest(".meal-item");
     e.preventDefault();
     deleteFood(foodsMealId, FoodsMealItem);
+    // remove disabled class on food item when item is removed
+    const foodForms = document.querySelectorAll("#new-foods-meal-form");
+    const removedFoodName = e.target
+      .closest(".meal-item")
+      .querySelector(".meal-item-name").textContent;
+    foodForms.forEach((food) => {
+      const foodName = food.querySelector(".food-name").textContent;
+      if (foodName === removedFoodName) {
+        food.querySelector("#submit-button").classList.remove("disabled");
+      }
+    });
   });
 };
 
