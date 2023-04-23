@@ -105,7 +105,6 @@ const mealsHTML = (data) => {
     .querySelector(".meal-body");
   const mealTemplate = mealBody.querySelector("#meal-template").content;
   const mealsArray = data.meals;
-
   mealsArray.forEach((mealObj) => {
     const mealNode = mealTemplate.querySelector("form").cloneNode(true);
     const mealName = mealNode.querySelector(".meal-item-name");
@@ -114,33 +113,24 @@ const mealsHTML = (data) => {
     const mealCalInput = mealNode.querySelector(
       "input[name='diary[calories]']"
     );
-
     const mealProteinSum = mealNode.querySelector("#meal-protein-sum");
     const mealProteinInput = mealNode.querySelector(
       "input[name='diary[protein]']"
     );
-
     const mealFatsSum = mealNode.querySelector("#meal-fats-sum");
     const mealFatsInput = mealNode.querySelector("input[name='diary[fats]']");
-
     const mealCarbSum = mealNode.querySelector("#meal-carbs-sum");
     const mealCarbInput = mealNode.querySelector("input[name='diary[carbs]']");
-
     mealName.innerHTML = mealObj.meal.meal_name;
     mealItemId.dataset.id = mealObj.meal.id;
-
     mealCalSum.innerHTML = `Cals. ${mealObj.calories}/`;
     mealCalInput.value = mealObj.calories;
-
     mealFatsSum.innerHTML = ` Fats ${mealObj.fats}/`;
     mealFatsInput.value = mealObj.fats;
-
     mealProteinSum.innerHTML = ` Prot. ${mealObj.protein}/`;
     mealProteinInput.value = mealObj.protein;
-
     mealCarbSum.innerHTML = `Carbs. ${mealObj.carbs}`;
     mealCarbInput.value = mealObj.carbs;
-
     mealBody.appendChild(mealNode);
     onEditMealClick(mealNode);
   });
