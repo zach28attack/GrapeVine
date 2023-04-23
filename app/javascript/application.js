@@ -79,6 +79,7 @@ const activateTabs = () => {
       if (activeTab.id === "meals-form") {
         getMeals();
         enableCancelButton();
+        openCreateMealForm();
       }
     });
   });
@@ -397,13 +398,54 @@ const enableCancelButton = () => {
         .querySelector("#meals-form")
         .classList.remove("hidden");
 
-      const mealsForm = document.querySelector("#meals-form");
-      const meals = mealsForm.querySelectorAll("form");
-
-      meals.forEach((meal) => {
-        meal.remove();
-      });
+      clearMeals();
       getMeals();
     });
   });
 };
+const openCreateMealForm = () => {
+  const newMealFormButton = document.querySelector(".new-meal-form-button");
+  newMealFormButton.addEventListener("click", () => {
+    const mealsForm = document.querySelector("#meals-form");
+    const newMealForm = document.querySelector(".new-meal-form");
+    mealsForm.classList.add("hidden");
+    newMealForm.classList.remove("hidden");
+    newMealFormButton.classList.add("hidden");
+    onNewMealSubmit();
+  });
+};
+const onNewMealSubmit = () => {
+  const button = document.querySelector(".new-meal-form-submit");
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    const form = e.target.closest("form");
+    mealSubmit(form);
+  });
+};
+async function mealSubmit(form) {
+  const formData = new FormData(form);
+  const response = await fetch("/meals", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+    },
+    body: formData,
+  });
+
+  if (response.ok) {
+    document.querySelector(".new-meal-form").classList.add("hidden");
+    document.querySelector("#meals-form").classList.remove("hidden");
+    clearMeals();
+    getMeals();
+  }
+}
+const clearMeals = () => {
+  const mealsForm = document.querySelector("#meals-form");
+  const meals = mealsForm.querySelectorAll("form");
+
+  meals.forEach((meal) => {
+    meal.remove();
+  });
+};
+// add new food form
