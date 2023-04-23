@@ -18,7 +18,7 @@ class MealsController < ApplicationController
       }
     end
     
-    render json: { meals: meals_array }
+    render json: { meals: meals_array.reverse! }
   end
 
   def show
@@ -29,9 +29,9 @@ class MealsController < ApplicationController
     @meal = Meal.new(meal_param)
     @meal.user_id = 1
     if @meal.save
-      redirect_to new_foods_meal_path(meal_id: @meal.id)
+      render json: { status: 'success' }, status: :ok
     else
-      render :new
+      render json: {status: 'error'}, status: :unprocessable_entity
     end
   end
 
