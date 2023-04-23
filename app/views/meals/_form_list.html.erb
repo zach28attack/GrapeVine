@@ -5,29 +5,29 @@
     <%= link_to "Make Custom Meal", new_foods_meal_path %>
   </div>
   <div class="meal-body">
-  <% @meals.each do |meal| %>
-    <%= form_with model: @diary do |f| %>
-      <div class="meal-item" data-id=<%= meal.id %>>
-        <div class="meal-item-name">
-          <%= meal.meal_name%>
+    <template id="meal-template">
+      <%= form_with model: @diary do |f| %>
+        <div class="meal-item">
+          <div class="meal-item-name">
+          </div>
+          <div class="meal-item-macros">
+            <p id="meal-cal-sum"></p>
+            <p id="meal-protein-sum"></p>
+            <p id="meal-fats-sum"></p>
+            <p id="meal-carbs-sum"></p>
+            <%= f.submit "Add", class:"meal-add-btn"%>
+            <button class="meal-edit-button">Edit</button>
+          </div>
         </div>
-        <div class="meal-item-macros">
-          <%= meal.foods.sum(:calories) %>
-          <%= meal.foods.sum(:protein) %>
-          <%= meal.foods.sum(:fats) %>
-          <%= meal.foods.sum(:carbs) %>
-          <%= f.submit "Add", class:"meal-add-btn"%>
-          <button class="meal-edit-button">Edit</button>
-        </div>
-      </div>
-      <%= f.hidden_field :calories, value: meal.foods.sum(:calories) %>
-      <%= f.hidden_field :protein, value: meal.foods.sum(:protein)%>
-      <%= f.hidden_field :fats, value: meal.foods.sum(:fats)%>
-      <%= f.hidden_field :carbs, value: meal.foods.sum(:carbs)%>
-      <%= f.hidden_field :time_of_day, value: time_of_day %>
-      <%= f.hidden_field :food_id, value: meal.id %>
-    <%end%>
-  <%end%>
+        <input value="0" autocomplete="off" type="hidden" name="diary[calories]" id="diary_calories">
+        <input value="0" autocomplete="off" type="hidden" name="diary[protein]" id="diary_calories">
+        <input value="0" autocomplete="off" type="hidden" name="diary[fats]" id="diary_calories">
+        <input value="0" autocomplete="off" type="hidden" name="diary[carbs]" id="diary_calories">
+        <input value="0" autocomplete="off" type="hidden" name="diary[meal_id]" id="diary_calories">
+        <%= f.hidden_field :time_of_day, value: time_of_day %>
+        <%# <%= f.hidden_field :food_id, value: meal.id %> 
+      <%end%>
+    </template>
   </div>
 </div>
 
