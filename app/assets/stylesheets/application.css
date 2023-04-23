@@ -255,3 +255,9 @@ p {
   font-style: italic;
   opacity: 80%;
 }
+.new-meal-form {
+  padding: 1rem;
+  border: 0.2rem solid var(--secondary);
+  background-color: var(--secondary);
+  border-radius: 10px;
+}
