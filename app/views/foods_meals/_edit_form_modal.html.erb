@@ -1,12 +1,11 @@
 <div class="food-list hidden" id="foods-meal-form"  data-form-type="edit" >
-  <% if @meal.id %>
+ 
     <div class="meal-header">
-      <h2><%= @meal.meal_name %></h2>
+      <h2>ERROR: name not set</h2>
       <p> Remove items</p>
       <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %><p>
     </div>
     <div class="meal-body">
-
         <template id="meal-item-template">
           <div class="meal-item">
             <div class="meal-item-name">
@@ -15,11 +14,6 @@
           </div>
         </template>
     </div>
-  <%else%>
-    <h1>Create new meal</h1>
-    <%= render 'meals/form' %>
-    <%= link_to "go back" %>
-  <%end%>
   <div class="meal-btns">
     <a class="cancel-button" href="#">Go back to meal list</a>
     <% if @meal.id %>
