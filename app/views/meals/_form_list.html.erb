@@ -2,7 +2,7 @@
   <div class="meal-food-form-header">
     <h2></h2>
     <h4>Choose Meal</h4>
-    <%= link_to "Make Custom Meal", new_foods_meal_path %>
+    <button class="new-meal-form-button">Create New Meal</button>
   </div>
   <div class="meal-body">
     <template id="meal-template">
@@ -25,7 +25,6 @@
         <input value="0" autocomplete="off" type="hidden" name="diary[carbs]" id="diary_calories">
         <input value="0" autocomplete="off" type="hidden" name="diary[meal_id]" id="diary_calories">
         <%= f.hidden_field :time_of_day, value: time_of_day %>
-        <%# <%= f.hidden_field :food_id, value: meal.id %> 
       <%end%>
     </template>
   </div>
