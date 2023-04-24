@@ -10,17 +10,19 @@
   </thead>
   <tbody>
     <% diaries.each do |diary| %>
-      <tr class="diary-item">
-        <td>
-          <div class="summary-body-title">
-            <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : "Custom Food" %>
-          </div>
-        </td>
-        <td><%= diary.calories %></td>
-        <td><%= diary.protein %></td>
-        <td><%= diary.fats %></td>
-        <td><%= diary.carbs %></td>
-      </tr>
+      <% if diary.calories > 0%>
+        <tr class="diary-item">
+          <td>
+            <div class="summary-body-title">
+              <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : "Custom Food" %>
+            </div>
+          </td>
+          <td><%= diary.calories %></td>
+          <td><%= diary.protein %></td>
+          <td><%= diary.fats %></td>
+          <td><%= diary.carbs %></td>
+        </tr>
+      <%end%>
     <% end %>
     <tr class="totals-row">
       <td>
