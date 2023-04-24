@@ -101,6 +101,8 @@ async function getMeals() {
   if (response.ok) {
     const data = await response.json();
     mealsHTML(data);
+  } else {
+    console.error("Error");
   }
 }
 
@@ -238,6 +240,8 @@ async function getFoods(mealId) {
     const data = await response.json();
 
     return data;
+  } else {
+    console.error("Error");
   }
 }
 
@@ -319,6 +323,8 @@ async function submitForm(form) {
 
     // disable 'Add food' button
     form.querySelector("#submit-button").classList.add("disabled");
+  } else {
+    console.error("Error");
   }
 }
 
@@ -440,6 +446,8 @@ async function mealSubmit(form) {
     removeMealsForm();
     document.querySelector("#meals-form").classList.remove("hidden");
     getMeals();
+  } else {
+    console.error("Error");
   }
 }
 const removeMealsForm = () => {
@@ -481,6 +489,8 @@ async function submitNewFoodForm(form) {
     // add food to page
     addFoodItem(data.food);
     clearFoodForm(form);
+  } else {
+    console.error("Error");
   }
 }
 
