@@ -14,10 +14,11 @@ class FoodsController < ApplicationController
   def create
     @food = Food.new(food_params)
     @food.user_id = 1
+    
     if @food.save
-      redirect_to root_path
+      render json: { status: 'success', food: @food }, status: :ok
     else
-      render :new
+      render json: { status: 'error' }, status: :unprocessable_entity
     end
     
   end
