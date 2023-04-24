@@ -52,6 +52,9 @@ const activateTabs = () => {
   const [...tabsChildren] = tabs.children;
   tabsChildren.forEach((tab) => {
     tab.addEventListener("click", (e) => {
+      removeMealsForm();
+      toggleNewFoodForm(tab);
+      // onNewFoodSubmit();
       const forms = document.querySelectorAll(".food-list");
 
       // Remove the "active" class from all tabs
@@ -86,6 +89,7 @@ const activateTabs = () => {
 };
 
 async function getMeals() {
+  clearMeals();
   const response = await fetch("/meals", {
     method: "GET",
     headers: {
@@ -246,6 +250,7 @@ const renderFormModal = (e) => {
     .querySelector("#form-modal")
     .cloneNode(true);
   document.querySelector("body").appendChild(formModal);
+  onNewFoodSubmit();
 
   // close modal
   formModal.addEventListener("click", (e) => {
@@ -397,8 +402,6 @@ const enableCancelButton = () => {
         .closest(".add-item-card")
         .querySelector("#meals-form")
         .classList.remove("hidden");
-
-      clearMeals();
       getMeals();
     });
   });
@@ -434,12 +437,15 @@ async function mealSubmit(form) {
   });
 
   if (response.ok) {
-    document.querySelector(".new-meal-form").classList.add("hidden");
+    removeMealsForm();
     document.querySelector("#meals-form").classList.remove("hidden");
-    clearMeals();
     getMeals();
   }
 }
+const removeMealsForm = () => {
+  if (!document.querySelector(".new-meal-form").classList.contains("hidden"))
+    document.querySelector(".new-meal-form").classList.add("hidden");
+};
 const clearMeals = () => {
   const mealsForm = document.querySelector("#meals-form");
   const meals = mealsForm.querySelectorAll("form");
@@ -448,4 +454,70 @@ const clearMeals = () => {
     meal.remove();
   });
 };
-// add new food form
+
+const onNewFoodSubmit = () => {
+  const form = document.querySelector("#new-foods-form");
+  const submitButton = form.querySelector(".new-food-submit-button");
+  submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    submitNewFoodForm(form);
+  });
+};
+
+async function submitNewFoodForm(form) {
+  const formData = new FormData(form);
+  const response = await fetch("foods", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+    },
+    body: formData,
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    // add food to page
+    addFoodItem(data.food);
+  }
+}
+
+const toggleNewFoodForm = (tab) => {
+  const form = document.querySelector("#new-foods-form");
+  if (tab.dataset.form !== "foods") {
+    form.classList.add("hidden");
+  } else if (form.classList.contains("hidden")) {
+    form.classList.remove("hidden");
+  }
+};
+
+const addFoodItem = (food) => {
+  const foodTemplate = document.querySelector("#new-food-template").content;
+  const foodItem = foodTemplate.querySelector("form").cloneNode(true);
+  const foodName = foodItem.querySelector(".food-name");
+  const foodCals = foodItem.querySelector(".food-calories");
+  const foodProtein = foodItem.querySelector(".food-protein");
+  const foodFats = foodItem.querySelector(".food-fats");
+  const foodCarbs = foodItem.querySelector(".food-carbs");
+
+  foodName.innerHTML = food.food_name;
+  foodCals.innerHTML = `Cals.${food.calories}/`;
+  foodProtein.innerHTML = `prot.${food.protein}/`;
+  foodFats.innerHTML = `Fats.${food.fats}/`;
+  foodCarbs.innerHTML = `Carbs.${food.carbs}`;
+
+  const calsData = foodItem.querySelector('input[name="diary[calories]"]');
+  calsData.value = food.calories;
+  const proteinData = foodItem.querySelector('input[name="diary[protein]"]');
+  proteinData.value = food.protein;
+  const fatsData = foodItem.querySelector('input[name="diary[fats]"]');
+  fatsData.value = food.fats;
+  const carbsData = foodItem.querySelector('input[name="diary[carbs]"]');
+  carbsData.value = food.carbs;
+
+  const foodId = foodItem.querySelector('input[name="diary[food_id]"]');
+  foodId.value = food.id;
+
+  document.querySelector(".food-body").appendChild(foodItem);
+};
