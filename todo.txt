@@ -1,0 +1,9 @@
+- navbar
+- user features
+- user progress graph
+  - time scale toggle
+- diary summary graph
+- chart.js pie chart for macros
+- community features
+- USADA API search function
+
