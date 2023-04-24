@@ -15,6 +15,7 @@ before_action :init_diary
     @meals = Meal.all
     @meal = Meal.new
     @foods_meal = FoodsMeal.new
+    @food = Food.new
   end
 
   def show
