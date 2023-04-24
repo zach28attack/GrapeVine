@@ -7,13 +7,13 @@
         <%= form_with model: @diary do |f| %>
           <div class="food-item">
             <div class="food-item-name">
-              <%= food.food_name%>
+              <p class="food-name"><%= food.food_name%></p>
             </div>
             <div class="food-item-macros">
-              <%= food.calories %>
-              <%= food.protein %>
-              <%= food.fats %>
-              <%= food.carbs %>
+              <p class="food-calories">Cals.<%= food.calories %>/</p>
+              <p class="food-protein">Prot.<%= food.protein %>/</p>
+              <p class="food-fats">Fats.<%= food.fats %>/</p>
+              <p class="food-carbs">Carbs.<%= food.carbs %></p>
               <%= f.submit "Add item", class:"food-item-btn"%>
             </div>
           </div>
@@ -27,5 +27,30 @@
     <%end%>
   </div>
 </div>
+
+<template id='new-food-template'>
+  <%= form_with model: @diary do |f| %>
+    <div class="food-item">
+      <div class="food-item-name">
+        <p class="food-name"></p>
+      </div>
+      <div class="food-item-macros">
+
+        <p class="food-calories"></p>
+        <p class="food-protein"></p>
+        <p class="food-fats"></p>
+        <p class="food-carbs"></p>
+
+        <%= f.submit "Add item", class:"food-item-btn"%>
+      </div>
+    </div>
+    <%= f.hidden_field :calories, value: 0 %>
+    <%= f.hidden_field :protein, value: 0%>
+    <%= f.hidden_field :fats, value: 0%>
+    <%= f.hidden_field :carbs, value: 0%>
+    <%= f.hidden_field :time_of_day, value: time_of_day %>
+    <%= f.hidden_field :food_id, value: 0 %>
+  <%end%>
+</template>
 
 
