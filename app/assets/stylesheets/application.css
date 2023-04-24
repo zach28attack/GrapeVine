@@ -245,7 +245,6 @@ input[type="submit"].disabled {
   font-size: 2.5rem;
   font-weight: 500;
   color: white;
-  -webkit-text-stroke: 1px var(--primary);
 }
 .meal-header h4,
 p {
@@ -267,7 +266,6 @@ p {
 }
 .meal-item-notification {
   font-weight: 300;
-  /* color: rgba(255, 255, 255, 0.734); */
   font-style: italic;
   font-size: 0.7rem;
 }
@@ -292,14 +290,24 @@ p {
   height: 60px;
   margin-bottom: 1rem;
   color: white;
-  /* justify-content: ; */
+  justify-content: space-between;
   display: flex;
   align-items: center;
 }
 .nav-logo {
   font-size: 3rem;
-  letter-spacing: -2px;
-  padding: 1rem;
+  letter-spacing: -3px;
+  display: flex;
+  padding-left: 1rem;
+}
+.nav-link {
+  font-size: 2rem;
+  /* margin: 1rem; */
+}
+.nav-items {
+  display: flex;
+  justify-content: space-evenly;
+  width: 25rem;
 }
 .nav-logo:link {
   text-decoration: none;
@@ -315,7 +323,7 @@ p {
 }
 .nav-logo:hover {
   text-decoration: none;
-  color: white;
+  color: var(--secondary);
 }
 
 .nav-link:link {
@@ -333,5 +341,5 @@ p {
 
 .nav-link:hover {
   text-decoration: none;
-  color: white;
+  color: var(--secondary);
 }
