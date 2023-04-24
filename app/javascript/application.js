@@ -480,6 +480,7 @@ async function submitNewFoodForm(form) {
 
     // add food to page
     addFoodItem(data.food);
+    clearFoodForm(form);
   }
 }
 
@@ -520,4 +521,21 @@ const addFoodItem = (food) => {
   foodId.value = food.id;
 
   document.querySelector(".food-body").appendChild(foodItem);
+};
+
+const clearFoodForm = (form) => {
+  const foodName = form.querySelector("#food_food_name");
+  foodName.value = "";
+
+  const foodCals = form.querySelector("#food_calories");
+  foodCals.value = "";
+
+  const foodProtein = form.querySelector("#food_protein");
+  foodProtein.value = "";
+
+  const foodFats = form.querySelector("#food_fats");
+  foodFats.value = "";
+
+  const foodCarbs = form.querySelector("#food_carbs");
+  foodCarbs.value = "";
 };
