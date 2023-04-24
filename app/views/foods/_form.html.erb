@@ -1,0 +1,29 @@
+<%= form_with model: @food, id: 'new-foods-form' do |f|%>
+  <div class="new-food-form">
+    <div class="grid-food-item">
+      <%=f .label :food_name %>
+      <%= f.text_field :food_name %>
+    </div>
+    
+    <div class="grid-food-item">
+      <%=f .label :calories %>
+      <%= f.text_field :calories %>
+    </div>
+
+    <div class="grid-food-item">
+      <%=f .label :protein %>
+      <%= f.text_field :protein %>
+    </div>
+
+    <div class="grid-food-item">
+      <%=f .label :fats %>
+      <%= f.text_field :fats %>
+    </div>
+
+    <div class="grid-food-item">
+      <%=f .label :carbs %>
+      <%= f.text_field :carbs %>
+    </div>
+    <%= f.submit "Create Food", class:"new-food-submit-button" %>
+  </div>
+<%end%>
