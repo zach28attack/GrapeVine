@@ -164,6 +164,12 @@ input[type="submit"].disabled {
   margin-bottom: 1rem;
   padding: 0.5rem;
 }
+.food-item-macros {
+  display: flex;
+  font-style: italic;
+  opacity: 80%;
+  gap: 0.4rem;
+}
 .food-item-btn {
   align-self: flex-end;
 }
@@ -179,6 +185,23 @@ input[type="submit"].disabled {
   max-height: 15rem;
   margin: 1rem 0;
   scrollbar-width: thin;
+}
+.new-food-form {
+  padding: 0.1rem;
+  border: 0.2rem solid var(--secondary);
+  background-color: var(--secondary);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.1rem 0;
+}
+.grid-food-item {
+  display: flex;
+  justify-self: flex-end;
+  align-items: center;
+  margin-right: 1rem;
+  padding: 0.1rem;
+  color: var(--primary);
 }
 .add-item-card ul {
   list-style-type: none;
