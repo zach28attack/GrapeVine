@@ -1,9 +1,6 @@
 <div class="navbar-container" data-turbo="true">
   <% if user_signed_in? %>
-      <a class="nav-logo" href= "/diaries">
-        <span>Grape</span>
-        <span>Vine</span>
-      </a>
+      <%= link_to "GrapeVine", diaries_path, class:"nav-logo" %>
     <div class="nav-items">
       <%= link_to "Profile", user_path(current_user), class:"nav-link" %>
       <%= link_to "Sign out", destroy_user_session_path,  class:"nav-link",data: {turbo_method: :delete}  %>
