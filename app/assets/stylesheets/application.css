@@ -343,3 +343,50 @@ p {
   text-decoration: none;
   color: var(--secondary);
 }
+/* 
+######
+*/
+.user-profile {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.profile-control-panel {
+  grid-column: 1/2;
+  border: solid 1px var(--accent);
+  height: 30rem;
+  padding: 2rem;
+}
+.user-profile-content {
+  grid-column: 2/3;
+}
+.profile-control-panel header {
+  position: relative;
+  color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  height: 10rem;
+  /* align-items: center; */
+}
+.profile-control-panel div {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+.user-profile-img {
+  width: 10rem;
+  border-radius: 25%;
+  position: absolute;
+}
+.user-profile-username {
+}
+.profile-control-panel-tabs {
+  list-style: none;
+  border-top: solid 1px var(--accent);
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+}
+.panel-tabs-active {
+  color: var(--accent);
+}
