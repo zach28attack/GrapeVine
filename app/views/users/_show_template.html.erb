@@ -1,0 +1,26 @@
+
+<div class="user-profile">
+<div class="profile-control-panel">
+  <header>
+    <%= image_tag "default-profile-picture1.jpg", alt: "Default profile picture", class:"user-profile-img" %>
+    <div>
+      <div class="user-profile-username">
+        <%= @user.email%>
+      </div>
+    </div>
+  </header>
+  <ul class="profile-control-panel-tabs" role="list">
+    <li class=<%= "panel-tabs-active" if tab == 'Progress'%>>Progress</li> 
+    <li class=<%= "panel-tabs-active" if tab == 'Feed'%>>Feed</li>
+    <li class=<%= "panel-tabs-active" if tab == 'Settings'%>>Settings</li>
+  </ul>
+</div>
+
+
+<div class="user-show-page-content">
+  <% if partial_variable != '' %>
+    <%= render "#{partial_variable}" %>
+  <%end%>
+</div>
+
+</div>
