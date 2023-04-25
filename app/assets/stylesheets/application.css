@@ -390,3 +390,19 @@ p {
 .panel-tabs-active {
   color: var(--accent);
 }
+.tab-link {
+  text-decoration: none;
+  color: black;
+}
+.tab-link:visited {
+  text-decoration: none;
+  color: black;
+}
+.tab-link:hover {
+  text-decoration: none;
+  color: var(--primary);
+}
+.tab-link:active {
+  text-decoration: none;
+  color: black;
+}
