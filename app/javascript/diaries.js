@@ -1,8 +1,6 @@
 // Call diariesIndexJS when the page is shown
 window.addEventListener("pageshow", () => {
-  if (!diariesIndexJSCalled) {
-    diariesIndexJS();
-  }
+  diariesIndexJS();
 });
 
 const diariesIndexJS = () => {
@@ -566,5 +564,4 @@ const diariesIndexJS = () => {
     const foodCarbs = form.querySelector("#food_carbs");
     foodCarbs.value = "";
   };
-  console.log("end of execution");
 };
