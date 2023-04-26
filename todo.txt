@@ -1,9 +1,6 @@
-- navbar
-- user features
-- user progress graph
-  - time scale toggle
 - diary summary graph
-- chart.js pie chart for macros
-- community features
+- seperate diaries by day
+  - display calender to pick maybe
+- chart.js pie chart for consumed macros summary
 - USADA API search function
 
