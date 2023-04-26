@@ -1,6 +1,0 @@
-- diary summary graph
-- seperate diaries by day
-  - display calender to pick maybe
-- chart.js pie chart for consumed macros summary
-- USADA API search function
-
