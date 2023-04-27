@@ -163,7 +163,7 @@ const diariesIndexJS = () => {
 
       renderNewFoodsMealForm(data);
       updateCalorieSum(data.sum_of_calories);
-
+      // bug
       //iterate through array of foods_meal objects with meal.id
       data.foods_meals.forEach((foodsMeal) => {
         data.foods_in_meal.forEach((food) => {
@@ -205,14 +205,13 @@ const diariesIndexJS = () => {
 
   //update foods meal form with selected meal
   const updateNewFoodsMealHTML = (form, foods, meal, foodsInMeal) => {
-    const mealName = form.querySelector("#meal-name");
+    const mealNames = document.querySelectorAll("#meal-name");
     const mealBody = form.querySelector(".meal-body");
     // grab new_foods_meal template
     const formTemplate = document.querySelector(
       "#new-foods-meal-template"
     ).content;
-
-    mealName.innerHTML = meal.meal_name;
+    mealNames.forEach((mealName) => [(mealName.innerHTML = meal.meal_name)]);
 
     foods.forEach((food) => {
       //clone templated form
