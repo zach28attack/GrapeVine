@@ -237,6 +237,9 @@ input[type="submit"].disabled {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .meal-header {
   display: flex;
@@ -277,6 +280,8 @@ p {
   font-size: 0.5rem;
   font-style: italic;
   opacity: 80%;
+  white-space: nowrap;
+  /* width: 100%; */
 }
 .new-meal-form {
   padding: 1rem;
