@@ -160,9 +160,11 @@ input[type="submit"].disabled {
   margin: 0.4rem;
 }
 .food-item-name {
-  font-size: 1.5rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
+}
+.food-name {
+  font-size: 1.5rem;
 }
 .food-item-macros {
   display: flex;
