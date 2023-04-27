@@ -1,0 +1,2 @@
+class WeightLogController < ApplicationController
+end
