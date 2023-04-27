@@ -56,7 +56,6 @@ const diariesIndexJS = () => {
       tab.addEventListener("click", (e) => {
         removeMealsForm();
         toggleNewFoodForm(tab);
-        // onNewFoodSubmit();
         const forms = document.querySelectorAll(".food-list");
 
         // Remove the "active" class from all tabs
@@ -116,6 +115,7 @@ const diariesIndexJS = () => {
     const mealsArray = data.meals;
     mealsArray.forEach((mealObj) => {
       const mealNode = mealTemplate.querySelector("form").cloneNode(true);
+
       const mealName = mealNode.querySelector(".meal-item-name");
       const mealItemId = mealNode.querySelector(".meal-item");
       const mealCalSum = mealNode.querySelector("#meal-cal-sum");
@@ -132,6 +132,14 @@ const diariesIndexJS = () => {
       const mealCarbInput = mealNode.querySelector(
         "input[name='diary[carbs]']"
       );
+
+      const mealIdInput = mealNode.querySelector(
+        "input[name='diary[meal_id]']"
+      );
+      mealIdInput.value = mealObj.meal.id;
+      console.log(mealObj.meal.id);
+      console.log(mealIdInput);
+
       mealName.innerHTML = mealObj.meal.meal_name;
       mealItemId.dataset.id = mealObj.meal.id;
       mealCalSum.innerHTML = `Cals. ${mealObj.calories}/`;
