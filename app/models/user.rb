@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :foods, class_name: "Food"
   has_many :meals, class_name: "Meal"
   has_many :foods_meals
-
+  has_many :weight_logs
 end
