@@ -281,7 +281,6 @@ p {
   font-style: italic;
   opacity: 80%;
   white-space: nowrap;
-  /* width: 100%; */
 }
 .new-meal-form {
   padding: 1rem;
