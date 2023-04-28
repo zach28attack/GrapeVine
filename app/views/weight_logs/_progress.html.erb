@@ -1,7 +1,18 @@
-<h1>progress page</h1>
-<% @entries.each do |entry|%>
-  <hr/>
-  weight:<%= entry.log %><br/>
-  date:<%= entry.created_at.month %>/<%= entry.created_at.day %>/<%= entry.created_at.year %>
-  
-<%end%>
+<div class="progress-content">
+  <h1>Check out your progress!</h1>
+  <%= line_chart @chart_data,
+        width: '85%',
+        colors: ['#8139a7', '#e51cb3'],
+        min: @min_chart_data,
+        max:@max_chart_data, 
+        suffix: " lbs",
+        loading: "Loading...",
+        empty: "no data" %>
+
+  <%= form_with model: @weight_log do |f|%>
+
+    <%= f.label "Weight"%>
+    <%= f.number_field :log %>
+    <%= f.submit "Save"%>
+  <% end %>
+</div>
