@@ -360,6 +360,7 @@ p {
   border-radius: 10rem;
   box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.08);
   margin: 2rem;
+  height: 25rem;
 }
 .profile-control-panel {
   grid-column: 1/2;
@@ -387,8 +388,7 @@ p {
   width: 10rem;
   border-radius: 25%;
 }
-.user-profile-username {
-}
+
 .profile-control-panel-tabs {
   list-style: none;
   border-top: solid 1px var(--primary);
@@ -470,4 +470,9 @@ p {
 .edit-form-submit-section {
   display: flex;
   align-items: center;
+}
+.progress-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
