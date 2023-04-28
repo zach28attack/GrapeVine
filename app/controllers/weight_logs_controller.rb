@@ -1,11 +1,11 @@
-class WeightLogController < ApplicationController
-  
+class WeightLogsController < ApplicationController
+
   def new
     
   end
 
   def index
-    
+    @entries = WeightLog.all
   end
 
   def create
