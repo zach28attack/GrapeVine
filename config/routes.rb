@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :meals
   resources :foods
   resources :foods_meals
-
+  resources :weight_logs
+  
   root "diaries#index"
   
 end
