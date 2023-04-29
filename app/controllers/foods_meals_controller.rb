@@ -38,7 +38,7 @@ class FoodsMealsController < ApplicationController
       render json: 
       {status: 'success',
         meal: @meal,
-        foods: Food.all,#scope to user's foods
+        foods: current_user.foods,
         sum_of_calories: @meal.foods.sum(:calories),
         foods_in_meal: @meal.foods,
         foods_meals: @meal.foods_meals

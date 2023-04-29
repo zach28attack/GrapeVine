@@ -3,13 +3,13 @@ class WeightLogsController < ApplicationController
   
   def index
     @weight_log = WeightLog.new
-    @logs = WeightLog.all
+    @logs = current_user.weight_logs
     get_chart_data(@logs)
   end
 
   def create
     weight_log = WeightLog.new(weight_log_params)
-
+    weight_log.user_id = current_user.id
     if weight_log.save
       redirect_to weight_logs_path
     else

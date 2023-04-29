@@ -7,10 +7,7 @@ class MealsController < ApplicationController
   
   def index
     meals_array = []
-    meals = Meal.all
-    # @diary = Diary.new
-
-    meals.each do |meal|
+    current_user.meals.each do |meal|
       meals_array << {
         meal: meal,
         calories: meal.foods.sum(:calories),
@@ -29,7 +26,7 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_param)
-    @meal.user_id = 1
+    @meal.user_id = current_user.id
     if @meal.save
       render json: { status: 'success' }, status: :ok
     else

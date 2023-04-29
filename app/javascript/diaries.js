@@ -9,7 +9,8 @@ const documentBody = document.querySelector("body");
 // main function handles diary summary page
 const diariesIndexJS = () => {
   const formModalTemplateButtons = document.querySelectorAll("#form-modal-toggle");
-  // display respective form modal when 'add food/meal' button clicked
+
+  // display form modal when 'add food/meal' button clicked
   formModalTemplateButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       renderFormModal(e);
