@@ -476,3 +476,12 @@ p {
   flex-direction: column;
   text-align: center;
 }
+.progress-content-header {
+  margin-right: 6rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 10rem;
+  padding: 4px 0;
+  margin-left: 5rem;
+  margin-right: 13rem;
+}
