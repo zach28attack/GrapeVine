@@ -91,7 +91,6 @@ const diariesIndexJS = () => {
 
         if (activeTab.id === "meals-form") {
           getMeals();
-          enableCancelButton();
           openCreateMealForm();
         }
       });
@@ -168,6 +167,7 @@ const diariesIndexJS = () => {
 
     // Add a click event listener to the edit meal button.
     editMealButton.addEventListener("click", async (e) => {
+      enableCancelButton();
       // Get the meal ID from the closest meal item element's data attribute.
       const mealId = e.target.closest(".meal-item").dataset.id;
       e.preventDefault();
@@ -435,6 +435,7 @@ const diariesIndexJS = () => {
     }
   }
 
+  let hasGetMealsEventListener = "false";
   // This function enables cancel buttons for the food item form
   const enableCancelButton = () => {
     // Get all elements with the class "cancel-button"
@@ -451,8 +452,11 @@ const diariesIndexJS = () => {
         // Get the closest ancestor element with the class "add-item-card" and find the element with the ID "meals-form", then remove the "hidden" class
         e.target.closest(".add-item-card").querySelector("#meals-form").classList.remove("hidden");
 
-        // Call the getMeals function to get the updated meals list
-        getMeals();
+        if (!hasGetMealsEventListener) {
+          // Call the getMeals function to get the updated meals list
+          getMeals();
+          hasGetMealsEventListener = "true";
+        }
       });
     });
   };
@@ -524,11 +528,11 @@ const diariesIndexJS = () => {
 
   // This function removes all meal forms in the meals section
   const clearMeals = () => {
-    const mealsForm = document.querySelector("#meals-form");
-    const meals = mealsForm.querySelectorAll("form");
+    const mealsFormBody = document.querySelector("#meals-form");
+    const forms = mealsFormBody.querySelectorAll("form");
 
-    meals.forEach((meal) => {
-      meal.remove();
+    forms.forEach((form) => {
+      form.remove();
     });
   };
 
