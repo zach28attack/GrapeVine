@@ -1,10 +1,6 @@
 class DiariesController < ApplicationController
-  before_action :init_diary
+  before_action :init_diary, only: %i[ index ]
   before_action :authenticate_user!
-
-  def new
-    @diary = Diary.new
-  end
 
   def index
     diaries = current_user.diaries
@@ -20,10 +16,6 @@ class DiariesController < ApplicationController
     @food = Food.new
   end
 
-  def show
-    
-  end
-
   def create
     @diary = Diary.new(diary_params)
     @diary.user_id = current_user.id
@@ -35,16 +27,11 @@ class DiariesController < ApplicationController
     end
   end
 
-  def edit
-    
-  end
-
-  def update
-    
-  end
-
   def destroy
-    
+    diary = Diary.find(params[:id])
+    if diary.destroy
+      redirect_to diaries_path
+    end
   end
 
   private
