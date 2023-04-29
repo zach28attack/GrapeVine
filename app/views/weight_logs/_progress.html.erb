@@ -1,5 +1,5 @@
 <div class="progress-content">
-  <h1>Check out your progress!</h1>
+  <h1 class="progress-content-header">Watch your progress!</h1>
   <%= line_chart @chart_data,
         width: '85%',
         colors: ['#8139a7', '#e51cb3'],
@@ -10,7 +10,7 @@
         empty: "no data" %>
 
   <%= form_with model: @weight_log do |f|%>
-
+  
     <%= f.label "Weight"%>
     <%= f.number_field :log %>
     <%= f.submit "Save"%>
