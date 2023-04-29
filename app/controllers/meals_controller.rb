@@ -1,4 +1,6 @@
 class MealsController < ApplicationController
+  before_action :authenticate_user!
+  
   def new
     @meal = Meal.new
   end

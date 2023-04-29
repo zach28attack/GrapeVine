@@ -1,5 +1,6 @@
 class WeightLogsController < ApplicationController
-
+  before_action :authenticate_user!
+  
   def index
     @weight_log = WeightLog.new
     @logs = WeightLog.all

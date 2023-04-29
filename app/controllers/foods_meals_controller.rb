@@ -1,5 +1,6 @@
 class FoodsMealsController < ApplicationController
-
+  before_action :authenticate_user!
+  
   def new
     @meal = params[:meal_id] ?  Meal.find(params[:meal_id]) : Meal.new
     @foods_meal = FoodsMeal.new
