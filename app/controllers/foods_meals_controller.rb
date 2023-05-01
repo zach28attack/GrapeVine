@@ -1,22 +1,5 @@
 class FoodsMealsController < ApplicationController
   before_action :authenticate_user!
-  
-  def new
-    @meal = params[:meal_id] ?  Meal.find(params[:meal_id]) : Meal.new
-    @foods_meal = FoodsMeal.new
-    @foods = Food.all
-  end
-
-
-  def index
-    
-  end
-
-
-  def show
-    
-  end
-
 
   def create
     @foods_meal = FoodsMeal.new(foods_meals_params)
@@ -48,12 +31,6 @@ class FoodsMealsController < ApplicationController
       render json: { status: 'error', message: 'Meal could not be found' }
     end
   end
-
-
-  def update
-    
-  end
-
 
   def destroy
     @foods_meal = FoodsMeal.find(params[:id])

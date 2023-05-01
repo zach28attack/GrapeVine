@@ -1,10 +1,6 @@
 class MealsController < ApplicationController
   before_action :authenticate_user!
-  
-  def new
-    @meal = Meal.new
-  end
-  
+ 
   def index
     meals_array = []
     current_user.meals.each do |meal|
@@ -18,10 +14,6 @@ class MealsController < ApplicationController
     end
     
     render json: { meals: meals_array.reverse! }
-  end
-
-  def show
-    
   end
 
   def create

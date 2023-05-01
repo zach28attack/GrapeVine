@@ -15,15 +15,6 @@ class WeightLogsController < ApplicationController
     else
       render :index, status: :unprocessable_entity
     end
-    
-  end
-
-  def edit
-    
-  end
-
-  def update
-    
   end
 
   def destroy
