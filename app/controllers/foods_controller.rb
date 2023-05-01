@@ -13,7 +13,15 @@ class FoodsController < ApplicationController
   end
 
   def destroy
-    
+    food = Food.find(params[:id])
+    # if food.destroy
+    #   redirect_to diaries_path
+    # end
+    if food.destroy
+      render json: {status: 'success'}, status: :ok
+    else  
+      render json: {status: 'error'}, status: :unprocessable_entity
+    end
   end
 
   private
