@@ -14,9 +14,6 @@ class FoodsController < ApplicationController
 
   def destroy
     food = Food.find(params[:id])
-    # if food.destroy
-    #   redirect_to diaries_path
-    # end
     if food.destroy
       render json: {status: 'success'}, status: :ok
     else  

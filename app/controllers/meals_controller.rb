@@ -26,16 +26,13 @@ class MealsController < ApplicationController
     end
   end
 
-  def edit
-    
-  end
-
-  def update
-    
-  end
-
   def destroy
-    
+    meal = Meal.find(params[:id])
+    if meal.destroy
+      render json: {status: 'success'}, status: :ok
+    else
+      render json: {status: 'error'}, status: :unprocessable_entity
+    end
   end
 
   private
