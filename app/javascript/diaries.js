@@ -187,6 +187,8 @@ const diariesIndexJS = () => {
       // Update the calorie sum displayed in the form.
       updateCalorieSum(data.sum_of_calories);
 
+      clearFoodList();
+
       // Iterate through the array of foods_meal objects with the current meal ID to update the food list.
       data.foods_meals.forEach((foodsMeal) => {
         data.foods_in_meal.forEach((food) => {
@@ -195,6 +197,16 @@ const diariesIndexJS = () => {
           }
         });
       });
+    });
+  };
+
+  const clearFoodList = () => {
+    const editMealBody = document.querySelector("[data-form-type='edit']").querySelector(".meal-body");
+    const mealItems = editMealBody.querySelectorAll(".meal-item");
+    mealItems.forEach((item) => {
+      if (item.dataset.id !== undefined) {
+        item.remove();
+      }
     });
   };
   let areFoodsMealButtonsEnabled = "false";
@@ -363,13 +375,13 @@ const diariesIndexJS = () => {
     }
   }
 
-  const updateCalorieSum = (data) => {
+  const updateCalorieSum = (cals) => {
     // Get all elements with the ID "sum-of-calories"
     const calsCounters = document.querySelectorAll("#sum-of-calories");
 
     // Loop through each element and update its text content
     calsCounters.forEach((calsCounter) => {
-      calsCounter.textContent = `Total Cals:${data}`; // Set the text content of the element to the data passed in, prepended with "Total Cals:"
+      calsCounter.textContent = `Total Cals:${cals}`; // Set the text content of the element to the data passed in, prepended with "Total Cals:"
     });
   };
 
@@ -387,7 +399,8 @@ const diariesIndexJS = () => {
     const forms = document.querySelectorAll("#foods-meal-form");
     forms.forEach((form) => {
       if (form.dataset.formType === "edit") {
-        form.querySelector(".meal-body").appendChild(updatedMealItemHTML(food, foodsMealId));
+        const mealBody = form.querySelector(".meal-body");
+        mealBody.appendChild(updatedMealItemHTML(food, foodsMealId));
         onClickRemoveFood(foodsMealId);
       }
     });
@@ -442,8 +455,6 @@ const diariesIndexJS = () => {
     }
   }
 
-  let hasGetMealsEventListener = "false";
-
   // This function enables cancel buttons for the food item form
   const enableCancelButton = () => {
     // Get all elements with the class "cancel-button"
@@ -460,11 +471,8 @@ const diariesIndexJS = () => {
         // Get the closest ancestor element with the class "add-item-card" and find the element with the ID "meals-form", then remove the "hidden" class
         e.target.closest(".add-item-card").querySelector("#meals-form").classList.remove("hidden");
 
-        if (hasGetMealsEventListener === "false") {
-          // Call the getMeals function to get the updated meals list
-          getMeals();
-          hasGetMealsEventListener = "true";
-        }
+        // Call the getMeals function to get the updated meals list
+        getMeals();
       });
     });
   };
