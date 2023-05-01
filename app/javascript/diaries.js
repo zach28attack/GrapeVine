@@ -197,29 +197,55 @@ const diariesIndexJS = () => {
       });
     });
   };
-
+  let areFoodsMealButtonsEnabled = "false";
   // render foods_meal form partial
   const renderNewFoodsMealForm = (data) => {
     const foods = data.foods;
     const meal = data.meal;
     const foodsInMeal = data.foods_in_meal;
     const forms = document.querySelectorAll(".food-list");
+
     forms.forEach((form) => {
-      // hide all forms
+      // hide displayed form
       if (!form.classList.contains("hidden")) {
         form.classList.add("hidden");
       }
-
       // render new partial
       if (form.id === "foods-meal-form" && form.dataset.formType === undefined) {
         form.classList.remove("hidden");
         updateNewFoodsMealHTML(form, foods, meal, foodsInMeal);
 
-        // add event listeners to foods_meal forms to toggle new/edit forms
-        const foodsMealButtons = document.querySelectorAll("#foods-meal-form-toggle");
-        enableFoodsMealButtons(foodsMealButtons);
+        if (areFoodsMealButtonsEnabled === "false") {
+          console.log("enableFoodsMealButtons() event added");
+          enableFoodsMealButtons();
+        }
         onNewFoodsMealSubmit();
       }
+      // console.log(document.querySelector("#foods-meal-form-toggle").closest(".food-list").id);
+    });
+  };
+
+  // This function enables the switching of new/edit foods_meal form partials
+  const enableFoodsMealButtons = () => {
+    areFoodsMealButtonsEnabled = "true";
+    // add event listeners to foods_meal forms to toggle new/edit forms
+    const buttons = document.querySelectorAll("#foods-meal-form-toggle");
+    // Loop through all provided buttons
+    buttons.forEach((button) => {
+      // Add event listener to each button for when clicked
+      button.addEventListener("click", (e) => {
+        // Prevent the default behavior of the clicked button
+        e.preventDefault();
+        // Toggle the hidden class of new/edit meal forms for all buttons
+        buttons.forEach((button) => {
+          const form = button.closest(".food-list"); // Get the closest ancestor element with the class "food-list"
+          if (form.classList.contains("hidden")) {
+            form.classList.remove("hidden"); // Toggle the "hidden" class of the form
+          } else {
+            form.classList.add("hidden"); // Toggle the "hidden" class of the form
+          }
+        });
+      });
     });
   };
 
@@ -294,23 +320,6 @@ const diariesIndexJS = () => {
       if (e.target === formModal) {
         formModal.remove();
       }
-    });
-  };
-
-  // This function enables the switching of new/edit foods_meal form partials
-  const enableFoodsMealButtons = (buttons) => {
-    // Loop through all provided buttons
-    buttons.forEach((button) => {
-      // Add event listener to each button for when clicked
-      button.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent the default behavior of the clicked button
-
-        // Toggle the hidden class of new/edit meal forms for all buttons
-        buttons.forEach((button) => {
-          const form = button.closest(".food-list"); // Get the closest ancestor element with the class "food-list"
-          form.classList.toggle("hidden"); // Toggle the "hidden" class of the form
-        });
-      });
     });
   };
 
@@ -436,6 +445,7 @@ const diariesIndexJS = () => {
   }
 
   let hasGetMealsEventListener = "false";
+
   // This function enables cancel buttons for the food item form
   const enableCancelButton = () => {
     // Get all elements with the class "cancel-button"
@@ -452,7 +462,7 @@ const diariesIndexJS = () => {
         // Get the closest ancestor element with the class "add-item-card" and find the element with the ID "meals-form", then remove the "hidden" class
         e.target.closest(".add-item-card").querySelector("#meals-form").classList.remove("hidden");
 
-        if (!hasGetMealsEventListener) {
+        if (hasGetMealsEventListener === "false") {
           // Call the getMeals function to get the updated meals list
           getMeals();
           hasGetMealsEventListener = "true";
