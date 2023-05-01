@@ -5,8 +5,9 @@
   <div class="food-body">
     <% @foods.each do |food| %>
         <%= form_with model: @diary do |f| %>
-          <div class="food-item">
+          <div class="food-item" data-id=<%= food.id %>>
             <div class="food-item-name">
+              <%= button_to "X", food_path(food), method: :delete, id: "delete-food-button" %>
               <p class="food-name"><%= food.food_name%></p>
             </div>
             <div class="food-item-macros">
