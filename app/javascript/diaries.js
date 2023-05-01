@@ -150,13 +150,14 @@ const diariesIndexJS = () => {
 
       //  insert html into elements
       mealCarbSum.innerHTML = `Carbs. ${mealObj.carbs}`;
-      mealName.innerHTML = mealObj.meal.meal_name;
+      mealName.innerHTML = ` <button id="delete-meal-button" type="submit">X</button> ${mealObj.meal.meal_name}`;
       mealCalSum.innerHTML = `Cals. ${mealObj.calories}/`;
       mealFatsSum.innerHTML = ` Fats ${mealObj.fats}/`;
       mealProteinSum.innerHTML = ` Prot. ${mealObj.protein}/`;
 
       // append meal form node into body of the meal body div
       mealBody.appendChild(mealNode);
+      onClickDeleteMeal(mealNode);
       onEditMealClick(mealNode);
     });
   };
@@ -656,18 +657,24 @@ const diariesIndexJS = () => {
 
   const onClickDeleteFood = () => {
     const foodBody = document.querySelector(".food-body");
-    console.log(foodBody);
     foodBody.addEventListener("click", (e) => {
-      console.log("click");
       if (e.target.id === "delete-food-button") {
         e.preventDefault();
-        deleteFoodItem(e.target.closest(".food-item"));
+        deleteItem("foods", e.target.closest(".food-item"));
       }
     });
   };
 
-  const deleteFoodItem = async (foodItem) => {
-    const response = await fetch(`foods/${foodItem.dataset.id}`, {
+  const onClickDeleteMeal = (mealNode) => {
+    const mealDeleteButton = mealNode.querySelector("#delete-meal-button");
+    mealDeleteButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      deleteItem("meals", e.target.closest(".meal-item"));
+    });
+  };
+
+  const deleteItem = async (url, item) => {
+    const response = await fetch(`${url}/${item.dataset.id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -676,7 +683,7 @@ const diariesIndexJS = () => {
     });
 
     if (response.ok) {
-      foodItem.remove();
+      item.remove();
     }
   };
 };
