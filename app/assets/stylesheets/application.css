@@ -168,9 +168,16 @@ input[type="submit"].disabled {
 .food-item-name {
   margin-bottom: 1rem;
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.food-item-name button {
+  color: var(--primary);
+  padding: 0.1rem;
 }
 .food-name {
   font-size: 1.5rem;
+  font-weight: 400;
 }
 .food-item-macros {
   display: flex;
@@ -246,6 +253,7 @@ input[type="submit"].disabled {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--primary);
 }
 .meal-header {
   display: flex;
