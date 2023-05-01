@@ -59,7 +59,7 @@ input[type="submit"].disabled {
   border-radius: 20px;
 }
 .summary-header-title {
-  /* display: flex; */
+  width: 35%;
   font-weight: 500;
   font-size: 2rem;
 }
@@ -77,10 +77,12 @@ input[type="submit"].disabled {
 }
 .summary-table td {
   height: 3.5rem;
-  /* text-align: center; */
   padding-left: 2rem;
-
   font-size: 1.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 0;
 }
 .summary-body {
   display: flex;

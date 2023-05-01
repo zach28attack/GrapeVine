@@ -15,8 +15,8 @@
           <td>
             <div class="summary-body-title">
               <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : "Custom Food" %>
-              <%= button_to "remove item", diary_path(diary), method: :delete %>
             </div>
+            <%= button_to "remove item", diary_path(diary), method: :delete %>
           </td>
           <td><%= diary.calories %></td>
           <td><%= diary.protein %></td>
