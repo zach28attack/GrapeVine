@@ -216,12 +216,10 @@ const diariesIndexJS = () => {
         updateNewFoodsMealHTML(form, foods, meal, foodsInMeal);
 
         if (areFoodsMealButtonsEnabled === "false") {
-          console.log("enableFoodsMealButtons() event added");
           enableFoodsMealButtons();
         }
         onNewFoodsMealSubmit();
       }
-      // console.log(document.querySelector("#foods-meal-form-toggle").closest(".food-list").id);
     });
   };
 
