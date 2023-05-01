@@ -247,6 +247,8 @@ input[type="submit"].disabled {
   margin: 0.4rem;
 }
 .meal-item-name {
+  display: flex;
+  align-items: center;
   font-size: 1.5rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
@@ -254,6 +256,10 @@ input[type="submit"].disabled {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: var(--primary);
+}
+.meal-item-name button {
+  color: var(--primary);
+  padding: 0.1rem;
 }
 .meal-header {
   display: flex;
