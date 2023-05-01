@@ -84,6 +84,13 @@ input[type="submit"].disabled {
   white-space: nowrap;
   max-width: 0;
 }
+.summary-header-group {
+  display: flex;
+}
+.summary-header-group button {
+  color: var(--primary);
+  padding: 0.1rem;
+}
 .summary-body {
   display: flex;
 }

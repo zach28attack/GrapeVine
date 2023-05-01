@@ -12,12 +12,15 @@
     <% diaries.each do |diary| %>
       <% if diary.calories > 0%>
         <tr class="diary-item">
-          <td>
-            <div class="summary-body-title">
-              <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : "Custom Food" %>
+          <td >
+            <div class="summary-header-group">
+              <%= button_to "X", diary_path(diary), method: :delete %>
+              <div class="summary-body-title">
+                <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : "Custom Food" %>
+              </div>
             </div>
-            <%= button_to "remove item", diary_path(diary), method: :delete %>
           </td>
+
           <td><%= diary.calories %></td>
           <td><%= diary.protein %></td>
           <td><%= diary.fats %></td>
