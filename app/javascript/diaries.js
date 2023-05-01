@@ -15,6 +15,7 @@ const diariesIndexJS = () => {
     button.addEventListener("click", (e) => {
       renderFormModal(e);
       activateTabs();
+      onClickDeleteFood();
     });
   });
 
@@ -651,5 +652,31 @@ const diariesIndexJS = () => {
 
     const foodCarbs = form.querySelector("#food_carbs");
     foodCarbs.value = "";
+  };
+
+  const onClickDeleteFood = () => {
+    const foodBody = document.querySelector(".food-body");
+    console.log(foodBody);
+    foodBody.addEventListener("click", (e) => {
+      console.log("click");
+      if (e.target.id === "delete-food-button") {
+        e.preventDefault();
+        deleteFoodItem(e.target.closest(".food-item"));
+      }
+    });
+  };
+
+  const deleteFoodItem = async (foodItem) => {
+    const response = await fetch(`foods/${foodItem.dataset.id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+      },
+    });
+
+    if (response.ok) {
+      foodItem.remove();
+    }
   };
 };
