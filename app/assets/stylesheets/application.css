@@ -326,6 +326,7 @@ p {
 */
 .navbar-container {
   background-color: var(--primary);
+  padding: 0 10%;
   height: 60px;
   margin-bottom: 1rem;
   color: white;
@@ -523,4 +524,43 @@ p {
   font-size: 1.4rem;
   justify-content: center;
   align-items: center;
+}
+.date-navbar a:link {
+  text-decoration: none;
+  color: var(--primary);
+}
+.date-navbar a:visited {
+  color: var(--primary);
+}
+.date-navbar a:active {
+  color: var(--primary);
+}
+.date-navbar a:hover {
+  color: var(--accent);
+}
+.summary-total-card {
+  width: 70%;
+  border-radius: 20px;
+  margin-bottom: 4rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.08);
+}
+.summary-total-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.summary-total-header {
+  color: white;
+  width: 100%;
+  background-color: var(--primary);
+  text-align: center;
+  font-size: 2.5rem;
+  padding: 0.5rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.summary-total-calories {
+  color: var(--primary);
 }
