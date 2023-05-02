@@ -5,6 +5,7 @@ class DiariesController < ApplicationController
     # May 1st.yday == 121
     @date = params[:date].to_i
     @date = 122 if @date == 0
+    @todays_date = Date.today.yday
     init_diary(@date)
 
     diaries = current_user.diaries

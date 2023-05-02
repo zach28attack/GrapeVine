@@ -30,8 +30,10 @@
     <% end %>
     <tr class="totals-row">
       <td>
+        <%if @todays_date == @date %>
         <button id="form-modal-toggle">Add food/meal</button>
         <button id="diary-form-toggle">Quick Add</button>
+        <%end%>
       </td>
       <td><%= diaries.sum(&:calories) %></td>
       <td><%= diaries.sum(&:protein) %></td>
