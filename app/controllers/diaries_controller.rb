@@ -8,23 +8,28 @@ class DiariesController < ApplicationController
     @todays_date = Date.today.yday
     init_diary(@date)
 
-    diaries = current_user.diaries
-    diaries = diaries.select{ |diary| diary.date.yday == @date }
-
-    @breakfast_diaries = diaries.select { |diary| diary.time_of_day == "Breakfast" }
-    @lunch_diaries = diaries.select { |diary| diary.time_of_day == "Lunch" }
-    @dinner_diaries = diaries.select { |diary| diary.time_of_day == "Dinner" }
+    # variables for sumary tables
+    @diaries = current_user.diaries.select{ |diary| diary.date.yday == @date }
+    
+    @breakfast_diaries = @diaries.select { |diary| diary.time_of_day == "Breakfast" }
+    @lunch_diaries = @diaries.select { |diary| diary.time_of_day == "Lunch" }
+    @dinner_diaries = @diaries.select { |diary| diary.time_of_day == "Dinner" }
     @diary = Diary.new
 
+    # variables for form modal
     @foods = current_user.foods
     @meals = current_user.meals
     @meal = Meal.new
     @foods_meal = FoodsMeal.new
     @food = Food.new
-    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   
+    # variables for summary total piechart
+    total_calories = @diaries.sum{ |diary| diary.calories }
+    total_protein = @diaries.sum{ |diary| diary.protein }
+    total_fats = @diaries.sum{ |diary| diary.fats }
+    total_carbs = @diaries.sum{ |diary| diary.carbs }
+    @piechart_macros = [[ 'protein', total_protein], [ 'fats', total_fats], [ 'carbs', total_carbs]]
+
   end
 
   def create
