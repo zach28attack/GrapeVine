@@ -363,7 +363,7 @@ p {
 }
 .nav-logo:hover {
   text-decoration: none;
-  color: var(--secondary);
+  color: var(--accent);
 }
 
 .nav-link:link {
@@ -381,7 +381,7 @@ p {
 
 .nav-link:hover {
   text-decoration: none;
-  color: var(--secondary);
+  color: var(--accent);
 }
 /* 
 ######
