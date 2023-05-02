@@ -1,40 +1,37 @@
-<div class="date-navbar">
-  <%day_in_words = Date.new(2023,1,1) + (@date - 1)%>
-  <%yesterday_in_words = Date.new(2023,1,1) + (@date - 2)%>
-  <%tomorrow_in_words = Date.new(2023,1,1) + (@date )%>
+<div id="diaries-index">
+  <div class="date-navbar">
+    <%day_in_words = Date.new(2023,1,1) + (@date - 1)%>
+    <%yesterday_in_words = Date.new(2023,1,1) + (@date - 2)%>
+    <%tomorrow_in_words = Date.new(2023,1,1) + (@date )%>
 
-  <%=link_to "⬅#{yesterday_in_words.strftime('%A')}", diaries_path(date: (@date.to_i - 1))%>
-  - <%=day_in_words.strftime('%A')%> - 
-  <%=link_to "#{tomorrow_in_words.strftime('%A')}➡", diaries_path(date: (@date.to_i + 1))%>
-</div>
-<main class="container">
-  <div class="card">
-    <%= render "summary", diaries: @breakfast_diaries%>
+    <%=link_to "⬅#{yesterday_in_words.strftime('%A')}", diaries_path(date: (@date.to_i - 1))%>
+    - <%=day_in_words.strftime('%A')%> - 
+    <%=link_to "#{tomorrow_in_words.strftime('%A')}➡", diaries_path(date: (@date.to_i + 1))%>
   </div>
-  <div class="card">
-    <%= render "summary", diaries: @lunch_diaries%>
-  </div>
-  <div class="card">
-    <%= render "summary", diaries: @dinner_diaries%>
-  </div>
-  
-  <% if should_display_piechart(@piechart_macros)%>
-    <div class="summary-total-card">
-      <%= render 'summary_total'%>
+  <main class="container">
+    <div class="card">
+      <%= render "summary", diaries: @breakfast_diaries%>
     </div>
-  <%end%>
-</main>
+    <div class="card">
+      <%= render "summary", diaries: @lunch_diaries%>
+    </div>
+    <div class="card">
+      <%= render "summary", diaries: @dinner_diaries%>
+    </div>
+    
+    <% if should_display_piechart(@piechart_macros)%>
+      <div class="summary-total-card">
+        <%= render 'summary_total'%>
+      </div>
+    <%end%>
+  </main>
 
-<%= render "form", time_of_day: "Breakfast", id: "breakfast-diary-form-template" %>
-<%= render "form_modal", time_of_day: "Breakfast" %>
+  <%= render "form", time_of_day: "Breakfast", id: "breakfast-diary-form-template" %>
+  <%= render "form_modal", time_of_day: "Breakfast" %>
 
-<%= render "form", time_of_day: "Lunch", id: "lunch-diary-form-template" %>
-<%= render "form_modal", time_of_day: "Lunch" %>
+  <%= render "form", time_of_day: "Lunch", id: "lunch-diary-form-template" %>
+  <%= render "form_modal", time_of_day: "Lunch" %>
 
-<%= render "form", time_of_day: "Dinner", id: "dinner-diary-form-template" %>
-<%= render "form_modal", time_of_day: "Dinner" %>
-
-
-
-
-
+  <%= render "form", time_of_day: "Dinner", id: "dinner-diary-form-template" %>
+  <%= render "form_modal", time_of_day: "Dinner" %>
+</div>

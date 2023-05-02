@@ -1,10 +1,13 @@
 // Call diariesIndexJS when the page is shown
-window.addEventListener("pageshow", () => {
-  diariesIndexJS();
+document.addEventListener("turbo:load", () => {
+  setTimeout(() => {
+    const diariesPage = document.querySelector("#diaries-index");
+    if (diariesPage) {
+      diariesIndexJS();
+      console.log("turbo loaded");
+    }
+  }, 100);
 });
-
-// refactored functions
-const documentBody = document.querySelector("body");
 
 // main function handles diary summary page
 const diariesIndexJS = () => {
@@ -33,7 +36,7 @@ const diariesIndexJS = () => {
       const diaryFormModal = diaryFormTemplate.querySelector(".diary-form-modal").cloneNode(true);
 
       // add form to page and add event listener to close
-      documentBody.appendChild(diaryFormModal);
+      document.querySelector("body").appendChild(diaryFormModal);
       diaryFormModal.addEventListener("click", (e) => {
         if (e.target === diaryFormModal) {
           diaryFormModal.remove();
@@ -322,7 +325,7 @@ const diariesIndexJS = () => {
     const formModal = formModalTemplate.querySelector("#form-modal").cloneNode(true);
 
     // Add the new form modal to the document body
-    documentBody.appendChild(formModal);
+    document.querySelector("body").appendChild(formModal);
 
     // Add event listeners for form submission
     onNewFoodSubmit();
@@ -558,6 +561,7 @@ const diariesIndexJS = () => {
   const onNewFoodSubmit = () => {
     // Get the form element with the id "new-foods-form"
     const form = document.querySelector("#new-foods-form");
+    console.log(form);
     // Get the submit button element inside the form
     const submitButton = form.querySelector(".new-food-submit-button");
     // Add a click event listener to the submit button
