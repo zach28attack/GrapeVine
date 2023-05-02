@@ -90,6 +90,7 @@ input[type="submit"].disabled {
 .summary-header-group button {
   color: var(--primary);
   padding: 0.1rem;
+  margin-right: 0.2rem;
 }
 .summary-body {
   display: flex;
@@ -174,6 +175,7 @@ input[type="submit"].disabled {
 .food-item-name button {
   color: var(--primary);
   padding: 0.1rem;
+  margin-right: 0.2rem;
 }
 .food-name {
   font-size: 1.5rem;
@@ -260,6 +262,7 @@ input[type="submit"].disabled {
 .meal-item-name button {
   color: var(--primary);
   padding: 0.1rem;
+  margin-right: 0.2rem;
 }
 .meal-header {
   display: flex;
