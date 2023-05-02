@@ -17,7 +17,12 @@
   <div class="card">
     <%= render "summary", diaries: @dinner_diaries%>
   </div>
-  <hr/>
+  
+  <% if should_display_piechart(@piechart_macros)%>
+    <div class="summary-total-card">
+      <%= render 'summary_total'%>
+    </div>
+  <%end%>
 </main>
 
 <%= render "form", time_of_day: "Breakfast", id: "breakfast-diary-form-template" %>
