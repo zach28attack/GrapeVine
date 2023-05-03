@@ -37,6 +37,7 @@ class DiariesController < ApplicationController
     diary.user_id = current_user.id
     diary.remove_nil
     diary.date ||= Date.today
+    diary = multiply_by_servings(diary)
     if diary.save
       redirect_to root_path
     else
@@ -54,7 +55,7 @@ class DiariesController < ApplicationController
   private
 
   def diary_params
-    params.require(:diary).permit(:calories, :protein, :fats, :carbs, :time_of_day, :meal_id, :food_id, :date)
+    params.require(:diary).permit(:calories, :protein, :fats, :carbs, :time_of_day, :meal_id, :food_id, :date, :servings)
   end
 
   def init_diary(date)
@@ -73,6 +74,14 @@ class DiariesController < ApplicationController
         )
       end
     end
+  end
+
+  def multiply_by_servings(diary)
+    diary.calories *= diary.servings
+    diary.protein *= diary.servings
+    diary.fats *= diary.servings
+    diary.carbs *= diary.servings
+    diary
   end
   
 end

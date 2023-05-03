@@ -600,26 +600,25 @@ const diariesIndexJS = () => {
     }
   };
 
-  // Define a function that adds a new food item to the food diary
+  // Define a function that adds a new food item to the diary
   const addFoodItem = (food) => {
     // Get the food template from the DOM
     const foodTemplate = document.querySelector("#new-food-template").content;
     // Clone the template to create a new food item
     const foodItem = foodTemplate.querySelector("form").cloneNode(true);
+
     // Get the various elements inside the food item form
     const foodName = foodItem.querySelector(".food-name");
     const foodCals = foodItem.querySelector(".food-calories");
     const foodProtein = foodItem.querySelector(".food-protein");
     const foodFats = foodItem.querySelector(".food-fats");
     const foodCarbs = foodItem.querySelector(".food-carbs");
-
     // Set the text content of the food name and macronutrient elements
     foodName.innerHTML = food.food_name;
     foodCals.innerHTML = `Cals.${food.calories}/`;
     foodProtein.innerHTML = `prot.${food.protein}/`;
     foodFats.innerHTML = `Fats.${food.fats}/`;
     foodCarbs.innerHTML = `Carbs.${food.carbs}`;
-
     // Set the value of the various input elements inside the food item form
     const calsData = foodItem.querySelector('input[name="diary[calories]"]');
     calsData.value = food.calories;
