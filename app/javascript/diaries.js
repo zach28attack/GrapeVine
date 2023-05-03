@@ -1,12 +1,9 @@
 // Call diariesIndexJS when the page is shown
 document.addEventListener("turbo:load", () => {
-  setTimeout(() => {
-    const diariesPage = document.querySelector("#diaries-index");
-    if (diariesPage) {
-      diariesIndexJS();
-      console.log("turbo loaded");
-    }
-  }, 100);
+  const diariesPage = document.querySelector("#diaries-index");
+  if (diariesPage) {
+    diariesIndexJS();
+  }
 });
 
 // main function handles diary summary page
@@ -561,7 +558,6 @@ const diariesIndexJS = () => {
   const onNewFoodSubmit = () => {
     // Get the form element with the id "new-foods-form"
     const form = document.querySelector("#new-foods-form");
-    console.log(form);
     // Get the submit button element inside the form
     const submitButton = form.querySelector(".new-food-submit-button");
     // Add a click event listener to the submit button
