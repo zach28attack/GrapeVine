@@ -8,6 +8,7 @@ document.addEventListener("turbo:load", () => {
 
 // main function handles diary summary page
 const diariesIndexJS = () => {
+  // function to display delete button on diaries/meals/foods items
   const displayButton = (item, button) => {
     item.addEventListener("mouseover", (e) => {
       button.classList.remove("hidden");
@@ -17,11 +18,14 @@ const diariesIndexJS = () => {
       button.classList.add("hidden");
     });
   };
+
+  // a function to display meal item delete button
   const displayMealDeleteButton = (item) => {
     const button = item.querySelector("#delete-meal-button");
     displayButton(item, button);
   };
 
+  // a function to display food item delete button
   const displayFoodDeleteButton = () => {
     const foodItems = document.querySelectorAll(".food-item");
     foodItems.forEach((item) => {
@@ -30,6 +34,7 @@ const diariesIndexJS = () => {
     });
   };
 
+  // a function to display diary item delete button
   const displayDiaryDeleteButtons = () => {
     const diaryItems = document.querySelectorAll(".diary-item");
     diaryItems.forEach((item) => {
@@ -37,6 +42,8 @@ const diariesIndexJS = () => {
       displayButton(item, button);
     });
   };
+
+  // calling function above immediately when page loads
   displayDiaryDeleteButtons();
 
   const formModalTemplateButtons = document.querySelectorAll("#form-modal-toggle");
@@ -720,30 +727,5 @@ const diariesIndexJS = () => {
     if (response.ok) {
       item.remove();
     }
-  };
-
-  const displayMealDeleteButton = (item) => {
-    const button = item.querySelector("#delete-meal-button");
-    item.addEventListener("mouseover", (e) => {
-      button.classList.remove("hidden");
-    });
-
-    item.addEventListener("mouseout", (e) => {
-      button.classList.add("hidden");
-    });
-  };
-
-  const displayFoodDeleteButton = () => {
-    const foodItems = document.querySelectorAll(".food-item");
-    foodItems.forEach((item) => {
-      const button = item.querySelector("#delete-food-button");
-      item.addEventListener("mouseover", (e) => {
-        button.classList.remove("hidden");
-      });
-
-      item.addEventListener("mouseout", (e) => {
-        button.classList.add("hidden");
-      });
-    });
   };
 };
