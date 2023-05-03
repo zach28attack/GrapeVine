@@ -22,7 +22,7 @@ class FoodsMealsController < ApplicationController
       {status: 'success',
         meal: @meal,
         foods: current_user.foods,
-        sum_of_calories: @meal.foods.sum(:calories),
+        sum_of_calories: @meal.foods_macro_sum_with_servings('calories'),
         foods_in_meal: @meal.foods,
         foods_meals: @meal.foods_meals
       } 
@@ -44,7 +44,7 @@ class FoodsMealsController < ApplicationController
   private
 
   def foods_meals_params
-    params.require(:foods_meal).permit(:meal_id, :food_id)
+    params.require(:foods_meal).permit(:meal_id, :food_id, :servings)
   end
 
   def sum_of_calories
