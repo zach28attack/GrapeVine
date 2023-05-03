@@ -10,4 +10,5 @@ validates :protein, allow_blank: true, numericality: { only_integer: true }
 validates :fats, allow_blank: true, numericality: { only_integer: true }
 validates :carbs, allow_blank: true, numericality: { only_integer: true }
 
+
 end
