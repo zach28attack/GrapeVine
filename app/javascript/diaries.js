@@ -608,7 +608,8 @@ const diariesIndexJS = () => {
     const foodItem = foodTemplate.querySelector("form").cloneNode(true);
 
     // Get the various elements inside the food item form
-    const foodName = foodItem.querySelector(".food-name");
+    const foodNameContainer = foodItem.querySelector(".food-name");
+    const foodName = document.createElement("p");
     const foodCals = foodItem.querySelector(".food-calories");
     const foodProtein = foodItem.querySelector(".food-protein");
     const foodFats = foodItem.querySelector(".food-fats");
@@ -632,6 +633,7 @@ const diariesIndexJS = () => {
     foodId.value = food.id;
 
     // Append the new food item to the "food-body" element in the DOM
+    foodNameContainer.appendChild(foodName);
     document.querySelector(".food-body").appendChild(foodItem);
   };
 
