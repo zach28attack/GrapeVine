@@ -15,6 +15,7 @@ const diariesIndexJS = () => {
     button.addEventListener("click", (e) => {
       renderFormModal(e);
       activateTabs();
+      displayFoodDeleteButton();
       onClickDeleteFood();
     });
   });
@@ -133,7 +134,7 @@ const diariesIndexJS = () => {
       const mealIdInput = mealNode.querySelector("input[name='diary[meal_id]']");
 
       // get form elements
-      const mealName = mealNode.querySelector(".meal-item-name");
+      const mealName = mealNode.querySelector("#meal-item-name");
       const mealItemId = mealNode.querySelector(".meal-item");
       const mealFatsSum = mealNode.querySelector("#meal-fats-sum");
       const mealCarbSum = mealNode.querySelector("#meal-carbs-sum");
@@ -150,7 +151,7 @@ const diariesIndexJS = () => {
 
       //  insert html into elements
       mealCarbSum.innerHTML = `Carbs. ${mealObj.carbs}`;
-      mealName.innerHTML = ` <button id="delete-meal-button" type="submit">X</button> ${mealObj.meal.meal_name}`;
+      mealName.innerHTML = ` ${mealObj.meal.meal_name}`;
       mealCalSum.innerHTML = `Cals. ${mealObj.calories}/`;
       mealFatsSum.innerHTML = ` Fats ${mealObj.fats}/`;
       mealProteinSum.innerHTML = ` Prot. ${mealObj.protein}/`;
@@ -159,6 +160,8 @@ const diariesIndexJS = () => {
       mealBody.appendChild(mealNode);
       onClickDeleteMeal(mealNode);
       onEditMealClick(mealNode);
+
+      displayMealDeleteButton(mealNode);
     });
   };
 
@@ -686,5 +689,30 @@ const diariesIndexJS = () => {
     if (response.ok) {
       item.remove();
     }
+  };
+
+  const displayMealDeleteButton = (item) => {
+    const button = item.querySelector("#delete-meal-button");
+    item.addEventListener("mouseover", (e) => {
+      button.classList.remove("hidden");
+    });
+
+    item.addEventListener("mouseout", (e) => {
+      button.classList.add("hidden");
+    });
+  };
+
+  const displayFoodDeleteButton = () => {
+    const foodItems = document.querySelectorAll(".food-item");
+    foodItems.forEach((item) => {
+      const button = item.querySelector("#delete-food-button");
+      item.addEventListener("mouseover", (e) => {
+        button.classList.remove("hidden");
+      });
+
+      item.addEventListener("mouseout", (e) => {
+        button.classList.add("hidden");
+      });
+    });
   };
 };

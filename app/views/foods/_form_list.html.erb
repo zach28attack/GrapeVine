@@ -9,7 +9,7 @@
             <div class="food-item-content">
 
               <div class="food-name">
-                <%= button_to "X", food_path(food), method: :delete, id: "delete-food-button" %>
+                <%= button_to "X", food_path(food), method: :delete, id: "delete-food-button", class:'hidden' %>
                 <p><%= food.food_name%></p>
               </div>
 

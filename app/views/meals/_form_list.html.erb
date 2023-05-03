@@ -9,6 +9,9 @@
       <%= form_with model: @diary do |f| %>
         <div class="meal-item">
           <div class="meal-item-name">
+          <button id="delete-meal-button" type="submit" class="hidden">X</button> 
+          <div id="meal-item-name">
+          </div>
           </div>
           <div class="meal-item-macros">
             <p id="meal-cal-sum"></p>
