@@ -8,15 +8,5 @@ validates :protein, numericality: { only_integer: true }, allow_blank: true
 validates :fats, numericality: { only_integer: true }, allow_blank: true
 validates :carbs, numericality: { only_integer: true }, allow_blank: true
 
-  def remove_nil
-    if !self.protein
-      self.protein = 0
-    end
-    if !self.carbs
-      self.carbs = 0
-    end
-    if !self.fats
-      self.fats=0
-    end
-  end
+  
 end
