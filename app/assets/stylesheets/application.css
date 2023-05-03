@@ -563,4 +563,6 @@ p {
 }
 .summary-total-calories {
   color: var(--primary);
+  font-size: 2rem;
+  border-bottom: solid 1px var(--accent);
 }

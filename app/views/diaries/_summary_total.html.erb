@@ -2,8 +2,9 @@
   <div class="summary-total-header">
     Total summary
   </div>
-  <%= pie_chart @piechart_macros, colors: ["#8139a7", "#bf96fd9a", "#e51cb3"] %>
   <div class="summary-total-calories">
-    Total calories: <%= @diaries.sum{|diary| diary.calories } %>
+    Calories: <%= @diaries.sum{|diary| diary.calories } %>
   </div>
+  <%= pie_chart @piechart_macros, colors: ["#8139a7", "#bf96fd9a", "#e51cb3"] %>
+  
 </div>
