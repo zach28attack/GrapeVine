@@ -8,6 +8,37 @@ document.addEventListener("turbo:load", () => {
 
 // main function handles diary summary page
 const diariesIndexJS = () => {
+  const displayButton = (item, button) => {
+    item.addEventListener("mouseover", (e) => {
+      button.classList.remove("hidden");
+    });
+
+    item.addEventListener("mouseout", (e) => {
+      button.classList.add("hidden");
+    });
+  };
+  const displayMealDeleteButton = (item) => {
+    const button = item.querySelector("#delete-meal-button");
+    displayButton(item, button);
+  };
+
+  const displayFoodDeleteButton = () => {
+    const foodItems = document.querySelectorAll(".food-item");
+    foodItems.forEach((item) => {
+      const button = item.querySelector("#delete-food-button");
+      displayButton(item, button);
+    });
+  };
+
+  const displayDiaryDeleteButtons = () => {
+    const diaryItems = document.querySelectorAll(".diary-item");
+    diaryItems.forEach((item) => {
+      const button = item.querySelector("#delete-diary-button");
+      displayButton(item, button);
+    });
+  };
+  displayDiaryDeleteButtons();
+
   const formModalTemplateButtons = document.querySelectorAll("#form-modal-toggle");
 
   // display form modal when 'add food/meal' button clicked
