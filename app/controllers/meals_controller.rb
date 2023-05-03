@@ -6,10 +6,10 @@ class MealsController < ApplicationController
     current_user.meals.each do |meal|
       meals_array << {
         meal: meal,
-        calories: meal.foods.sum(:calories),
-        protein: meal.foods.sum(:protein),
-        fats: meal.foods.sum(:fats),
-        carbs: meal.foods.sum(:carbs)
+        calories: meal.foods_macro_sum_with_servings('calories'),
+        protein: meal.foods_macro_sum_with_servings('protein'),
+        fats: meal.foods_macro_sum_with_servings('fats'),
+        carbs: meal.foods_macro_sum_with_servings('carbs')
       }
     end
     
@@ -40,4 +40,5 @@ class MealsController < ApplicationController
   def meal_param
     params.require(:meal).permit(:meal_name)
   end
+
 end
