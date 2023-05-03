@@ -4,6 +4,7 @@ class FoodsMealsController < ApplicationController
   def create
     @foods_meal = FoodsMeal.new(foods_meals_params)
     @foods_meal.user_id = 1
+    @meal = @foods_meal.meal_id
     food = Food.find(@foods_meal.food_id)
     if @foods_meal.save
       # Return the updated data as JSON
@@ -49,6 +50,6 @@ class FoodsMealsController < ApplicationController
 
   def sum_of_calories
     meal = Meal.find(@foods_meal.meal_id)
-    meal.foods.sum(:calories)
+    meal.foods_macro_sum_with_servings('calories')
   end
 end
