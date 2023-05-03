@@ -171,31 +171,44 @@ input[type="submit"].disabled {
 .food-item {
   background-color: white;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  flex-direction: column;
   border-radius: 0.5rem;
   margin: 0.4rem;
 }
-.food-item-name {
-  margin-bottom: 1rem;
+
+.food-item-content {
   padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.food-name {
   display: flex;
   align-items: center;
 }
-.food-item-name button {
+.food-name p {
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+.food-name button {
   color: var(--primary);
   padding: 0.1rem;
   margin-right: 0.2rem;
 }
-.food-name {
-  font-size: 1.5rem;
-  font-weight: 400;
+.food-item-actions {
+  background-color: var(--secondary);
+  border-radius: 10px;
+  padding: 1rem;
 }
 .food-item-macros {
   display: flex;
   font-style: italic;
   opacity: 80%;
   gap: 0.4rem;
+}
+.servings-selector {
+  width: 2rem;
+  font-size: 1rem;
 }
 .food-item-btn {
   align-self: flex-end;
