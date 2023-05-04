@@ -33,9 +33,9 @@
   display: none;
 }
 input[type="submit"].disabled {
-  pointer-events: none;
-  background-color: rgb(206, 206, 206);
-  border-radius: 20px;
+  pointer-events: none !important;
+  color: var(--secondary) !important;
+  background-color: #52246b !important;
 }
 .footer {
   width: 100%;
@@ -200,6 +200,15 @@ input[type="submit"].disabled {
   border-radius: 10px;
   padding: 1rem;
 }
+.food-item-actions input[type="submit"] {
+  background-color: var(--secondary);
+  color: white;
+  border-radius: 10px;
+  padding: 0.2rem;
+}
+.food-item-actions input[type="submit"]:hover {
+  color: var(--primary);
+}
 .food-item-macros {
   display: flex;
   font-style: italic;
@@ -340,6 +349,17 @@ p {
   border: 0.2rem solid var(--secondary);
   background-color: var(--secondary);
   border-radius: 10px;
+}
+.meal-item-actions button {
+  background-color: var(--secondary);
+  color: white;
+  border-radius: 10px;
+  border: none;
+  padding: 0.2rem;
+  font-size: 1.5rem;
+}
+.meal-item-actions button:hover {
+  color: var(--primary);
 }
 /* 
   ########
