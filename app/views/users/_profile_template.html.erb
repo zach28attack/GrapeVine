@@ -5,8 +5,13 @@
       <%= image_tag "default-profile-picture1.jpg", alt: "Default profile picture", class:"user-profile-img" %>
     </header>
     <ul class="profile-control-panel-tabs" role="list">
-      <li class=<%= "panel-tabs-active" if tab == 'Progress'%>>*<a href="/weight_logs" class="tab-link">Progress</a>*</li> 
-      <li class=<%= "panel-tabs-active" if tab == 'Settings'%>>*<a href="users/edit" class="tab-link" >Settings</a>*</li>
+      <li class=<%= "panel-tabs-active" if tab == 'Progress'%>>
+        <%= link_to "Progress", weight_logs_path, class: 'tab-link' %>
+      </li> 
+      <li class=<%= "panel-tabs-active" if tab == 'Settings'%>>
+        <%= link_to "Account", edit_user_registration_path(current_user), class: 'tab-link' %>
+      </li>
+
     </ul>
   </div>
 
