@@ -298,7 +298,7 @@ input[type="submit"].disabled {
   flex-direction: column;
   width: 100%;
 }
-.meal-item-name button {
+#delete-meal-button {
   color: var(--primary);
   padding: 0.1rem;
   margin-right: 0.2rem;

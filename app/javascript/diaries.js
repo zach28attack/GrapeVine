@@ -172,7 +172,7 @@ const diariesIndexJS = () => {
       const mealIdInput = mealNode.querySelector("input[name='diary[meal_id]']");
 
       // get form elements
-      const mealName = mealNode.querySelector("#meal-item-name");
+      const mealName = mealNode.querySelector("#meal-item-name").querySelector("p");
       const mealItemId = mealNode.querySelector(".meal-item");
       const mealFatsSum = mealNode.querySelector("#meal-fats-sum");
       const mealCarbSum = mealNode.querySelector("#meal-carbs-sum");
