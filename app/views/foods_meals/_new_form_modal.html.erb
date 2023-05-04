@@ -5,17 +5,29 @@
       <p id="sum-of-calories">Total Cals:<%= @meal.foods.sum(:calories) %></p>
     </div>
     <div class="meal-body">
-        <template id="new-foods-meal-template">
-          <%= form_with model: @foods_meal, id: "new-foods-meal-form", class: "meal-item meal-item-name" do |f| %>
-            <div class="food-name">
-              ERROR
+      <template id="new-foods-meal-template">
+        <%= form_with model: @foods_meal, id: "new-foods-meal-form", class: "meal-item" do |f| %>
+          <div class=" meal-item-name">
+            <div class="meal-item-content">
+              <div class="food-name">
+                <p></p>
+              </div>
+              <div class="food-item-actions">
+                <%= f.number_field :servings, value: 1, class: "servings-selector"%>
+                <%=f.submit "Add food", id: "submit-button"%>
+              </div>
             </div>
             <%=f.hidden_field :meal_id, value: @meal.id%>
             <%=f.hidden_field :food_id, value: Food.first%>
-            <%= f.number_field :servings, value: 1, class: "servings-selector"%>
-            <%=f.submit "Add food", id: "submit-button"%>
-          <% end %>
-        </template>
+            <div class="food-item-macros">
+              <p class="food-calories"></p>
+              <p class="food-protein"></p>
+              <p class="food-fats"></p>
+              <p class="food-carbs"></p>
+            </div>
+          </div>
+        <% end %>
+      </template>
     </div>
   <div class="meal-btns">
     <a class="cancel-button" href="#">Go back to meal list</a>

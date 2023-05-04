@@ -315,22 +315,31 @@ const diariesIndexJS = () => {
 
     // for each food, clone form template, update values, and append to form
     foods.forEach((food) => {
-      const foodForm = formTemplate.querySelector("#new-foods-meal-form").cloneNode(true);
-      const foodName = foodForm.querySelector(".food-name");
-      const mealId = foodForm.querySelector("input[name='foods_meal[meal_id]']");
-      const foodId = foodForm.querySelector("input[name='foods_meal[food_id]']");
-      const submitButton = foodForm.querySelector("#submit-button");
+      const foodsMealForm = formTemplate.querySelector("#new-foods-meal-form").cloneNode(true);
+      const foodName = foodsMealForm.querySelector(".food-name").querySelector("p");
+      const mealId = foodsMealForm.querySelector("input[name='foods_meal[meal_id]']");
+      const foodId = foodsMealForm.querySelector("input[name='foods_meal[food_id]']");
+      const submitButton = foodsMealForm.querySelector("#submit-button");
+      const foodCals = foodsMealForm.querySelector(".food-calories");
+      const foodProtein = foodsMealForm.querySelector(".food-protein");
+      const foodFats = foodsMealForm.querySelector(".food-fats");
+      const foodCarbs = foodsMealForm.querySelector(".food-carbs");
 
       mealId.value = meal.id;
       foodId.value = food.id;
-      foodName.innerHTML = `${food.food_name}`;
+      foodName.innerHTML = food.food_name;
+
+      foodCals.innerHTML = `Cals.${food.calories}/`;
+      foodProtein.innerHTML = `prot.${food.protein}/`;
+      foodFats.innerHTML = `Fats.${food.fats}/`;
+      foodCarbs.innerHTML = `Carbs.${food.carbs}`;
 
       // disable submit button if food is already in meal
       if (foodsInMeal.some((item) => item.id === food.id)) {
         submitButton.classList.add("disabled");
       }
 
-      mealBody.appendChild(foodForm);
+      mealBody.appendChild(foodsMealForm);
     });
   };
 
