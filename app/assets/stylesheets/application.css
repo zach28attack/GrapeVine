@@ -533,10 +533,10 @@ p {
   margin-right: 13rem;
 }
 .date-navbar {
+  width: 100%;
   display: flex;
   font-size: 1.4rem;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
 }
 .date-navbar a:link {
   text-decoration: none;
