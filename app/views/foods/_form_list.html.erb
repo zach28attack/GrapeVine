@@ -7,19 +7,15 @@
         <%= form_with model: @diary do |f| %>
           <div class="food-item" data-id=<%= food.id %>>
             <div class="food-item-content">
-
               <div class="food-name">
                 <%= button_to "X", food_path(food), method: :delete, id: "delete-food-button", class:'hidden' %>
                 <p><%= food.food_name%></p>
               </div>
-
               <div class="food-item-actions">
                 <%= f.number_field :servings, value: 1, class: "servings-selector"%>
                 <%= f.submit "Add item", class:"food-item-btn"%>
               </div>
-
             </div>
-
             <div class="food-item-macros">
               <p class="food-calories">Cals.<%= food.calories %>/</p>
               <p class="food-protein">Prot.<%= food.protein %>/</p>
@@ -42,23 +38,19 @@
   <%= form_with model: @diary do |f| %>
     <div class="food-item">
       <div class="food-item-content">
-      
         <div class="food-name">
           <p></p>
         </div>
-
         <div class="food-item-actions">
           <%= f.number_field :servings, value: 1, class: "servings-selector"%>
           <%= f.submit "Add item", class:"food-item-btn"%>
         </div>
       </div>
       <div class="food-item-macros">
-
         <p class="food-calories"></p>
         <p class="food-protein"></p>
         <p class="food-fats"></p>
         <p class="food-carbs"></p>
-
       </div>
     </div>
     <%= f.hidden_field :calories, value: 0 %>
