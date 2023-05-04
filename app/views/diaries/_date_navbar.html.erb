@@ -1,0 +1,9 @@
+<div class="date-navbar">
+  <%day_in_words = Date.new(2023,1,1) + (@date - 1)%>
+  <%yesterday_in_words = Date.new(2023,1,1) + (@date - 2)%>
+  <%tomorrow_in_words = Date.new(2023,1,1) + (@date )%>
+
+  <%=link_to "⬅#{yesterday_in_words.strftime('%A')}", diaries_path(date: (@date.to_i - 1))%>
+  <h3><%=day_in_words.strftime('%A')%></h3>
+  <%=link_to "#{tomorrow_in_words.strftime('%A')}➡", diaries_path(date: (@date.to_i + 1))%>
+</div>
