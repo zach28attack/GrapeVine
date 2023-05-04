@@ -9,15 +9,26 @@
         <template id="meal-item-template">
           <div class="meal-item">
             <div class="meal-item-name">
+              <div class="meal-item-content">
+                <div class="food-name">
+                  <p></p>
+                </div>
+                <div class="meal-item-actions">
+                  <button type="submit" id="remove-food-button">Remove</button>
+                </div>
+              </div>
+              <div class="food-item-macros">
+                <p class="food-calories"></p>
+                <p class="food-protein"></p>
+                <p class="food-fats"></p>
+                <p class="food-carbs"></p>
+              </div>
             </div>
-            <button type="submit" id="remove-food-button">Remove food</button>
           </div>
         </template>
     </div>
   <div class="meal-btns">
     <a class="cancel-button" href="#">Go back to meal list</a>
-    
-      <button id="foods-meal-form-toggle"><%= link_to "Add foods" %></button>
-   
+    <button id="foods-meal-form-toggle"><%= link_to "Add foods" %></button>
   </div>
 </div>

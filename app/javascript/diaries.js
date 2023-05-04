@@ -441,8 +441,18 @@ const diariesIndexJS = () => {
   const updatedMealItemHTML = (food, foodsMealId) => {
     const mealItemTemplate = document.querySelector("#meal-item-template").content;
     const mealItem = mealItemTemplate.querySelector(".meal-item").cloneNode(true);
+    const foodCals = mealItem.querySelector(".food-calories");
+    const foodProtein = mealItem.querySelector(".food-protein");
+    const foodFats = mealItem.querySelector(".food-fats");
+    const foodCarbs = mealItem.querySelector(".food-carbs");
+
+    foodCals.innerHTML = `Cals.${food.calories}/`;
+    foodProtein.innerHTML = `prot.${food.protein}/`;
+    foodFats.innerHTML = `Fats.${food.fats}/`;
+    foodCarbs.innerHTML = `Carbs.${food.carbs}`;
+
     mealItem.dataset.id = `${foodsMealId}`;
-    mealItem.querySelector(".meal-item-name").innerHTML = `${food.food_name}`;
+    mealItem.querySelector(".food-name").querySelector("p").innerHTML = `${food.food_name}`;
     return mealItem;
   };
 
