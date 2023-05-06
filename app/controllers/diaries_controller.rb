@@ -40,8 +40,6 @@ class DiariesController < ApplicationController
     diary = multiply_by_servings(diary)
     if diary.save
       redirect_to root_path
-    else
-      render :index
     end
   end
 
