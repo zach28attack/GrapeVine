@@ -2,6 +2,9 @@ class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
   def remove_nil
+    if !self.calories
+      self.calories = 0
+    end
     if !self.protein
       self.protein = 0
     end
