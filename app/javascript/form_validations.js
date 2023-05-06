@@ -5,6 +5,7 @@ document.addEventListener("turbo:load", () => {
     validateDeviseForm();
   }
 });
+
 // validation for form input on Login/Logout/User Edit page
 const validateDeviseForm = () => {
   const emailInput = document.querySelector('input[type="email"]');
@@ -80,7 +81,3 @@ const confirmPassword = (password, confirmPassword, passwordField) => {
     document.querySelector('input[type="submit"]').classList.add("disabled");
   }
 };
-
-const validateFoodForm = () => {};
-const validateMealForm = () => {};
-const validateDiaryForm = () => {};
