@@ -625,3 +625,19 @@ p {
   font-size: 2rem;
   border-bottom: solid 1px var(--accent);
 }
+.devise-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.devise-form-card {
+  background-color: white;
+  border: solid 5px var(--secondary);
+  border-radius: 10px;
+  padding: 1rem;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+.devise-form input[type="email"] {
+  width: 100%;
+}
