@@ -1,5 +1,4 @@
 <template id=<%= id %>>
-  
   <div class="diary-form-modal" id="diary-form-modal">
     <div id="diary-form">
       <%= form_with model: @diary, class: 'diary-form' do |f| %>
@@ -11,20 +10,20 @@
           </div>
           <div class="">
             <%= f.label :protein %>
-          <%= f.text_field :protein%>
+            <%= f.text_field :protein%>
           </div>
           <div class="">
             <%= f.label :fats %>
-          <%= f.text_field :fats%>
+            <%= f.text_field :fats%>
           </div>
           <div class="">
             <%= f.label :carbs %>
-          <%= f.text_field :carbs%>
+            <%= f.text_field :carbs%>
           </div>
           <%= f.hidden_field :time_of_day, value: time_of_day %>
           <%= f.submit "Save Diary"%>
         </div>
       <%end%>
     </div>
-</div>
+  </div>
 </template>
