@@ -462,7 +462,7 @@ p {
   border-radius: 10rem;
   box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.08);
   margin: 2rem;
-  height: 25rem;
+  min-height: 25rem;
 }
 .profile-control-panel {
   grid-column: 1/2;
@@ -649,4 +649,19 @@ p {
 }
 .devise-form input[type="email"] {
   width: 100%;
+}
+
+.weight-table {
+  margin-right: 4rem;
+  border: solid 1px var(--secondary);
+  border-radius: 5rem;
+  padding: 1rem;
+  padding-bottom: 2rem;
+}
+.weight-table td {
+  width: 1%;
+}
+.weight-table tr:nth-child(even) {
+  background-color: var(--secondary);
+  color: white;
 }
