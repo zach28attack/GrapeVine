@@ -2,6 +2,7 @@ class WeightLogsController < ApplicationController
   before_action :authenticate_user!
   
   def index
+    @weight_logs = WeightLog.all
     @weight_log = WeightLog.new
     @logs = current_user.weight_logs
     get_chart_data(@logs)
@@ -18,7 +19,10 @@ class WeightLogsController < ApplicationController
   end
 
   def destroy
-    
+    log = WeightLog.find(params[:id])
+    if log.destroy
+      redirect_to weight_logs_path
+    end
   end
 
   private
