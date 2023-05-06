@@ -4,3 +4,4 @@ import "controllers";
 import "./diaries.js";
 import "chartkick";
 import "Chart.bundle";
+import "./form_validations.js";

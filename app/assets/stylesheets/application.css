@@ -47,6 +47,15 @@ input[type="submit"].disabled {
   position: fixed;
   bottom: 0;
 }
+.valid-input {
+  border-color: var(--secondary);
+  box-shadow: 0 0 5px var(--secondary);
+}
+.invalid-input {
+  background-color: rgba(255, 0, 0, 0.321);
+  border-color: red;
+  box-shadow: 0 0 5px red;
+}
 /* 
 ### DIARY STYLING
 */
