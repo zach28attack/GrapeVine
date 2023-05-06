@@ -92,7 +92,7 @@ input[type="submit"].disabled {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 0;
+  width: 15%;
 }
 .summary-header-group {
   display: flex;
