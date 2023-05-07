@@ -1,0 +1,41 @@
+<div class="food-list" id="search-form">
+  <header class="search-food-header">
+    <h3>Search for food</h3>
+    <form class="food-list-search-bar">
+      <input type='text' placeholder="searchbar" id="search-input">
+      <button id="search-button">Search</button>
+    </form>
+  </header>
+  <div class="food-body">
+  </div>
+  
+  <template id='new-food-template'>
+    <%= form_with model: @diary do |f| %>
+      <div class="food-item">
+        <div class="food-item-content">
+          <div class="food-name">
+            <p></p>
+          </div>
+          <div class="food-item-actions">
+            <%= f.number_field :servings, value: 1, class: "servings-selector"%>
+            <%= f.submit "Add item", class:"food-item-btn"%>
+          </div>
+        </div>
+        <div class="food-item-macros">
+          <p class="food-calories"></p>
+          <p class="food-protein"></p>
+          <p class="food-fats"></p>
+          <p class="food-carbs"></p>
+        </div>
+      </div>
+      <%= f.hidden_field :calories, value: 0 %>
+      <%= f.hidden_field :protein, value: 0%>
+      <%= f.hidden_field :fats, value: 0%>
+      <%= f.hidden_field :carbs, value: 0%>
+      <%= f.hidden_field :time_of_day, value: time_of_day %>
+      <%= f.hidden_field :food_id, value: 0 %>
+    <%end%>
+  </template>
+</div>
+
+
