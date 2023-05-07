@@ -91,7 +91,7 @@ input[type="submit"].disabled {
 .summary-table thead th:nth-child(1) {
   border-top-left-radius: 20px;
 }
-.summary-table thead th:nth-child(5) {
+.summary-table thead th:nth-child(6) {
   border-top-right-radius: 20px;
 }
 .summary-table td {
@@ -128,11 +128,18 @@ input[type="submit"].disabled {
 .diary-item td:nth-child(4) {
   background-color: var(--secondary);
 }
+.diary-item td:nth-child(6) {
+  background-color: var(--secondary);
+}
 .totals-row td:nth-child(2) {
   background-color: var(--secondary);
 }
 .totals-row td:nth-child(4) {
   background-color: var(--secondary);
+}
+.totals-row td:nth-child(6) {
+  background-color: var(--secondary);
+  border-bottom-right-radius: 20px;
 }
 .diary-form {
   display: flex;

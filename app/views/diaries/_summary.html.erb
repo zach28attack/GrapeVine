@@ -6,6 +6,7 @@
       <th>Protein</th>
       <th>Fats</th>
       <th>Carbs</th>
+      <th>Servings</th>
     </tr>
   </thead>
   <tbody>
@@ -20,11 +21,11 @@
               </div>
             </div>
           </td>
-
           <td><%= diary.calories %></td>
           <td><%= diary.protein %></td>
           <td><%= diary.fats %></td>
           <td><%= diary.carbs %></td>
+          <td><%= diary.servings %></td>
         </tr>
       <%end%>
     <% end %>
@@ -39,6 +40,7 @@
       <td><%= diaries.sum(&:protein) %></td>
       <td><%= diaries.sum(&:fats) %></td>
       <td><%= diaries.sum(&:carbs) %></td>
+      <td></td>
     </tr>
   </tbody>
 </table>
