@@ -133,8 +133,83 @@ const diariesIndexJS = () => {
           getMeals();
           openCreateMealForm();
         }
+
+        if (activeTab.id === "search-form") {
+          enableSearchBar();
+        }
       });
     });
+  };
+
+  const enableSearchBar = () => {
+    const searchForm = document.querySelector("#search-form");
+    const searchSubmitButton = searchForm.querySelector("#search-button");
+
+    searchSubmitButton.addEventListener("click", (e) => {
+      const searchInput = searchForm.querySelector("#search-input");
+
+      e.preventDefault();
+      searchFood(searchInput.value);
+    });
+  };
+
+  const searchFood = async (searchItem) => {
+    // clearSearchResults()
+    const apiKey = "Bjw7uV3PaqSDICj9MT3mxTK24IfueahX9U3zzO6T";
+    const response = await fetch(`https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}&query=${searchItem}`, {
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      const foods = data.foods;
+      foods.forEach((food) => {
+        displaySearchResult(food);
+      });
+    }
+  };
+
+  // Define a function that adds a new food item to the diary
+  const displaySearchResult = (food) => {
+    const searchForm = document.querySelector("#search-form");
+    // Get the food template from the DOM
+    const foodTemplate = searchForm.querySelector("#new-food-template").content;
+    // Clone the template to create a new food item
+    const foodItem = foodTemplate.querySelector("form").cloneNode(true);
+
+    // Get the various elements inside the food item form
+    const foodNameContainer = foodItem.querySelector(".food-name");
+    const foodName = document.createElement("p");
+    const foodCals = foodItem.querySelector(".food-calories");
+    const foodProtein = foodItem.querySelector(".food-protein");
+    const foodFats = foodItem.querySelector(".food-fats");
+    const foodCarbs = foodItem.querySelector(".food-carbs");
+
+    // Set the text content of the food name and macronutrient elements
+    foodName.innerHTML = food.description.charAt(0) + food.description.substring(1).toLowerCase();
+    foodCals.innerHTML = `Cals.${food.foodNutrients.find((food) => food.nutrientName === "Energy").value}/`;
+    foodProtein.innerHTML = `prot.${food.foodNutrients.find((food) => food.nutrientName === "Protein").value}/`;
+    foodFats.innerHTML = `Fats.${food.foodNutrients.find((food) => food.nutrientName === "Total lipid (fat)").value}/`;
+    foodCarbs.innerHTML = `Carbs.${
+      food.foodNutrients.find((food) => food.nutrientName === "Carbohydrate, by difference").value
+    }`;
+
+    // Set the value of the various input elements inside the food item form
+    const calsData = foodItem.querySelector('input[name="diary[calories]"]');
+    calsData.value = food.foodNutrients.find((food) => food.nutrientName === "Energy").value;
+    const proteinData = foodItem.querySelector('input[name="diary[protein]"]');
+    proteinData.value = food.foodNutrients.find((food) => food.nutrientName === "Protein").value;
+    const fatsData = foodItem.querySelector('input[name="diary[fats]"]');
+    fatsData.value = food.foodNutrients.find((food) => food.nutrientName === "Total lipid (fat)").value;
+    const carbsData = foodItem.querySelector('input[name="diary[carbs]"]');
+    carbsData.value = food.foodNutrients.find((food) => food.nutrientName === "Carbohydrate, by difference").value;
+    const foodId = foodItem.querySelector('input[name="diary[food_id]"]');
+    foodId.value = food.id;
+
+    // Append the new food item to the "food-body" element in the DOM
+    foodNameContainer.appendChild(foodName);
+    searchForm.querySelector(".food-body").appendChild(foodItem);
   };
 
   async function getMeals() {
