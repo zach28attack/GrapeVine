@@ -204,8 +204,8 @@ const diariesIndexJS = () => {
     fatsData.value = food.foodNutrients.find((food) => food.nutrientName === "Total lipid (fat)").value;
     const carbsData = foodItem.querySelector('input[name="diary[carbs]"]');
     carbsData.value = food.foodNutrients.find((food) => food.nutrientName === "Carbohydrate, by difference").value;
-    const foodId = foodItem.querySelector('input[name="diary[food_id]"]');
-    foodId.value = food.id;
+    const foodNameData = foodItem.querySelector('input[name="diary[food_name]"]');
+    foodNameData.value = food.description.charAt(0) + food.description.substring(1).toLowerCase();
 
     // Append the new food item to the "food-body" element in the DOM
     foodNameContainer.appendChild(foodName);
