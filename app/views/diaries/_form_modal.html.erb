@@ -2,14 +2,10 @@
   <div class="diary-form-modal" id="form-modal">
     <div id="add-item-card">
       <div class="add-item-card">
-        <form  class="food-list-search-bar">
-          <input type='text' placeholder="searchbar">
-          <button>Search</button>
-        </form>
         <ul id="tabs">
           <li id="foods-tab" class="active" data-form="foods">Foods</li>
           <li  id="meals-tab" data-form="meals">Meals</li>
-          <li id="search-tab" data-form="meals">Search Results</li>
+          <li id="search-tab" data-form="search">Search Results</li>
         </ul>
         
         <%= render 'foods_meals/new_form_modal'%>
@@ -18,6 +14,7 @@
         <%= render 'meals/form_list', time_of_day: time_of_day %>
         <%= render 'meals/form' %>
         <%= render 'foods/form' %>
+        <%= render 'search_page', time_of_day: time_of_day  %>
       </div>
     </div>
   </div>
