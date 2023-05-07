@@ -16,7 +16,7 @@
             <div class="summary-header-group">
               <%= button_to "X", diary_path(diary), method: :delete , class:'hidden', id:'delete-diary-button'%>
               <div class="summary-body-title">
-                <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : "Custom Food" %>
+                <%= diary.food ? diary.food.food_name : diary.meal ? diary.meal.meal_name : !diary.food_name.nil? ? diary.food_name : "Custom Food" %>
               </div>
             </div>
           </td>
