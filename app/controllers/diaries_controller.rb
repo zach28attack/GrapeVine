@@ -15,7 +15,7 @@ class DiariesController < ApplicationController
     @lunch_diaries = @diaries.select { |diary| diary.time_of_day == "Lunch" }
     @dinner_diaries = @diaries.select { |diary| diary.time_of_day == "Dinner" }
     @diary = Diary.new
-
+    
     # variables for form modal
     @foods = current_user.foods
     @meals = current_user.meals
@@ -57,7 +57,6 @@ class DiariesController < ApplicationController
   end
 
   def init_diary(date)
-    # May 1st.yday == 121
     diaries_by_date = current_user.diaries.where(date: Date.new(2023,1,1) + (date-1))
     if user_signed_in? && diaries_by_date.empty?
       ["Breakfast", "Lunch", "Dinner"].each do |time_of_day|
@@ -68,7 +67,8 @@ class DiariesController < ApplicationController
           fats: 0, 
           carbs: 0, 
           time_of_day: time_of_day, 
-          date: Date.new(2023,1,1) + (date-1)
+          date: Date.new(2023,1,1) + (date-1),
+          servings: 1
         )
       end
     end
