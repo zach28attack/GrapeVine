@@ -3,9 +3,10 @@ class FoodsMealsController < ApplicationController
 
   def create
     @foods_meal = FoodsMeal.new(foods_meals_params)
-    @foods_meal.user_id = 1
+    @foods_meal.user_id = current_user.id
     @meal = @foods_meal.meal_id
     food = Food.find(@foods_meal.food_id)
+
     if @foods_meal.save
       # Return the updated data as JSON
       render json: { status: 'success', data: sum_of_calories, food_item: food, id:@foods_meal.id }, status: :ok
