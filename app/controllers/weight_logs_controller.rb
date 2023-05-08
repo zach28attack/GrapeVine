@@ -2,7 +2,7 @@ class WeightLogsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @weight_logs = WeightLog.all
+    @weight_logs = current_user.weight_logs
     @weight_log = WeightLog.new
     @logs = current_user.weight_logs
     get_chart_data(@logs)
