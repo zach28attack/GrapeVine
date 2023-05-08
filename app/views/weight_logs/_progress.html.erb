@@ -29,7 +29,7 @@
           <tr>
             <td><%= weight_log.created_at.month %>/ <%= weight_log.created_at.day %>/ <%= weight_log.created_at.year %></td>
             <td><%= weight_log.log %></td>
-            <td><%= button_to "Delete", weight_log_path(weight_log), data: { turbo_method: :delete } %></td>
+            <td><%= button_to "Delete", weight_log_path(weight_log), method: :delete%></td>
           </tr>
         <% end %>
       </tbody>
