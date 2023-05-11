@@ -64,7 +64,7 @@ RSpec.describe "Users", type: :system do
       end
     end
 
-    context "From progress page clicking 'Account'" do
+    context "from progress page clicking 'Account'" do
       it "should route to user edit" do 
         user
         log_in(user)
@@ -74,7 +74,7 @@ RSpec.describe "Users", type: :system do
       end
     end
 
-    context "From account page clicking 'Delete' button" do
+    context "from account page clicking 'Delete' button" do
       it "should delete user" do
         user
         expect{ 
@@ -84,6 +84,22 @@ RSpec.describe "Users", type: :system do
         click_on "Delete"
         sleep 0.1
         }.to change(User, :count).by(-1)
+      end
+    end
+
+    context "updating password with valid input" do
+      it "should update user" do 
+        user
+        old_password = user.encrypted_password
+        log_in(user)
+        click_on "Profile"
+        click_on "Account"
+        fill_in "user_password", with: "NewPasswordNew"
+        fill_in "Password confirmation", with: "NewPasswordNew"
+        fill_in "Current password", with: user.password
+        click_on "Update"
+        sleep 0.1
+        expect(User.last.encrypted_password).to_not eq(old_password)
       end
     end
   end
