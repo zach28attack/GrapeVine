@@ -1,14 +1,16 @@
 # GrapeVine
 
+### [Demo video](https://www.linkedin.com/feed/update/urn:li:activity:7061149481995489281/)
+
 ## Description
 
-This is version 2 of the GrapeVine app. It will have a revamped front-end built with hot-wire and Tailwind CSS, instead of the previous version's custom CSS and JS. I hope to create a sleeker, more modern look and feel.
+This is a diet-tracker application that allows users to track their daily caloric intake and exercise. Users can create an account, log in, and log out. Once logged in, users can add food items to their daily log, as well as track their weight-loss progress. The application will calculate the total calories consumed, and display the remaining calories for the day. Users can also view their daily log history, as well as edit and delete items from their log.
 
 ## Technologies used
 
 - Ruby on Rails
-- Tailwind CSS
-- Hot-wire
+- Html/CSS
+- Vanilla JS
 
 ### Gems used
 
